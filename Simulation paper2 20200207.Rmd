@@ -1,0 +1,617 @@
+---
+title             : "Nonresponse and Sample Weighting in Organizational Surveying"
+shorttitle        : "NONRESPONSE AND SAMPLE WEIGHTING"
+
+author: 
+  - name          : "John T. Kulas"
+    affiliation   : "1"
+    corresponding : yes
+    address       : "Dickson Hall #250, Montclair State University, Montclair, NJ, 07043"
+    email         : "kulasj@montclair.edu"
+  - name          : "Yang Yang"
+    affiliation   : "2"
+  - name          : "David H. Robinson"
+    affiliation   : "3"
+
+affiliation:
+  - id            : "1"
+    institution   : "Montclair State University"
+  - id            : "2"
+    institution   : "China Select"
+  - id            : "3"
+    institution   : "St. Cloud State University"
+
+author_note: |
+  John T. Kulas, Professor of Industrial and Organizational Psychology, Department of Psychology, Montclair State University. Yang Yang, Research and Data Scientist, China Select. David H. Robinson, Professor of Statistics, St. Cloud State University. This manuscipt was generated via papaja [@R-papaja] within rMarkdown.
+
+abstract: |
+  Post-stratification weighting is a common procedure used in public opinion polling applications to correct demographic constituency differences between samples and populations. Although common practice in public opinion polling, this form of data remediation is only recently emerging as a procedure of interest in organizational surveying applications. The current paper induces survey nonresponse via data simulation across fictional constituent groups (e.g., organizational strata) and documents the impact of weighting on the accuracy of sample estimates. Our goal was to evaluate the effectiveness of the weighting algorithm when confronted with *passive* and *active* forms of nonresponse in an effort to: 1) interject this nonresponse taxonomy within the broader weighting domain, while 2) exploring the organizationally-relevant sampling scenarios that are either benifit, "hurt", or effectively immune to post-stratification weighting. The results confirm that sampling contexts characterized by active nonresponse did benefit from application of sample weights, but only when accompanied by constituency differences in underlying population attitudes. Alternatively, constituent member differences in population attitudes, when characterized by passive forms of nonresponse, exhibited no benefit from weighting (in fact these scenarios are somewhat *hurt* by weighting). The simulations reinforce that, moving forward, it would be prudent for surveyors of all disciplinary backgrounds to attend to the traditional foci of both public opinion (e.g., post-stratification adjustment) and organizational polling (e.g., *form* of nonresponse). 
+  
+keywords          : "Survey methodology, sample weighting, nonresponse, response rate"
+
+bibliography      : "simulation paper references.bib"
+
+figsintext        : yes
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+lineno            : yes
+mask              : no
+header-includes:
+  - \raggedbottom
+class             : "man"
+output            : papaja::apa6_pdf
+#output            : papaja::apa6_word
+
+#header-includes: #used to change page orientation
+#- \usepackage{pdflscape}
+#- \newcommand{\blandscape}{\begin{landscape}}
+#- \newcommand{\elandscape}{\end{landscape}}
+---
+
+```{r load_packages, include = FALSE}
+library(papaja)   #APA6 formatting
+library(citr)     #APAcitation
+
+library(psych)
+library(ggplot2)  #data visualization
+library(reshape2) #convert Wide to Long (Fig2&3)
+
+library(Rmisc)    #summarySE()
+library(weights)  #rd()
+```
+
+
+```{r data load and prep, include=FALSE}
+
+cond1_nnnn <- read.csv("norm_norm_norm_norm_summary.csv")
+cond2_pppp <- read.csv("pos_pos_pos_pos_summary.csv")
+cond3_gggg <- read.csv("neg_neg_neg_neg_summary.csv")
+cond4_nnng <- read.csv("norm_norm_norm_neg_summary.csv")
+cond5_nnpp <- read.csv("norm_norm_pos_pos_summary.csv")
+cond6_pnng <- read.csv("pos_norm_norm_neg_summary.csv")
+cond7_pgpg <- read.csv("pos_neg_pos_neg_summary.csv")
+cond8_ppgg <- read.csv("pos_pos_neg_neg_summary.csv")
+
+cond1_nnnn$cond <- "Condition 1"
+cond2_pppp$cond <- "Condition 2"
+cond3_gggg$cond <- "Condition 3"
+cond4_nnng$cond <- "Condition 4"
+cond5_nnpp$cond <- "Condition 5"
+cond6_pnng$cond <- "Condition 6"
+cond7_pgpg$cond <- "Condition 7"
+cond8_ppgg$cond <- "Condition 8"
+
+combo <- rbind(cond1_nnnn, cond2_pppp, cond3_gggg, cond4_nnng, cond5_nnpp, cond6_pnng, cond7_pgpg, cond8_ppgg)
+names(combo)[names(combo)=="cond"] <- "Condition"
+
+
+## Sampling Rate for four subgroups(MA,MB,FA,FB)
+combo$cellrate.ma <- with(combo, SSmale*SSdepta)
+combo$cellrate.mb <- with(combo, SSmale*SSdeptb)
+combo$cellrate.fa <- with(combo, SSfemale*SSdepta)
+combo$cellrate.gb <- with(combo, SSfemale*SSdeptb)
+# SD index to indicate passive and active forms
+combo <- transform(combo, SD=apply(combo[18:21],1, sd, na.rm = TRUE))
+
+
+## Total response rate 
+combo$RR.all <- with(combo, PPmale*PPdepta*SSmale*SSdepta + PPmale*PPdeptb*SSmale*SSdeptb +
+                       PPfemale*PPdepta*SSfemale*SSdepta + PPfemale*PPdeptb*SSfemale*SSdeptb)
+
+
+## Population and sample subgroup constituencies
+combo$NS.ma <- with(combo, 10000*PPmale*PPdepta*SSmale*SSdepta)
+combo$NS.mb <- with(combo, 10000*PPmale*PPdeptb*SSmale*SSdeptb)
+combo$NS.fa <- with(combo, 10000*PPfemale*PPdepta*SSfemale*SSdepta)
+combo$NS.fb <- with(combo, 10000*PPfemale*PPdeptb*SSfemale*SSdeptb)
+combo$NS <- with(combo,NS.ma+NS.mb+NS.fa+NS.fb)
+
+combo$cell.sma <- with(combo, NS.ma/NS)*100
+combo$cell.smb <- with(combo, NS.mb/NS)*100
+combo$cell.sfa <- with(combo, NS.fa/NS)*100
+combo$cell.sfb <- with(combo, NS.fb/NS)*100
+combo$cell.pma <- with(combo, PPmale*PPdepta)*100
+combo$cell.pmb <- with(combo, PPmale*PPdeptb)*100
+combo$cell.pfa <- with(combo, PPfemale*PPdepta)*100
+combo$cell.pfb <- with(combo, PPfemale*PPdeptb)*100
+
+#combo$PPma <- scale(combo$cell.pma)
+#combo$PPmb <- scale(combo$cell.pmb)
+#combo$PPfa <- scale(combo$cell.pfa)
+#combo$PPfb <- scale(combo$cell.pfb)
+#combo$TSma <- scale(combo$cell.sma)
+#combo$TSmb <- scale(combo$cell.smb)
+#combo$TSfa <- scale(combo$cell.sfa)
+#combo$TSfb <- scale(combo$cell.sfb)
+#combo$one     <- (combo$PPma - combo$TSma)^2
+#combo$two     <- (combo$PPmb - combo$TSmb)^2
+#combo$three   <- (combo$PPfa - combo$TSfa)^2
+#combo$four    <- (combo$PPfb - combo$TSfb)^2
+
+combo$one     <- (combo$cell.pma - combo$cell.sma)^2
+combo$two     <- (combo$cell.pmb - combo$cell.smb)^2
+combo$three   <- (combo$cell.pfa - combo$cell.sfa)^2
+combo$four    <- (combo$cell.pfb - combo$cell.sfb)^2
+
+#The value E is the chance expected median value of sum of squared differences and
+#if the d is measured as differences in stand scores, we obtain Formular 2, E = 2k
+combo$Chron.d2 <- with(combo, one+two+three+four)
+combo$r.p      <- with(combo, (3.357*2-Chron.d2)/(3.357*2+Chron.d2))
+summary(combo$r.p)
+
+
+#Active and passive forms subsets
+combo$ID <- c(1:nrow(combo))
+combo.passive <- subset(combo, ID < 12289)     #Cond1to3
+combo.active <- subset(combo, ID > 12288)     #Cond4to8
+
+```
+
+Akin to differential variable weighting (for instance: a) construct indicators within an assessment scale [aka factor loadings], or b) predictors within a selection system [aka regression weights]; e.g., per data matrix "columns"), sample weighting alters the proportional contributions of *individual respondents* within a data set (e.g., matrix rows). Some respondents are assigned greater relative impact and others are assigned less. This practice is commonplace in the summary of general population polling data reflecting, for example, elections and politics [e.g., @rivers_inference_2009], prevalence rates of psychological disorders [e.g., @kessler_national_2009], or feelings of physical safety [e.g., @quine_feeling_2008]. It is also seemingly in the nascent stages of awareness and application within the organizational surveying domain [see, for example, @kulas_post-stratification_2016; @landers_inconvenient_2015; @tett_2011_2014].
+
+We speculate that this form of statistical remediation is gaining some interest in the organizational surveying domain, at least in part, because industrial psychologists are keenly aware that response rates within organizational surveying applications are trending downward [see, for example, @anseel_response_2010; @rogelberg_introduction:_2007]. With lower response rates, surveyors are confronted with heightened levels of scrutiny because, historically, a locally realized high response rate has been processed as a positive indicator of data quality - if not from the survey specialists themselves, at least from client stakeholders [e.g., @anseel_response_2010; @cycyota_enhancing_2002; @cycyota_what_2006; @frohlich_techniques_2002]. The orientation of this paper, however, is that although response rate is a commonly referenced proxy of survey quality, it is not response rate but rather sample *representativeness* that should be the primary focus of concern for survey specialists [see, for example, @cook_meta-analysis_2000; @krosnick_survey_1999]. Representativeness can of course be "hurt" by low response rates, but the relationship between these two survey concepts is by no means exact [e.g., @curtin_effects_2000; @keeter_gauging_2006; @kulas_nonresponse_2017]. Stated differently, a low response rate is neither a sufficient nor even necessary condition for sample misrepresentation.[^1]
+
+[^1]: There are tangible benefits associated with higher response rates (such as greater statistical *power*), although these do not stem directly from response rate, but rather its correlate - larger *n*. Our presentation reflects the fact that greater power (and/or, relatedly, smaller confidence intervals) in fact introduces a *false sense* of methodological superiority when the sample is a misrepresentation of the population. Primarily for this reason, we stress that the sampling concepts of response rate, sample size, and power need to be fully disentangled from the sampling concept of representativeness, and this dissocation drives the central theme of the current paper.
+
+In the context of any survey application, sample misrepresentation ultimately refers to a discrepancy between the obtained sample statistics and population parameters. Ideally, such discrepancies arise from completely random sources (in which case resulting error is less likely to be reasonably characterized as *bias*). In reality, however, discrepancies are not only driven by purely random causes. There are several broader sampling methodology factors that may be systematically driving the relative under- or over-selection of a population segment [see, for example, @kulas_post-stratification_2016], but the most commonly cited contributor within the organizational sciences is non-response [e.g., invited individuals simply either forget [e.g., passive nonresponse] or consciously choose not to participate in the survey process [e.g., active nonresponse], see, for example, @rogelberg_employee_2000]. Our presentation also focuses on this non-response contributor to sample misrepresentation, but only because we aim to: 1) integrate the organizational non-response and post-stratification weighting literatures, while also 2) highlighting the associations and dissociations between response rate and bias (although we note here that the current presentation and procedure also inform other sampling methodological sources of misrepresentation than non-response).[^footie]
+
+[^footie]: Frequently presented as a separate consideration, *measurement error* is an additional contributor to sample misrepresentation. The current focus is on deviations from a perfect sampling methodology as opposed to deviations from an ideal psychometric methodology. We do however note that advancement of current representations of survey error will benefit from a unified perspective on that encompasses error arising from both measurement and sampling strategy. 
+
+## Nonresponse in Organizational Surveying
+
+Within the organizational surveying domain, it is not uncommon for response rate to be implicated as an index of survey data quality [see, for example, @baruch_survey_2008; @fan_factors_2010; @pedersen_improving_2016]. @baruch_response_1999, for example, states that, "...to have dependable, valid, and reliable results, we need a high RR from a wide representation of the whole population under study" and that, "The level of RR is an important, sometimes crucial, issue in relation to the validity of a paper's results" (p. 422). @fan_factors_2010 similarly state that response rate is, "...the most widely used and commonly computed statistic to indicate the quality of surveys" (p. 132). @pedersen_improving_2016 claim that a high survey response rate, "...diminishes sampling bias concerns and promotes the validity of survey-based research findings" (p. 230). The general consensus seems to be that there are three major (negative) consequences of low response rates, including (a) yielding smaller sample size, which negatively impacts statistical power and confidence intervals, (b) reducing the credibility of survey data, and (c) generating biased samples that impair the generalizability of survey results [@biemer_introduction_2003; @luong_how_1998; @rogelberg_employee_2000].
+
+To the likely frustration of those who associate response rate with survey data quality, organizational survey response rates have been declining for decades. @baruch_response_1999, for example, summarized response rates of 175 studies published in five leading management and behavioral sciences journals in 1975, 1985, and 1995. His results revealed an average response rate (across time periods) of 55.6% (*SD* = 19.7%), but also a trend within which response rates declined steadily from 64.4% to 55.7% to 48.4% over the three time points. Nine years later, @baruch_survey_2008 conducted a follow-up study of 1,607 studies published in 17 disciplinary-relevant journals in 2000 and 2005 but found no substantial differences in response rates compared to those in 1995, suggesting that the declining trend had perhaps reached a lower asymptote. However, a different approach with similar goals [@anseel_response_2010] analyzed 2,037 survey projects published in 12 journals in Industrial and Organizational Psychology, Management, and Marketing from 1995 to 2008 and did note a slight decline (overall *M* = 52.3%) when controlling for the use of response enhancing techniques.[^2]
+
+[^2]: It is possible that the declination has stabilized with mean response rates hovering around 50% after roughly the turn of the millenium [*M* = 52.5% for HRM studies from 2009 to 2013, @mellahi_response_2016; *M* = 52.0% for management studies from 2000 to 2004, @werner_reporting_2007]. This stability, if authentic, may again possibly be accounted for by an increased contemporary emphasis on response enhancing strategies [@anseel_response_2010; @fulton_b._r._organizations_2016].
+
+## *Form* of Nonresponse
+
+Although high response rates are generally pursued as a desirable goal within organizational surveying applications, there has also been a broad acknowledgement that not all forms of nonresponse should be considered equally worrisome. @rogelberg_profiling_2003, for example, propose a classification between *active* and *passive* nonrespondents based on intent and (in)action. According to @rogelberg_profiling_2003, active nonrespondents are those who intentionally refuse to participate in surveys, while passive nonrespondents are those who fail to respond to surveys due to reasons such as forgetting or misplacing invitations. Passive nonrespondents are thought to be similar to respondents in both attitude [@rogelberg_profiling_2003] as well as organizational citizenship behaviors [OCBs; @spitzmuller_survey_2007], whereas active nonrespondents have been shown to exhibit significantly lower organizational commitment and satisfaction, higher intention to leave, lower conscientiousness, and lower OCBs than actual respondents [@rogelberg_employee_2000; @rogelberg_profiling_2003; @spitzmuller_survey_2007]. 
+
+The more commonly encountered form of nonresponse appears to be passive  [e.g., @rogelberg_introduction:_2007; @rogelberg_profiling_2003], although subgroup rates may evidence variability - men, for example, have a higher proclivity toward active nonresponse than do women [@luong_how_1998; @rogelberg_employee_2000; @spitzmuller_survey_2007]. Additionally, it has been noted that selection of an individual population element into a realized sample is often predictable [because of, for example, an increased likelihood of not responding when dissatisfied or disgruntled; @taris_how_2007]. The organizational surveying expectation is that, *on average*, roughly 15% of nonrespondents can be expected to be accurately characterized as "active" [@rogelberg_introduction:_2007; @rogelberg_profiling_2003; @werner_reporting_2007]. It is this second, less frequently anticipated form of nonresponse that also carries the greater corresponding threat of biased sample estimates [see, for example, @kulas_nonresponse_2017; @rogelberg_introduction:_2007].
+
+# Sample Weighting - a Brief Overview
+
+Within public opinion polling contexts, when realized sample constituencies (e.g., 44% male - by tradition from *carefully-specified* and *randomly sampled* data frames)[^again] are compared against census estimates of population parameters (e.g., 49% male), weights are applied to the realized sample in an effort to remediate the relative proportional under- or over-sampling. This is because, if the  broader populations from which the under- or over-represented groups are sampled differ along surveyed dimensions (e.g., males, within the population, are *less likely to vote for Candidate X* than are women), then unweighted aggregate statistics (of, for example, projected voting results) will misrepresent the true population parameter. This remedial application of sample weights should also be considered an option for organizational researchers pursuing answers to similar survey questions such as: "What is the mood of the employees?" This is because focused queries such as this are deceptively complex - implicit in the question is a focus not on survey respondents, but rather the broader employee population. Acknowledging this implied target is important, because the next step (after gauging the mood of the surveyed respondents) is *doing something* about it. Weighting is one remedial option for organizational surveyors to plausibly transition from, "What do the survey results say"? to "What do the employees feel"?
+
+[^again]: These important sampling elements are very carefully attended to within public opinion polling contexts. Conversely, within organizational surveying traditions, these considerations are not explicitly acknowledged. The weighting procedure presented in the current manuscript remediates bias regardless of full methodological consideration of sampling context, but is dependent on accurate "census" population constituency estimates (and, as the results highlight, the presence of an active nonrespondent group). For the interested reader, an acknowledgement of the broader methodological sampling scenario facilitates a much deeper appreciation and understanding of the benefits and potential pitfalls of sample weighting.   
+
+## Procedural application
+
+*Proportional weights* are the form of weights most directly relevant to organizational surveying applications that traditionally focus on nonresponse as the primary contributor to sample misrepresentation. These weights are ratios of the proportion of a population within a given stratum to the proportion of the sample within that same stratum:
+
+\begin{equation}
+proportional \: weight(\pi_k) = \frac{(N_k/N)}{(n_k/n)}
+\end{equation}
+
+Over-sampling of elements of a stratum (*k*) results in proportional weights less than one, while under-sampling (relative to the population) results in proportional weights greater than one.
+The common procedure for weight estimation *when more than one stratum is specified* is an iterative process that may be referred to by multiple synonymous terms: *rim weighting*, *iterative proportional fitting*, or *raking* [see, for example, @deming_least_1940]. Regardless of label, the procedure guides the surveyor to:
+
+1) Determine proportional weights for all levels within one stratum, and then assign these weights to cases.
+
+2) Determine proportional weights for a second group (ratio of population percent to *current* sample percent [the current sample percent will be affected by the step 1 weighting procedure]). Multiply previous (step 1) weights by the proportional weights for this second stratum and assign these new weights to cases.
+
+3) Determine proportional weights for a third stratum (which will once again require re-inspection of the *current* sample percent). Multiply the previous step 2 weights by the third stratum proportional weights and assign to cases.
+  
+4) Repeat steps 1, 2, and 3 (or more if more than three groups/strata are considered) in sequence until the weighted sample characteristics closely match the population characteristics. 
+
+Possible strata relevant for organizational survey weighting include: branch, full-, part-, or flex-time status, functional area, gender, geographic location, hierarchy, salaried status, subsidiary, tenure, work shift, or any other groupings especially deemed suspect to possess a relatively disporportionate number of active nonrespondents (through application of forecasting strategies such as those advocated by, for example, Rogelberg and Stanton, 2007). Each of these strata may of course also be the targeted focus of survey results feedback, but when *aggregating* results across (or even within) strata, a consideration of the impact of nonresponse may yield more accurate survey estimates. The explicit goal is a closer approximation of sample characteristics to population parameters via statistical remediation, and drives the current paper's focus on the interplay of four survey concepts (response rate, nonresponse form, bias, and remedial weighting):
+
+> after chatting with Yang (10/31/19) these need to be clarified a bit - reading 11/3 they make sense but need to be read very carefully. Check with Yang on 1/26 Skype. 2/1 revisions seem ok to Kulas. Three moving parts: underlying attitudinal distributions, response rate, and form of nonresponse <- perhaps we should make these variables more explicit prior to the procedure/results...
+
+*Research question 1*: What role does overall response *rate* play in sample misrepresentation? **[make sure this is reflected in results]**
+
+*Research question 2*: What role does nonresponse *form* (passive versus active) play in sample misrepresentation? **currently in paper as figures 1-3**
+
+*Research question 3*: What impact does the application of weights have on both biased (e.g., misrepresentative) and unbiased sample estimates?
+
+*Research question 4*: What is the role of response rate and form in the *effectiveness* of weighting? **[perhaps David can derive/find a proof to parallel our results?]**
+
+We view these questions as being akin to similar questions asked and answered with differential variable weighting within the applied Psychology discipline. Just as, for example, there has been debate regarding the merits of differential versus unit variable weighting in a selection context [e.g., @wainer_estimating_1976] or simple composite score aggregate [@bobko_usefulness_2007], we propose that a similar consideration is appropriate with persons, and therefore compare and contrast unit- versus variable-sample element weighting via carefully controlled data simulation. 
+
+# Methods
+
+We address our research questions via data simulation within the broad fictional context of organizational surveying (assessing, for example, attitudinal estimates of employee satisfaction, engagement, or organizational commitment). We began the simulations by establishing "populations", each consisting of 10,000 respondents characterized by demographic categorizations across gender (male and female) and department (A and B). We therefore had four demographic groups (male-A, male-B, female-A, and female-B). For these population respondents, we generated scaled continuous responses (real numbers) ranging from values of 1 to 5, reflecting averaged aggregate scale scores from a multi-item survey with a typical 1 $\rightarrow$ 5 Likert-type or graphic rating scale response format.
+
+In order to represent different proportions of relative constituency (for example, more females than males or more department A workers than department B), we iterated population characteristics at marginal levels (gender and department) starting at 20% (and 80%) with increments and corresponding decriments of 20%. For example, if males accounted for 20% of the simulated population, then females were 80%; also if respondents in Department A represented 60% of a population, then 40% were in Department B. Marginal constituencies were therefore specified at all combinations (across the two variables) of 20% and 80%, 40% and 60%, 60% and 40%, and 80% and 20%. This resulted in population *cell* constituencies (e.g., men in department A) as low as 400 and as high as 6,400.
+
+Additionally, each of these cell populations was characterized by an attitude distribution in one of three different possible forms: normal, positively skewed, or negatively skewed. These distributional forms were specified in an attempt to model similarities and discrepancies in construct standing (e.g., commitment, satisfaction, or engagement) across respondent groupings. The normal distribution exhibited, on average, a mean of 3.0 whereas the skewed distributions were characterized by average means of 2.0 and 4.0, respectively. In total, eight crossings of distributional type across employee categorization were specified (Table 1 presents the combinations of these distributions). Note that these eight conditions are not exhaustive across our four cell groupings - we specified combinations that we expected to be most informative across our passive to active nonresponse continuum (reflected in Table 1's "anticipated bias" column). 
+
+```{r Tab.1, echo=FALSE, results="asis"}
+
+a <- c("1","","","2","","","3","","","4","","","5","","","6","","","7","","","8","","")
+b <- c("Normal","Positive Skew","Negative Skew","Normal","Positive Skew","Negative Skew",
+       "Normal","Positive Skew","Negative Skew","Normal","Positive Skew","Negative Skew",
+       "Normal","Positive Skew","Negative Skew","Normal","Positive Skew","Negative Skew",
+       "Normal","Positive Skew","Negative Skew","Normal","Positive Skew","Negative Skew")
+c <- c("3","2","4","3","2","4","3","2","4","3","2","4",
+       "3","2","4","3","2","4","3","2","4","3","2","4")
+d <- c("X","","","","X","","","","X","X","","",
+       "X","","","","X","","","X","","","X","")
+e <- c("X","","","","X","","","","X","X","","",
+       "X","","","X","","","","","X","","X","")
+f <- c("X","","","","X","","","","X","X","","",
+       "","X","","X","","","","X","","","","X")
+g <- c("X","","","","X","","","","X","","","X",
+       "","X","","","","X","","","X","","","X")
+h <- c("None","","","None","","","None","","",
+       "Moderate","","","Moderate/High","","",
+       "Moderate/High","","","High","","",
+       "High","","")
+
+tab.1 <- cbind.data.frame(a,b,c,d,e,f,g,h)
+
+apa_table(tab.1,
+          align=c("c","l",rep("c",6)),
+          escape=TRUE,
+          caption="Attitudinal Distribution Conditions Specified in Current Paper",
+          col.names=c("Condition","Distributional Shape","mu","Dept A","Dept B","Dept A","Dept B","Anticipated Bias"),
+          col_spanners=list("Male"=c(4,5), "Female"=c(6,7)),
+          small=TRUE,
+          landscape=FALSE)
+
+```
+
+Individual attitudes were randomly sampled from population distributions at the cell level (e.g., Department A Males) without replacement. Response rates (methodologially these could also be conceptualized as *sampling* rates) were controlled using 10% increments ranging from 60% to 90%, and these were fully iterated. Our cell-level response rates therefore ranged from 36% to 81% - a range of rates chosen because they are, according to the organizational surveying literature, reasonable expectations [e.g., @mellahi_response_2016; @werner_reporting_2007]. We therefore investigated error within the aggregate mean (e.g., grand mean or total sample mean) attributable to different likelihoods of sample inclusion from constituent groups of different relative size and representing populations of different attitudinal distribution, but at response rates reasonably expected to exist in real-world organizational surveying contexts.  
+
+It should be noted here that there are several collective patterns of response that are intended to represent sampling scenarios exhibiting *passive* nonresponse, regrardless of absolute response rate: all subgroups exhibiting the same response rate (e.g., 36%, 36%, 36%, and 36%). All other combinations of response rate are intended operationalizations of active forms of nonresponse (e.g., *not* reasonably characterized as missing at random, NMAR), although the degree to which a sampling scenario should be reasonably characterized as exhibiting active nonresponse is intended to be incremental across iterations.  
+
+In an attempt to capture this "degree of active nonresponse", we calculated a simple index of response rate discrepancy (SD; presented in Table 2). The "least" active nonresponse scenarios are characterized by two subgroups with identical response rates and two  having a slightly different response rate (e.g., Dept A Males = 36%, Dept A Females = 36%, Dept B Males = 42%, and Dept B Females = 42%; see the second row of Table 2, the SD index = .034)[^3]. Also here note that three of our eight Table 1 conditions represent scenarios where the presence of active nonrespondents is not expected to result in bias (e.g., regardless of patterns of nonresponse, the unweighted sample mean is expected to yield an unbiased estimate of the population mean). These are Table 1 conditions one through three, where attitudinal distributions are of *the same form* across groups, regardless of any individual group response rate discrepancy from others'.
+
+[^3]: It should be noted that this method of simplifying the presentation of our response rate conditions is fully orthogonal to population constituency and distributional form. That is, the amount of bias present in a sample estimate is expected to be quite different for Condition 7 with response rates of 48%, 48%, 72%, 72% versus 48%, 72%, 48%, 72%, even though the crude response rate index (SD = 0.139) is the same for both scenarios.  There is additional information within these simulations (the effect of a *combination* of response rate and population form on degree of bias) that is therefore not captured via this simple SD index. 
+
+It should also be noted that the current operationalizations of passive and active forms of nonresponse differ from other specifications with similar-minded approaches. @kulas_nonresponse_2017, for example, directly tie probabilities of sample inclusion to an individual's held attitude (the likelihood of sample inclusion is fully dependent on the population member's attitude). With the current investigation, conversely, the probability of sample inclusion is dependent only on *group* membership (with some of these groups occasionally being characterized by unique attitude distributional forms). Essentially, @kulas_nonresponse_2017 operationalize active nonresponse at the person-level whereas the current paper does so at the group level. This may be a more practical operationalization, as organizational surveyors are more likely to have an inclination of a group's collective attitude or likelihood to respond (e.g., night shift workers, machine operators) than they are of any one individual employee.
+
+```{r Tab.2, echo=FALSE, results="asis"}
+
+aa <- c("36%","36%","48%","42%","48%","56%","54%","63%","36%",
+	"42%","49%","48%","56%","36%","64%","42%","36%","42%",
+	"48%","42%","49%","36%","48%","56%","36%","36%","42%",
+	"42%","49%","42%","48%","36%","48%","54%","42%","36%")
+
+bb <- c("36%","36%","48%","42%","48%","56%","54%","63%","42%",
+	"48%","56%","54%","63%","36%","72%","42%","42%","49%",
+	"48%","48%","56%","36%","54%","63%","48%","42%","42%",
+	"54%","63%","48%","48%","48%","54%","54%","54%","54%")
+
+cc <- c("36%","42%","54%","49%","56%","64%","63%","72%","42%",
+	"49%","56%","56%","64%","48%","72%","56%","48%","54%",
+	"64%","56%","63%","54%","64%","72%","48%","54%","63%",
+	"56%","63%","63%","72%","54%","72%","81%","63%","54%")
+
+dd <- c("36%","42%","54%","49%","56%","64%","63%","72%","49%",
+	"56%","64%","63%","72%","48%","81%","56%","56%","63%",
+	"64%","64%","72%","54%","72%","81%","64%","63%","63%",
+	"72%","81%","72%","72%","72%","81%","81%","81%","81%")
+
+
+
+ee <- c(".000",".034",".035",".040",".046",".047",".051",".052",".053",
+	".057",".061",".062",".066",".069",".069",".081",".085",".089",
+	".092",".096",".098",".104",".106",".109",".115",".120",".121",
+	".123",".131",".137",".139",".150",".154",".156",".164",".186")
+
+
+ff <- c("256","128","64","192","128","64","128","64","64",
+	"128","64","128","128","128","64","128","128","128",
+	"128","128","128","192","128","128","64","128","64",
+	"128","64","128","64","128","128","64","128","64")
+
+
+gg <- c("Passive","","","","","","","","",
+        "","","","","","","","","",
+        "","","","","","","","","",
+        "","","","","","","","","Active")
+tab.2 <- cbind.data.frame(aa,bb,cc,dd,ee,ff,gg)
+
+apa_table(tab.2,
+          align=c(rep("c",7)),
+          caption="Example Summarized Response Rate Conditions Represented in Figures 2 through 5",
+          col.names=c("Male Dept A","Male Dept B","Female Dept A","Female Dept B","SD Index", "Number of Conditions","Form (and degree) of Nonresponse"),
+          col_spanners=list("Example Response Rates (Any Combination)"=c(1,4)),
+          longtable = TRUE,
+          small=TRUE,
+          landscape=TRUE)
+```
+
+
+# Results
+
+*Research question 1a*: What role does overall response *rate* play in sample misrepresentation? **[make sure this is reflected in results]**
+
+A couple paragraphs to answer RQ1
+
+Have to operationalie "sample misrepresentation" first
+
+The following is RQ2:
+
+
+In total, we generated 327.68 million samples (4,096 unique combinations of response rate and population constituency across gender and department, simulated 10,000 times each across our eight Table 1 conditions).  Each of these samples was comprised of, on average, *n* = `r format(mean(combo[,"NS"]), big.mark=",", digits=0,scientific=FALSE)`, collectively representing an experiment-wide *n* of 1.8432 trillion. For each individual simulation, weights were applied iteratively to the data at the two marginal (variable) levels via raking, and were estimated via the *anesrake* package [@pasek_anesrake:_2016] in *R* version 3.31 [@r_core_team_r:_2017]. We were most interested in comparing the extent to which unweighted (aggregated responses without raking) and weighted (aggregated weighted responses) sample means approximated the population means across our controlled specifications of response rate, nonresponse form, and attitudinal distribution (population means were taken from each iteration, as the simulations specified a new population at each iteration). The "effectiveness" of weighting was evaluated by calculating the discrepancies between the population and both weighted and unweighted sample means as well as the averaged deviations of these discrepancies from the population mean (discrepancy in the "mean" of the means is bias, dispersion about the "mean" of the means is error). If the average weighted sample mean was closer to the true population mean, relative to the unweighted one, then the weighting was deemed beneficial.
+
+
+Add a couple of paragraphs here to answer research questions 1(a) and 1(b)
+
+Correlation coefficient needed.[Yang to calculate 2/1]
+```{r Figure1, echo=FALSE, fig.cap="Relationship between total response rate and misrepresentation.",fig.height=4.5, fig.width=6.5}
+
+new.fig.1 <- ggplot(combo, aes(x=RR.all, y=PPSU)) + 
+  geom_point(alpha=1/25, size=1.5) + 
+  xlim(0.36,0.81) +
+  ylim(0, .3) + 
+  xlab("Total Response Rate") + 
+  ylab("Misrepresentation") +
+  theme(panel.background = element_rect(fill = "transparent", color = "#CCCCCC"),
+        panel.grid.major.y = element_line(color = "grey80")) + 
+  scale_colour_gradient() +
+  geom_smooth(method='loess', color="red", size = 1/3) +
+  theme(axis.title.x = element_text(size = 8,color = "black")) +
+  theme(axis.text.x = element_text(size = 8, color = "black")) +
+  theme(axis.title.y = element_text(size = 8,color = "black")) +  
+  theme(axis.text.y = element_text(size = 8,color = "black"))
+new.fig.1 + facet_wrap(~Condition) +
+  theme(strip.text.x = element_text(size = 10,color= "black"))
+
+```
+
+```{r Figure2, echo=FALSE, fig.cap="Relationship between nonresponse form and misrepresentation.",fig.height=4.5, fig.width=6.5}
+
+new.fig.2 <- ggplot(combo, aes(x=SD, y=PPSU)) + 
+  geom_point(alpha=1/25, size=1.5) + 
+  xlim(0, .2) +
+  ylim(0, .3) + 
+  xlab("SD indicating Form of Nonresponse") + 
+  ylab("Misrepresentation") +
+  theme(panel.background = element_rect(fill = "transparent", color = "#CCCCCC"),
+        panel.grid.major.y = element_line(color = "grey80")) + 
+  scale_colour_gradient() +
+  geom_smooth(method='loess', color="red",size=1/3) +
+  theme(legend.title = element_text(size = 8)) +
+  theme(legend.text = element_text(size = 8)) +
+  theme(axis.title.x = element_text(size = 8,color = "black")) +
+  theme(axis.text.x = element_text(size = 8, color = "black")) +
+  theme(axis.title.y = element_text(size = 8,color = "black")) +
+  theme(axis.text.y = element_text(size = 8,color = "black"))
+new.fig.2 + facet_wrap(~Condition) +
+  theme(strip.text.x = element_text(size = 10,color= "black"))
+
+```
+
+
+
+To partially address the second limitation, discrepancy between population constituency and sampling proportions was additionally estimated via Cattell's profile similarity index [*r~p~*; @cattell_taxonometric_1966]. *r~p~* is sensitive to discrepancies in profile shape (pattern across profile components), elevation (average component score), and scatter (sum of individual components' deviation from the elevation estimate. Figure 3 demonstrates the pattern of unweighted sample mean deviation (from the population parameter) when this index is taken into consideration. *edits*....gain demonstrate these relationships across the attitudinal form conditions, being grouped by underlying distributions thought to be susceptible to bias (Conditions 3 through 8) as well as those thought to be relatively immune to bias (Conditions 1 through 3; aka those sampling situations in which weighting is unnecessary).
+
+```{r Figure3, echo=FALSE, fig.cap="Relationship between sample representativeness and misrepresentation.",fig.height=4.5, fig.width=6.5}
+
+new.fig.3 <- ggplot(combo, aes(x=r.p, y=PPSU)) + 
+  geom_point(alpha=1/25,size=1.5) + 
+  xlim(-1.0, 1.0) + 
+  ylim(0, .3) + 
+  xlab("Cattell's Profile Similarity Coefficient rp") + 
+  ylab("Misrepresentation") +
+  theme(panel.background = element_rect(fill = "transparent", color = "#CCCCCC"),
+        panel.grid.major.y = element_line(color = "grey80")) + 
+  scale_colour_gradient() +
+  geom_smooth(method='loess', color="red",size=1/3) +
+  theme(axis.title.x = element_text(size = 8,color = "black")) +
+  theme(axis.text.x = element_text(size = 8, color = "black")) +
+  theme(axis.title.y = element_text(size = 8,color = "black")) +  
+  theme(axis.text.y = element_text(size = 8,color = "black"))
+new.fig.3 + facet_wrap(~Condition) +
+  theme(strip.text.x = element_text(size = 10,color= "black"))
+
+```
+
+
+
+```{r Figure4, echo=FALSE, fig.cap="Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.",fig.height=4.5, fig.width=6.5}
+
+combo.fig4 <- data.frame(Misrepresentation=numeric(), 
+                        Condition=factor(levels = c("Condition 1","Condition 2","Condition 3","Condition 4",
+                                                    "Condition 5","Condition 6","Condition 7","Condition 8")),
+                        Type=factor(levels = c("Misrepresentation before applying weighting",
+                                               "Misrepresentation after applying weighting")))
+
+combo.fig4[c(1:32768),c(1:2)] <- combo[c(1:32768),c(14,2)]
+combo.fig4[c(1:32768),3]   <- "Misrepresentation before applying weighting"
+combo.fig4[c(32769:65536),c(1:2)] <- combo[c(1:32768),c(15,2)]
+combo.fig4[c(32769:65536),3]   <- "Misrepresentation after applying weighting"
+
+combo.fig4 <- summarySE(combo.fig4, measurevar="Misrepresentation", groupvars=c("Type","Condition"))
+
+ggplot(combo.fig4, aes(x=Condition, y=Misrepresentation, fill=Type)) + 
+  xlab("Simulation Conditions") + 
+  ylab("Mean Misrepresentation") +
+  scale_y_continuous(limits = c(0, .15), breaks=seq(0,.15, by =.01)) + 
+  geom_bar(position=position_dodge(), stat="identity", colour="black") +
+  geom_errorbar(aes(ymin=Misrepresentation-sd,ymax=Misrepresentation+sd),
+                    width=.2,position=position_dodge(.9)) +
+  scale_fill_manual(values=c("#FFFFFF","#999999")) +
+  theme(legend.justification = c(0,1), 
+        legend.position = c(.6,.97),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 8,colour = "black"),
+        legend.background = element_rect(fill="transparent")) +
+  theme(axis.title.x = element_text(size = 8,colour = "black")) + 
+  theme(axis.title.y = element_text(size = 8,colour = "black")) +  
+  theme(axis.text.x = element_text(size = 8,colour = "black")) +
+  theme(axis.text.y = element_text(size = 8,colour = "black")) +
+  theme(panel.background = element_rect(fill = "transparent"),
+        panel.border = element_rect(colour = "grey80", fill=NA, size=0.5),
+        panel.grid.major.y = element_line(colour = "grey80"))
+
+```
+
+The plurality of our findings are presented visually, and they focus on the overall mean (e.g., the average rating across all sample members). Figure 1 provides a broad summary of the results across the eight different attitudinal distribution conditions, presenting the average absolute discrepancy from the population mean within each broad condition. Conditions one through three demonstrate that, on average, the unweighted sample mean provides a good (unbiased) estimate of the population mean when the distributional form is held constant across constituent groups (e.g., the distributions of attitudes are of similar functional forms and locations for all constituent groups). This is regardless of form or extent of nonresponse. Additionally, weighting remediates deviations about the true mean in all five attitudinally discrepant conditions, even when considerable error exists in the unweighted estimate (e.g., the rightmost bars in Figure 1).
+
+# The Role of Response Rate
+
+In terms of explaining the very little error that did emerge within the passive nonresponse conditions, this error was entirely attributable to response rate (See Figure XX). The nature of the exact relationship was slightly nonlinear, being fit with quadratic functions within each condition (collapsing across conditions did exhibit slight within-array differences [which would affect the statistically perfect relationship]). 
+
+```{r Figure5, echo=FALSE, fig.cap="Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 1 through 3).",fig.height=7, fig.width=6.5}
+
+combo.fig5 <- combo.passive[,c(2,14,15,22)]
+combo.fig5 <- melt(combo.fig5, id.vars=c("Condition","SD"), variable.name="type", value.name="difvalue")
+
+rownum <- nrow(combo.fig5)/2
+
+for (i in 1:rownum){
+  combo.fig5$type2[i] <- "Before applying weighting"
+  combo.fig5$type2[i+rownum] <- "After applying weighting"
+}
+
+rm(rownum,i)  #delete extraneous objects
+
+xlab <- expression('SD Index')
+
+fig.5 <- ggplot(combo.fig5, aes(x=SD, y=difvalue, color=Condition)) + 
+  geom_point(alpha=1/2,size=1.5)+ 
+  xlim(0,.2) + 
+  ylim(0,.4) + 
+  xlab("SD Index") + 
+  ylab("Misrepresentation") +
+  #geom_jitter(width=.03) +
+  theme(panel.background = element_rect(fill = "transparent", colour = "#CCCCCC"),
+        panel.grid.major.y = element_line(colour = "grey80")) + 
+  theme(axis.title.x = element_text(size = 8,colour = "black")) +  
+  theme(axis.title.y = element_text(size = 8,colour = "black")) +  
+  theme(axis.text.x = element_text(size = 8,colour = "black")) +
+  theme(axis.text.y = element_text(size = 8,colour = "black")) +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(size = 8, colour = "black"),
+        legend.background = element_rect(fill="transparent")) +
+  #geom_vline(xintercept=.025) + 
+  scale_colour_brewer() + 
+  annotate("text", x=.00, y=.35, label="Passive", color = "black", size = 3) +
+  annotate("text", x=.20, y=.35, label="Active", color = "black", size = 3) +
+  geom_smooth(method=lm, se=FALSE, colour="red", size = 1/3)
+
+fig.5 + facet_wrap(~type2, nrow=2) +
+  theme(strip.text.x = element_text(size=10,colour="black"))
+
+```
+
+
+```{r Figure6, echo=FALSE, fig.cap="Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 4 through 8).",fig.height=7, fig.width=6.5}
+
+combo.fig6 <- combo.active[,c(2,14,15,22)]
+combo.fig6 <- melt(combo.fig6, id.vars=c("Condition","SD"), variable.name="type", value.name="difvalue")
+
+rownum <- nrow(combo.fig6)/2
+
+for (i in 1:rownum){
+  combo.fig6$type2[i] <- "Before applying weighting"
+  combo.fig6$type2[i+rownum] <- "After applying weighting"
+}
+
+rm(rownum,i)  #delete extraneous objects
+
+xlab <- expression('SD Index')
+
+fig.5 <- ggplot(combo.fig6, aes(x=SD, y=difvalue, color=Condition)) + 
+  geom_point(alpha=1/2,size=1.5)+ 
+  xlim(0,.2) + 
+  ylim(0,.4) + 
+  xlab("SD Index") + 
+  ylab("Misrepresentation") +
+  #geom_jitter(width=.03) +
+  theme(panel.background = element_rect(fill = "transparent", colour = "#CCCCCC"),
+        panel.grid.major.y = element_line(colour = "grey80")) + 
+  theme(axis.title.x = element_text(size = 8,colour = "black")) +  
+  theme(axis.title.y = element_text(size = 8,colour = "black")) +  
+  theme(axis.text.x = element_text(size = 8,colour = "black")) +
+  theme(axis.text.y = element_text(size = 8,colour = "black")) +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(size = 8, colour = "black"),
+        legend.background = element_rect(fill="transparent")) +
+  #geom_vline(xintercept=.025) + 
+  scale_colour_brewer() + 
+  annotate("text", x=.00, y=.35, label="Passive", color = "black", size = 3) +
+  annotate("text", x=.20, y=.35, label="Active", color = "black", size = 3) +
+  geom_smooth(method=lm, se=FALSE, colour="red", size = 1/3)
+
+fig.5 + facet_wrap(~type2, nrow=2) +
+  theme(strip.text.x = element_text(size=10,colour="black"))
+
+```
+
+**Need to Recall Research Questions in appropriate sections** 
+
+Figure 2 demonstrates how the weighting algorithm operated across conditions one through three taking form of nonresponse into consideration (along the x-axis, with passive nonresponse occupying the left of the figure and active nonresponse scenarios occupying the right). There is a very slight amount of error in the unweighted sample mean with active nonresponse, as well as a systematic pattern of heteroskedasticity across the "passive to active" continuum (studentized Breusch-Pagan = 565.42 [unweighted], 496.67 [weighted], *p*'s < .001). Weighting always corrects this slight amount of error. Figure 3 demonstrates a more pronounced *form of* nonresponse association when underlying attitudinal distributions evidence group differences, and in these scenarios, active nonresponse is shown to have a fairly large effect on error within the sample estimate (and, again, predictable heteroskedasticity paralleling the SD index, Breusch-Pagan = 3177.2 [unweighted]; 832.91 [weighted], *p*'s < .001). Weighting again corrects the sample estimate. 
+
+It should be noted regarding the above-mentioned "heteroskedasticity" that there are active nonresponse scenarios in which no error is found (see, for example, the lower right-hand portion of Figure 3 where values appear all along the passive-active abscissa). These situations are ones within which the response rates "parallel" the distributional form. For example, in Condition Eight, the distributional forms were: Positive Skew~Male_A~, Positive Skew~Male_B~, Negative Skew~Female_A~, Negative Skew~Female_B~. In the most extreme cases of active nonresponse, response rates that fully parallel distributional patterns (e.g., 20%~Male_A~, 20%~Male_B~, 80%~Female_A~, 80%~Female_B~) result in no error in the population mean approximation (average discrepancy = .0003, *SD* = .0002). Alternatively, when the response rates are inverted, (e.g., 20%~Male_A~, 80%~Male_B~, 20%~Female_A~, 80%~Female_B~), there is substantial error in approximation (average discrepancy = .51, SD = .14). **this is an old number - why are our new numbers so low? (see, for example, the y-axis on Figure 1) - YANG? (11/17/18)** Again, it is not merely response rate or form that is associated with biased sample estimates, but rather the nature of response rate relative to existing attitudinal differences.
+
+To further elaborate this point, consider, for example, Condition 4. Here, three groups are characterized by similar distributions of attitudes (normally distributed) and one, Females from Department B, is characterized by negatively skewed attitudes. The greatest unweighted error here arises from sampling scenarios in which there are many Department B females (e.g., in our specifications, 6,400) and fewer males and Department A females[^4], but the Department B females exhibit a much lower response rate (e.g., 20%) than do other groups, who respond at a high rate (e.g., 80%). That is, it is not merely response rate, but response rate within these identifiable groups, and whether or not those response rate differences parallel underlying attitudinal differences.
+
+[^4]: Because of the "marginal" versus "cell" specifications of population constituencies, our most extreme example here is necessarily 400 Department A males, 1,600 Department B males, and 1,600 Department A females. This was a decision based on keeping the population N's at 10,000 and certainly more extreme population constituency combinations could be examined in future like-minded explorations.
+
+Although the *patterns* of unweighted sample mean discrepancies differed across conditions, all eight conditions exhibited similar omnibus effect (weighting ameliorating error wherever it arose [in the unweighted statistic]).
+
+
+To partially address the second limitation, discrepancy between population constituency and sampling proportions was additionally estimated via Cattell's profile similarity index [*r~p~*; @cattell_r_1949; @cattell_taxonometric_1966]. *r~p~* is sensitive to discrepancies in profile shape (pattern across profile components), elevation (average component score), and scatter (sum of individual components' deviation from the elevation estimate. Figure 3 demonstrates the pattern of unweighted sample mean deviation (from the population parameter) when this index is taken into consideration. *edits*....gain demonstrate these relationships across the attitudinal form conditions, being grouped by underlying distributions thought to be susceptible to bias (Conditions 3 through 8) as well as those thought to be relatively immune to bias (Conditions 1 through 3; aka those sampling situations in which weighting is unnecessary).
+
+# Summary
+
+Collectively the results highlight three aspects of weighting: 1) our simulations are comprehensive, iterating through all possible combinations of response rates - those paralleling population distributions, those inversely mirroring population distributions, and those "orthogonal to" population distributions, 2) the "SD" operationalization of passive to active forms of nonresponse is a bit crude and insensitive to specific combinations of response rates expected to manifest or not manifest in bias, and 3) substantial bias may be present in the unweighted estimate even with only small proportions of active non-response (e.g., only one or two groups exhibiting slightly different response rates, with the resulting discrepancy [population versus sample mean] being quite large). 
+
+Mean square error is our second index for sample quality. It is a well-known mathematical theorem that the application of weights increases (random) errors of precision, which was also empirically true in the current study. For each condition in our simulations, we calculated the standard deviations of 40.96 million unweighted and 40.96 million weighted samples means (4,096 possible population-sample combinations by 10,000 iterations), which yielded eight empirically-estimated standard errors of unweighted and weighted sample means. Figure XXX **<- need to readd this** visually presents these standard errors in eight pairs of bars, demonstrating that the standard error of weighted sample means (red bar) tended to be 16% to 18% larger than that of unweighted sample means (grey bar) regardless of condition. These errors highlight the caveat that weighting should only be applied in the active nonresponse case (e.g., although the aggregate effect of weighting with passive nonresponse is error-minimizing, any one sampling condition is *more likely* to result in greater deviation from the population parameter when weighting is applied the passive nonresponse data).
+
+In summary, as an aggregate across sampling events, weighting always corrects sample bias, when it is present in the unweighted estimate. However, the standard errors suggest that for any *one* sampling event in the absence of bias, the likelihood that the sample mean approximates the *mean* of sample means is (slightly) greater for the unweighted estimate. When bias is present, however, (in the unweighted estimate) there is obviously no advantage to "being closer" to this biased mean of means. That is, under some circumstances, the mean of unweighted sample means does not center on the population mean. The implications of this seem quite obvious: Weighting should only be applied if bias is anticipated in the sample estimate. This may seem to be a picayune recommendation, but we note here that this advocation is not heeded in public opinion polling applications, where the computation and application of weights are default procedures (CITES? - perhaps AAPOR standards or personal communication with polling agencies such as Gallop).
+
+**Can we look at the "crossing point?" (e.g., when MSE becomes excessive) - David?**
+
+# Discussion
+
+We view nonresponse as a serious problem that should be addressed via repeated attempts to survey particularly reluctant or hard-to-reach respondents particularly because nonresponse may be reasonably expected to be greatest in groups that are most unsatisfied [e.g., it may be typical for individuals representing these groups to have their responses diluted; see, for example, @taris_how_2007]. However, several researchers have noted potentially misplaced relative emphasis on survey response rates, with @cook_meta-analysis_2000, @krosnick_survey_1999, and @visser_mail_1996 articulating the point that representativeness of the sample is more important than response rate. We also believe that the goal in organizational surveying should be representativeness not exhaustiveness. @krosnick_survey_1999 specifically comments that, even when probability sampling is employed, response rate does not necessarily implicate either good or poor sample representativeness. One aim of this paper is to reinforce this primary 'representativeness' orientation to those who may be otherwise inclined to focus on response rate as a sufficient index of quality (and propose sample weighting as a practice that can adjust for lack of representativeness).
+
+With the above in mind, we set out to answer two fairly simple questions: What impact does the application of weights have on the quality of sample estimates, and what role does nonresponse play? Our answers are that: 1) weighting "always" helps, as long as you capture the proper strata (which of course we were able to do via controlled simulation), but also 2) response rate impact *depends* on relationship between response rate and the underlying distribution of attitudes. conditions 1 through 3 as well as all other conditions are occasionally immune to response rate influence, depending on whether the pattern of nonresponse parallels the pattern of attitudinal distribution differences or not). Active forms of nonresponse can harm the unweighted sample estimate, but only when the pattern of active nonresponse is accompanied by differing distributions of attitudes within the active nonrespondent "populations" [this would appear to be a reasonable expectation based on the literature; e.g., @rogelberg_employee_2000; @rogelberg_profiling_2003; @spitzmuller_survey_2007]. Although the weighted mean proved an unbiased estimate of the population mean across all simulations, in circumstances where no bias existed in the unweighted estimate, the trade-off between bias-correction and random error of precision (e.g., standard error) also needs to be acknowledged.
+
+It should be noted that the organizational surveying categorization of passive versus active parallels the broader statistical focus on data that is missing at random or completely at random [MAR or MCAR, see for example, @heitjan_distinguishing_1996] versus data not missing at random [non-MCAR, see for example, ]. Imputation is the common remediation for data MAR or MCAR whereas non-MCAR solutions may involve strategies such as latent variable estimation procedures [@muthen_structural_1987]. In the context of surveying, we are similarly proposing a bifurcation of remediation methods - no remediation with passive nonresponse and post-stratification weighting with active.
+
+Previous presentations have noted that bias is sometimes associated with nonresponse and othertimes it is not - this research has not been explicit in the specific conditions that moderate this association, however. The current paper does make this association explicit. It is not merely the form of nonresponse that determines whether or not bias occurs, but also the underlying distributions that the response probabilities are applied to.  Some distributional patterns are immune to the biasing effects of active nonresponse (see, for example, Conditions 1 through 3). Some patterns of active nonresponse also result in no bias even when distributional patterns deviate substantially (see, for example, Condition 8 where a 20%, 20%, 80%, 80% response rate pattern exhibits no error). The target therefore should not be merely form of nonresponse but also underlying attitudes. Regardless, however, weighting always remediates the error when it occurs (and does not add error where it is absent).
+
+The current findings are of course qualified by the uniqueness of our simulations, most notably our ability to fully capture the correct population parameters (e.g., because these were "created" by us, we were also able to identify these strata as the nonresponse contributors). Even in the extreme conditions (e.g., a small "population" with a correspondingly low response rate; see, for example, the lower-left hand corner of Figure 2), the weighting algorithm was able to provide a bias correction. This is undoubtedly attributable to our random sampling procedure (instead of, for example, sampling conditionally from the population distributions), but here we do note that the raking procedure is applied at the "margins" (e.g., variable level, not interaction level), although our introduction of a biasing element is at the cell (interaction) level.
+
+It has been stated that active nonresponse is relatively harmless unless the actively nonrespondent group is relatively large [cites below]. The current study, however, suggests that post-data-collection remediation. There may also be some important implications here regarding sample (and population) size. Because organizational surveyors likely interface with organizations of varying sizes (perhaps some of which are small- or medium-sized), the implications of our simulations particularly in the small population conditions, were highlighted. Findings specific to these conditions were: XXX, XXX, XXX.
+
+There is of course no need to restrict weighting protocols to demographic groups - organizational surveyors have a rich tradition of attending to drivers of nonresponse [see, for example, @rogelberg_introduction:_2007]. Groupings of any sort can be the basis of weighting (for example, pre-survey probing might assign probabilities of nonresponse, and these probabilities can be retained post-administration as weighting guides. 
+
+It should also be pointed out that although the active nonrespondent group seems to be a great concern, it will not seriously bias the results unless the proportion of active nonrespondents is higher than 15% [@rogelberg_introduction:_2007; @rogelberg_profiling_2003; @werner_reporting_2007].
+"In this study we found that the active nonrespondent group was relatively small (approximately 15%), but consistent in size with research conducted by ." [@rogelberg_profiling_2003, pp.1110-1111]. "Furthermore, consistent with Roth (1994) who stated that when missingness is not random (as we found for active nonrespondents), meaningful bias will only be introduced if the group is relatively large (which was not the case in this study)." [@rogelberg_profiling_2003, pp.1112].
+
+"If the results show that the active nonrespondent group comprises a low proportion of the population, fewer concerns for bias arise. If the proportion of active respondents is greater than 15% of the group of individuals included in the interviews or focus groups (this has been the average rate in other studies), generalizability may be compromised." [@rogelberg_introduction:_2007, p.201] * I believe there is an error here. The author want to say that if the proportion of active nonrespondents is greater than 15% of the group .
+
+"It has been suggested that it takes a response rate of 85% to conclude that nonresponse error is not a threat (Dooely & Lindner, 2003). We agree that researchers should provide both empirical and theoretical evidence refuting nonresponse bias whenever the response rate is less than 85%." [@werner_reporting_2007, p.293].
+
+Note here however, the seeming disconnect between the reports of 15% active nonresponse and declining response rates (trending toward 50%). Certainly with decreasing overall response rates, the likely reasons would appear to be more active than passive (e.g., it is difficult to entertain the idea that potential respondents are more likely to forget to respond today than they were 40 years ago).
+
+> Integration of IT/IS systems within HR functions hopefully assists the (un)likelihood that organizatinoal population frames are either deficient or contaminated, although we note that this possibility (frame misspecification) is much more plausible within organziations that do not have updated or integrated HR IT/IS systems (perhaps, ironically, *smaller* organizations). 
+
+## Future Directions
+
+Experimental methods within the psychological discipline have long been criticized for heavy reliance on samples of convenience (for instance, student samples). Very little progress has been made regarding the application of appropriate population sampling procedures in experimentation. Certain non-experimental procedures (most notably organizational surveying) hold paradoxical advantage over experimental procedures primarily in this arena of sampling - particularly in consideration of population coverage, which refers to the percent of a population that is reachable by the sampling procedure (e.g., postal, intra-office, or internet invitation) and likelihood of having access to population parameter estimates (e.g., strata constituencies).  There is a rich tradition and literature of public opinion polling procedures and techniques from which to draw. These procedures, however, only hold advantage if the non-experimental methodologist acknowledges the criticality of sample representativeness. The current paper provides one corrective technique (post-stratification weighting) as an important focus for the organizational surveyor who shares this primary interest in maximizing sample representativeness.
+
+We note the above "advantage" held by organizational surveyors because extensions of the current protocol include investigating how inaccurate census estimates (and/or grabbing the "wrong" group) affects the quality of sample estimates. That is, in our controlled simulations, we were able to know population constituencies, because they were set by us! In real-world applications, there is likely more error between the population estimate and actual population constituency. Similarly, if the association between attitude and group membership were to be controlled, there may be conditions identified whereby weighting loses its efficacy (e.g., low "correlations" between attitude and group membership). Future simulations should test boundary conditions for this type of error, identifying at what point inaccuracy in the population constituency estimate appreciably degrades the weighting procedure. Furthermore, it was demonstrated here that, when bias exists, weighting corrects it. Weighting also, however, results in a larger mean square error (MSE; expected spread of sample estimates around the population parameter). Feasibly then, there is a point at which the decreased bias is accompanied by an unacceptably inflated MSE. At which point does this occur? This is another fertile area for future exploration.
+
+Most potential issues with weighting are addressed through careful consideration of the appropriate strata to take under consideration as well as ultimate level of aggregation (what group constitutes the population of interest or focus of feedback; e.g., regional, functional, or organizational?). We recommend the surveyor especially considers groups that might have issues of active forms of nonresponse and collect those demographics so weighting is an option. It is particularly in these contexts of 'unsatisfied' employees being less likely to respond to surveys that pre-stratification consideration becomes critical (for instance, if there is an inclination that attitudes may differ across, for example, night versus day shift workers, it is important that shift be measured and incorporated as a stratum prior to survey administration).
+
+For Condition 5 (for example, low/high response rates with minority/majority population constituencies). The lower-right to upper-left diagonal reflects response rates that parallel population constituencies. The patterns across these stressors were consistent, with the weighted sample means (red dots) providing unbiased estimates of the population parameter, whereas the unweighted sample means (grey dots) tended to yield unbiased estimates when the population constituencies were roughly equal (e.g., close to 50%/50%).
+
+Figure 3 drills down this information further by extracting unweighted and weighted estimates in one specific marginal population parameter combination (here, 60% males and 40% females; 40% in department A and 60% in department B). In doing so, the population parameters were in control and sample parameters were set free (see dotted red rectangle in Figure 2). Therefore, Figure 3 was then arranged in a fashion that allowed further investigation into the interactive effect of marginal sample parameters (gender on the x-axis and department on the y-axis) on the effectiveness of post-stratification weighting reflected by the pattern of grey and red dots. **Huh? - find old version or delete**
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "simulation paper references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
+
