@@ -51,7 +51,7 @@ output            : papaja::apa6_pdf
 
 ```{r load_packages, include = FALSE}
 library(papaja)   #APA6 formatting
-library(citr)     #APAcitation
+# library(citr)     #APAcitation
 
 library(psych)
 library(ggplot2)  #data visualization
