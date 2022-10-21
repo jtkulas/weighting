@@ -33,16 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Nonresponse and Sample Weighting in Organizational Surveying},
-  pdfauthor={John T. Kulas1, Yang Yang2, \& David H. Robinson3},
-  pdflang={en-EN},
-  pdfkeywords={Survey methodology, sample weighting, nonresponse, response rate},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -174,6 +164,16 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Nonresponse and Sample Weighting in Organizational Surveying},
+  pdfauthor={John T. Kulas1, Yang Yang2, \& David H. Robinson3},
+  pdflang={en-EN},
+  pdfkeywords={Survey methodology, sample weighting, nonresponse, response rate},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{Nonresponse and Sample Weighting in Organizational Surveying}
 \author{John T. Kulas\textsuperscript{1}, Yang Yang\textsuperscript{2}, \& David H. Robinson\textsuperscript{3}}
@@ -224,7 +224,7 @@ The more commonly encountered form of organizational nonresponse appears to be p
 \hypertarget{sample-weighting---a-brief-overview}{%
 \section{Sample Weighting - a Brief Overview}\label{sample-weighting---a-brief-overview}}
 
-Within public opinion polling contexts, when realized sample constituencies (e.g., 44\% male - by tradition from \emph{carefully-specified} and \emph{randomly sampled} data frames)\footnote{These important sampling elements are very carefully attended to within public opinion polling contexts. Conversely, within organizational surveying traditions, these considerations are not explicitly acknowledged. The weighting procedure presented in the current manuscript remediates bias regardless of full methodological consideration of sampling context, but is dependent on accurate ``census'' population constituency estimates (and, as the results highlight, the presence of an active nonrespondent group). For the interested reader, an acknowledgement of the broader methodological sampling scenario facilitates a much deeper appreciation and understanding of the benefits and potential pitfalls of sample weighting.} are compared against census estimates of population parameters (e.g., 49\% male), weights are applied to the realized sample in an effort to remediate the relative proportional under- or over-sampling. This is because, if the broader populations from which the under- or over-represented groups are sampled differ along surveyed dimensions (e.g., males, within the population, are \emph{less likely to vote for Candidate X} than are women), then unweighted aggregate statistics (of, for example, projected voting results) will misrepresent the true population parameter. This remedial application of sample weights should also be considered an option for organizational researchers pursuing answers to similar survey questions such as: ``What is the mood of the employees?'' This is because focused queries such as this are deceptively complex - implicit in the question is a focus not on survey respondents, but rather the broader employee population. Acknowledging this implied target is important, because the next step (after gauging the mood of the surveyed respondents) is \emph{doing something} about it. Weighting is one remedial option for organizational surveyors to plausibly transition from, ``What do the survey results say''? to ``What do the employees feel''?
+Within public opinion polling contexts, when realized sample constituencies (e.g., 44\% male - by tradition from \emph{carefully-constructed} and \emph{randomly sampled} data frames)\footnote{These important sampling elements are very carefully attended to within public opinion polling contexts. Conversely, within organizational surveying traditions, these considerations are not commonly acknowledged, at least explicitly. The weighting procedure presented in the current manuscript remediates bias regardless of full methodological consideration of sampling context, but is dependent on accurate ``census'' population constituency estimates (and, as the results highlight, the presence of an active nonrespondent group). For the interested reader, an acknowledgement of the broader methodological sampling scenario, and the additional potential sources of error, facilitates a much deeper appreciation and understanding of the benefits and potential pitfalls of sample weighting.} are compared against census estimates of population parameters (e.g., 49\% male), weights are applied to the realized sample in an effort to remediate the relative proportional under- or over-sampling. This is because, if the broader populations from which the under- or over-represented groups are sampled differ along surveyed dimensions (e.g., males, within the population, are \emph{less likely to vote for Candidate X} than are women), then unweighted aggregate statistics (of, for example, projected voting results) will misrepresent the true population parameter. This remedial application of sample weights should also be considered an option for organizational researchers pursuing answers to similar survey questions such as: ``What is the mood of the employees?'' This is because focused queries such as this are deceptively complex - implicit in the question is a focus not on survey respondents, but rather the broader employee population. Acknowledging this implicit target is important, because the next step (after gauging the mood of the surveyed respondents) is \emph{doing something} about it. Weighting is one remedial option for organizational surveyors to plausibly transition from, ``What do the survey results say''? to ``What do the employees feel''?
 
 \hypertarget{procedural-application}{%
 \subsection{Procedural application}\label{procedural-application}}
