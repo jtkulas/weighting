@@ -1,0 +1,43 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure2-1.pdf}
+\caption{\label{fig:Figure2}Relationship between nonresponse form and misrepresentation.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure3-1.pdf}
+\caption{\label{fig:Figure3}Relationship between sample representativeness and misrepresentation.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure4-1.pdf}
+\caption{\label{fig:Figure4}Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure5-1.pdf}
+\caption{\label{fig:Figure5}Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 1 through 3).}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure6-1.pdf}
+\caption{\label{fig:Figure6}Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 4 through 8).}
+\end{figure*}
