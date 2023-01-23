@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.3)  13 JAN 2023 15:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.3)  20 JAN 2023 14:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -877,11 +877,12 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 <Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf, id=150, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf>
-Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf  used on input line 414.
+Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf  used on input line 420.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[14]
 \openout5 = `Simulation-paper2-20200207.fff'.
 
-(Simulation-paper2-20200207.fff) [14 <./Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf>] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] AED endfloat: Processing end Figures and Tables [30] (./Simulation-paper2-20200207.ttt
+(Simulation-paper2-20200207.fff) [15 <./Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf>] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] AED endfloat: Processing end Figures and Tables [30] (./Simulation-paper2-20200207.ttt
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 12.
 
@@ -970,13 +971,13 @@ Package rerunfilecheck Info: File `Simulation-paper2-20200207.out' has not chang
 Here is how much of TeX's memory you used:
  26634 strings out of 476928
  504098 string characters out of 5823806
- 839696 words of memory out of 5000000
+ 839754 words of memory out of 5000000
  47223 multiletter control sequences out of 15000+600000
  565818 words of font info for 105 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,11n,103p,2413b,782s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,11n,103p,2434b,782s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}<c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri8.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Simulation-paper2-20200207.pdf (39 pages, 8132140 bytes).
+Output written on Simulation-paper2-20200207.pdf (39 pages, 8131615 bytes).
 PDF statistics:
  472 PDF objects out of 1000 (max. 8388607)
  388 compressed objects within 4 object streams
