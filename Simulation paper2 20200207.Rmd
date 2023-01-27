@@ -17,12 +17,12 @@ affiliation:
   - id            : "1"
     institution   : "Montclair State University"
   - id            : "2"
-    institution   : "China Select"
+    institution   : "Roche Group"
   - id            : "3"
     institution   : "St. Cloud State University"
 
 author_note: |
-  John T. Kulas, Professor of Industrial and Organizational Psychology, Department of Psychology, Montclair State University. Yang Yang, Research and Data Scientist, China Select. David H. Robinson, Professor of Statistics, St. Cloud State University. This manuscipt was generated via papaja [@R-papaja] within rMarkdown.
+  John T. Kulas, Professor of Industrial and Organizational Psychology, Department of Psychology, Montclair State University. Yang Yang, Organizational Scientist, People Insights & Technology, People & Culture, Roche Group. David H. Robinson, Professor of Statistics, St. Cloud State University. This manuscipt was generated via papaja [@R-papaja] within rMarkdown.
 
 abstract: |
   Post-stratification weighting is a common procedure used in public opinion polling applications to correct demographic constituency differences between samples and populations. Although common practice in public opinion polling, this form of data remediation is only sparsely acknowledged as a procedural topic worthy of empirical investigation within the organizational surveying literature. The current paper induces survey nonresponse via data simulation across fictional constituent groups (e.g., organizational strata) and documents the impact of weighting on the accuracy of sample statistics. Our goal was to evaluate the effectiveness of weighting when confronted with *passive* and *active* forms of nonresponse in an effort to: 1) interject this data-remediation procedure into the established organizational surveying literature focused on nonresponse, while also 2) exploring organizationally-relevant sampling scenarios that: a) benifit from, b) are "hurt" by, or c) are unaffected by post-stratification weighting. The results confirm that sampling contexts characterized by active nonresponse do benefit from application of sample weights, but only when accompanied by constituency differences in underlying population construct (e.g., surveyed *attitude*) standing. Alternatively, constituent member differences in population attitudes, when characterized by passive forms of nonresponse, exhibit no benefit from weighting (in fact these scenarios are somewhat *hurt* by weighting). The simulations reinforce that, moving forward, it would be prudent for surveyors of all disciplinary backgrounds to mutually attend to the traditional focus of both traditions: public opinion polling (e.g., multiple possible  methodological sources of error as well as post-stratification adjustment) and organizational surveying (e.g., *form* of nonresponse). 
