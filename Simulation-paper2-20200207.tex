@@ -33,15 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Nonresponse and Sample Weighting in Organizational Surveying},
-  pdflang={en-EN},
-  pdfkeywords={Survey methodology, sample weighting, nonresponse, response rate},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -179,6 +170,15 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Nonresponse and Sample Weighting in Organizational Surveying},
+  pdflang={en-EN},
+  pdfkeywords={Survey methodology, sample weighting, nonresponse, response rate},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{Nonresponse and Sample Weighting in Organizational Surveying}
 \author{John T. Kulas\textsuperscript{1}, Yang Yang\textsuperscript{2}, \& David H. Robinson\textsuperscript{3}}
@@ -193,7 +193,7 @@ Correspondence concerning this article should be addressed to John T. Kulas, Dic
 
 }
 
-\affiliation{\vspace{0.5cm}\textsuperscript{1} Montclair State University\\\textsuperscript{2} China Select\\\textsuperscript{3} St.~Cloud State University}
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Montclair State University\\\textsuperscript{2} Roche Group\\\textsuperscript{3} St.~Cloud State University}
 
 \abstract{%
 Post-stratification weighting is a common procedure used in public opinion polling applications to correct demographic constituency differences between samples and populations. Although common practice in public opinion polling, this form of data remediation is only sparsely acknowledged as a procedural topic worthy of empirical investigation within the organizational surveying literature. The current paper induces survey nonresponse via data simulation across fictional constituent groups (e.g., organizational strata) and documents the impact of weighting on the accuracy of sample statistics. Our goal was to evaluate the effectiveness of weighting when confronted with \emph{passive} and \emph{active} forms of nonresponse in an effort to: 1) interject this data-remediation procedure into the established organizational surveying literature focused on nonresponse, while also 2) exploring organizationally-relevant sampling scenarios that: a) benifit from, b) are ``hurt'' by, or c) are unaffected by post-stratification weighting. The results confirm that sampling contexts characterized by active nonresponse do benefit from application of sample weights, but only when accompanied by constituency differences in underlying population construct (e.g., surveyed \emph{attitude}) standing. Alternatively, constituent member differences in population attitudes, when characterized by passive forms of nonresponse, exhibit no benefit from weighting (in fact these scenarios are somewhat \emph{hurt} by weighting). The simulations reinforce that, moving forward, it would be prudent for surveyors of all disciplinary backgrounds to mutually attend to the traditional focus of both traditions: public opinion polling (e.g., multiple possible methodological sources of error as well as post-stratification adjustment) and organizational surveying (e.g., \emph{form} of nonresponse).
@@ -410,7 +410,7 @@ Have to operationalize ``sample misrepresentation'' first
 
 The following is RQ2:
 
-In total, we generated 327.68 million samples (4,096 unique combinations of response rate and population constituency across gender and department, simulated 10,000 times each across our eight Table 1 conditions). Each of these samples was comprised of, on average, \emph{n} = 5,625, collectively representing an experiment-wide \emph{n} of 1.8432 trillion. For each individual simulation, weights were applied iteratively to the data at the two marginal (variable) levels via raking, and were estimated via the \emph{anesrake} package (Pasek, 2016) in R version 4.1.1 (2021-08-10).
+In total, we generated 327.68 million samples (4,096 unique combinations of response rate and population constituency across gender and department, simulated 10,000 times each across our eight Table 1 conditions). Each of these samples was comprised of, on average, \emph{n} = 5,625, collectively representing an experiment-wide \emph{n} of 1.8432 trillion. For each individual simulation, weights were applied iteratively to the data at the two marginal (variable) levels via raking, and were estimated via the \emph{anesrake} package (Pasek, 2016) in R version 4.2.2 (2022-10-31 ucrt).
 
 We were most interested in comparing the extent to which unweighted (aggregated responses without raking) and weighted (aggregated weighted responses) sample means approximated the population means across our controlled specifications of response rate, nonresponse form, and attitudinal distribution (population means were taken from each iteration, as the simulations specified a new population at each iteration). The ``effectiveness'' of weighting was evaluated by calculating the discrepancies between the population and both weighted and unweighted sample means as well as the averaged deviations of these discrepancies from the population mean (discrepancy in the ``mean'' of the means is bias, dispersion about the ``mean'' of the means is error). If the average weighted sample mean was closer to the true population mean, relative to the unweighted one, then the weighting was deemed beneficial.
 
@@ -432,6 +432,11 @@ To partially address the second limitation, discrepancy between population const
 \includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure3-1.pdf}
 \caption{\label{fig:Figure3}Relationship between sample representativeness and misrepresentation.}
 \end{figure}
+
+\begin{verbatim}
+## Warning: The `size` argument of `element_rect()` is deprecated as of ggplot2 3.4.0.
+## i Please use the `linewidth` argument instead.
+\end{verbatim}
 
 \begin{figure}
 \centering
