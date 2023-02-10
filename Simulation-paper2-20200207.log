@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.27)  27 JAN 2023 14:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.2)  9 FEB 2023 19:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Simulation-paper2-20200207.tex
 (./Simulation-paper2-20200207.tex
 LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-01-24> (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/apa7/apa7.cls
+L3 programming layer <2023-02-01> (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/apa7/apa7.cls
 Document Class: apa7 2022/07/25 v2.16 APA formatting (7th edition)
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
@@ -697,7 +697,7 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 Failed to patch abstract.
 Failed to patch title.
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xpatch/xpatch.sty (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-01-24 L3 programming layer (loader) 
+Package: expl3 2023-02-01 L3 programming layer (loader) 
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count336
@@ -705,7 +705,7 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 ))
 Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2023-01-16 L3 Experimental document command parser
+Package: xparse 2023-02-01 L3 Experimental document command parser
 )) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2023/01/19 line numbers on paragraphs v5.1
 \linenopenalty=\count337
@@ -872,20 +872,20 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \openout4 = `Simulation-paper2-20200207.ttt'.
 
 (Simulation-paper2-20200207.ttt) [11] [12] [13]
-<Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf, id=150, 469.755pt x 325.215pt>
+<Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf, id=160, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf>
-Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf  used on input line 420.
+Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf  used on input line 421.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [14]
 \openout5 = `Simulation-paper2-20200207.fff'.
 
 (Simulation-paper2-20200207.fff)
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 436.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 435.
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (61.29524pt too wide) in paragraph at lines 439--439
+Overfull \hbox (61.29524pt too wide) in paragraph at lines 438--438
 []\T1/lmtt/m/n/12 ## Warning: The `size` argument of `element_rect()` is deprecated as of ggplot2 3.4.0.[] 
  []
 
@@ -931,7 +931,7 @@ Overfull \hbox (20.00299pt too wide) in alignment at lines 71--109
 
 
 ] [33] [34]) (./Simulation-paper2-20200207.fff
-<Simulation-paper2-20200207_files/figure-latex/Figure2-1.pdf, id=310, 469.755pt x 325.215pt>
+<Simulation-paper2-20200207_files/figure-latex/Figure2-1.pdf, id=322, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/Figure2-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Figure2-1.pdf>
 Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure2-1.pdf  used on input line 5.
@@ -940,7 +940,7 @@ Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure2-1
 
 
  <./Simulation-paper2-20200207_files/figure-latex/Figure2-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/Figure3-1.pdf, id=325, 469.755pt x 325.215pt>
+<Simulation-paper2-20200207_files/figure-latex/Figure3-1.pdf, id=337, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/Figure3-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Figure3-1.pdf>
 Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure3-1.pdf  used on input line 14.
@@ -948,7 +948,7 @@ Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure3-1
 [36
 
  <./Simulation-paper2-20200207_files/figure-latex/Figure3-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/Figure4-1.pdf, id=340, 469.755pt x 325.215pt>
+<Simulation-paper2-20200207_files/figure-latex/Figure4-1.pdf, id=352, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/Figure4-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Figure4-1.pdf>
 Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure4-1.pdf  used on input line 23.
@@ -956,7 +956,7 @@ Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure4-1
 [37
 
  <./Simulation-paper2-20200207_files/figure-latex/Figure4-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/Figure5-1.pdf, id=351, 469.755pt x 505.89pt>
+<Simulation-paper2-20200207_files/figure-latex/Figure5-1.pdf, id=363, 469.755pt x 505.89pt>
 File: Simulation-paper2-20200207_files/figure-latex/Figure5-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Figure5-1.pdf>
 Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure5-1.pdf  used on input line 32.
@@ -964,7 +964,7 @@ Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure5-1
 [38
 
  <./Simulation-paper2-20200207_files/figure-latex/Figure5-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/Figure6-1.pdf, id=366, 469.755pt x 505.89pt>
+<Simulation-paper2-20200207_files/figure-latex/Figure6-1.pdf, id=378, 469.755pt x 505.89pt>
 File: Simulation-paper2-20200207_files/figure-latex/Figure6-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Figure6-1.pdf>
 Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure6-1.pdf  used on input line 41.
@@ -973,21 +973,21 @@ Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Figure6-1
 
  <./Simulation-paper2-20200207_files/figure-latex/Figure6-1.pdf>] (./Simulation-paper2-20200207.aux)
 Package rerunfilecheck Info: File `Simulation-paper2-20200207.out' has not changed.
-(rerunfilecheck)             Checksum: 9E676BCEBCF56690DFCC1C6DD611A6F9;1559.
+(rerunfilecheck)             Checksum: 5ED7AEDC140B7528C42AAD67A153F524;1958.
  ) 
 Here is how much of TeX's memory you used:
- 26676 strings out of 478025
- 505747 string characters out of 5838499
- 1874299 words of memory out of 5000000
- 46169 multiletter control sequences out of 15000+600000
+ 26684 strings out of 478026
+ 505895 string characters out of 5838504
+ 1874340 words of memory out of 5000000
+ 46172 multiletter control sequences out of 15000+600000
  609164 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,11n,103p,2434b,782s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}<c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on Simulation-paper2-20200207.pdf (39 pages, 8155675 bytes).
+Output written on Simulation-paper2-20200207.pdf (39 pages, 8155767 bytes).
 PDF statistics:
- 477 PDF objects out of 1000 (max. 8388607)
- 391 compressed objects within 4 object streams
- 123 named destinations out of 1000 (max. 500000)
- 131 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 491 PDF objects out of 1000 (max. 8388607)
+ 404 compressed objects within 5 object streams
+ 127 named destinations out of 1000 (max. 500000)
+ 147 words of extra memory for PDF output out of 10000 (max. 10000000)
 
