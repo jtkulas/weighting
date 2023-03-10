@@ -2,6 +2,15 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf}
+\caption{\label{fig:Figure1}Relationship between total response rate and misrepresentation.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
 \includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure2-1.pdf}
 \caption{\label{fig:Figure2}Relationship between nonresponse form and misrepresentation.}
 \end{figure*}
