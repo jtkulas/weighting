@@ -2,8 +2,8 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure1-1.pdf}
-\caption{\label{fig:Figure1}Relationship between total response rate and misrepresentation.}
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf}
+\caption{\label{fig:ResponseRate1}Relationship between total response rate and misrepresentation.}
 \end{figure*}
 \efloatseparator
  
@@ -11,8 +11,8 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure2-1.pdf}
-\caption{\label{fig:Figure2}Relationship between nonresponse form and misrepresentation.}
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf}
+\caption{\label{fig:SDForm2}Relationship between nonresponse form and misrepresentation.}
 \end{figure*}
 \efloatseparator
  
@@ -20,8 +20,8 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure3-1.pdf}
-\caption{\label{fig:Figure3}Relationship between sample representativeness and misrepresentation.}
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf}
+\caption{\label{fig:Cattell3}Relationship between sample representativeness and misrepresentation.}
 \end{figure*}
 \efloatseparator
  
@@ -29,8 +29,8 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure4-1.pdf}
-\caption{\label{fig:Figure4}Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.}
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf}
+\caption{\label{fig:Overall4}Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.}
 \end{figure*}
 \efloatseparator
  
@@ -38,8 +38,8 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure5-1.pdf}
-\caption{\label{fig:Figure5}Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 1 through 3).}
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Together5-1.pdf}
+\caption{\label{fig:Together5}Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 1 through 3).}
 \end{figure*}
 \efloatseparator
  
@@ -47,6 +47,6 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{Simulation-paper2-20200207_files/figure-latex/Figure6-1.pdf}
-\caption{\label{fig:Figure6}Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 4 through 8).}
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/Together6-1.pdf}
+\caption{\label{fig:Together6}Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 4 through 8).}
 \end{figure*}
