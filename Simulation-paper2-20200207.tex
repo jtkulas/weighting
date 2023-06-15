@@ -167,8 +167,6 @@
 \linenumbers
 \usepackage{csquotes}
 \raggedbottom
-\usepackage{float}
-\floatplacement{figure}{H}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -198,7 +196,7 @@ Correspondence concerning this article should be addressed to John T. Kulas, Dic
 \affiliation{\vspace{0.5cm}\textsuperscript{1} Montclair State University\\\textsuperscript{2} Roche Group\\\textsuperscript{3} St.~Cloud State University}
 
 \abstract{%
-Post-stratification weighting is a common procedure used in public opinion polling applications to correct demographic constituency differences between samples and populations. Although common practice in public opinion polling, this form of data remediation is only sparsely acknowledged as a procedural topic worthy of empirical investigation within the organizational surveying literature. The current paper induces survey nonresponse via data simulation across fictional constituent groups (e.g., organizational strata) and documents the impact of weighting on the accuracy of sample statistics. Our goal was to evaluate the effectiveness of weighting when confronted with \emph{passive} versus \emph{active} forms of nonresponse in an effort to: 1) interject this data-remediation procedure into the established organizational surveying literature focused on nonresponse, while also 2) exploring organizationally-relevant sampling scenarios that: a) benefit from, b) are ``hurt'' by, or c) are unaffected by post-stratification weighting. The results confirm that sampling contexts characterized by active nonresponse do benefit from application of sample weights, but only when accompanied by constituency differences in underlying population construct (e.g., surveyed \emph{attitude}) standing. Alternatively, constituent member differences in population attitudes, when characterized by passive forms of nonresponse, exhibit no benefit from weighting (in fact these scenarios are somewhat \emph{hurt} by weighting). The simulations reinforce that, moving forward, it would be prudent for surveyors of all disciplinary backgrounds to mutually attend to the traditional focus of both traditions: public opinion polling (e.g., multiple possible methodological sources of error as well as post-stratification adjustment) and organizational surveying (e.g., \emph{form} of nonresponse).
+Post-stratification weighting is a common procedure used in public opinion polling applications to correct demographic constituency differences between samples and populations. Although common practice in public opinion polling, this form of data remediation is only sparsely acknowledged as a procedural topic worthy of empirical investigation within the organizational surveying literature. The current paper induces survey nonresponse via data simulation across fictional constituent groups (aka organizational strata) and documents the impact of weighting on the accuracy of sample statistics. Our goal was to evaluate the effectiveness of weighting when confronted with \emph{passive} versus \emph{active} forms of nonresponse in an effort to: 1) interject this data-remediation procedure into the established organizational surveying literature focused on nonresponse, while also 2) exploring organizationally-relevant sampling scenarios that: a) benefit from, b) are ``hurt'' by, or c) are unaffected by post-stratification weighting. The results confirm that sampling contexts characterized by active nonresponse do benefit from application of sample weights, but only when accompanied by constituency differences in underlying population construct (e.g., surveyed \emph{attitude}) standing. Alternatively, constituent member differences in population attitudes, when characterized by passive forms of nonresponse, exhibit no benefit from weighting (in fact these scenarios are somewhat \emph{hurt} by weighting). The simulations reinforce that, moving forward, it would be prudent for surveyors of all disciplinary backgrounds to mutually attend to the traditional focus of both traditions: public opinion polling (e.g., multiple possible methodological sources of error as well as post-stratification adjustment) and organizational surveying (e.g., \emph{form} of nonresponse).
 }
 
 
@@ -257,9 +255,9 @@ The common procedure for weight estimation \emph{when more than one stratum is s
 
 Possible strata relevant for organizational survey weighting include: branch, full-, part-, or flex-time status, functional area, gender, geographic location, hierarchy, remote-working categorization, salaried status, subsidiary, tenure, work shift, or any other groupings especially suspected to plausibly possess a relatively disporportionate number of active nonrespondents (through application of forecasting strategies such as those advocated by, for example, Rogelberg and Stanton, 2007). Each of these strata may of course also be the targeted focus of survey results feedback, but when \emph{aggregating} results across (or even within) strata, a consideration of the impact of nonresponse \emph{has the potential} to yield more accurate survey estimates. The explicit goal is therefore a closer approximation of sample descriptive statistics to population parameters via statistical remediation, and drives the current paper's focus on the interplay of four survey concepts (distribution of attitude within the larger population, response rate, nonresponse form, and remedial weighting).
 
-\emph{Research question 1}: What role does overall \emph{response rate} play in population misrepresentation?
+\emph{Research question 1}: What role does overall response rate play in population misrepresentation?
 
-\emph{Research question 2}: What role does \emph{nonresponse form} (passive versus active) play in population misrepresentation?
+\emph{Research question 2}: What role does nonresponse form (passive versus active) play in population misrepresentation?
 
 \emph{Research question 3}: What impact does the application of weights have on both biased (e.g., misrepresentative) and unbiased sample estimates?
 
@@ -267,7 +265,7 @@ Possible strata relevant for organizational survey weighting include: branch, fu
 Maybe try to combine Figures 2 and 3 (put SD on Figure 3 - color code)
 
 \begin{quote}
-Added population attitudes (1/20/23) - not sure if this clutters but more consistent with flow of introduction
+Added population attitudes (1/20/23) - not sure if this clutters but more consistent with flow of introduction - or possibly just delete this RQ - may be tighter without RQ4 (5/18/23)
 \end{quote}
 
 We view these questions as being analogous to similar questions asked and answered with differential variable weighting within the broader applied psychological disciplines. Just as, for example, there has been debate regarding the merits of differential versus unit variable weighting in a selection context (e.g., Wainer, 1976) or simple aggregate scale score definition (Bobko et al., 2007), we propose that a similar consideration is appropriate with persons, and therefore compare and contrast unit- versus variable-sample element weighting.
@@ -275,7 +273,7 @@ We view these questions as being analogous to similar questions asked and answer
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
 
-We address our research questions via data simulation within a fictional context of organizational surveying (wherein it is common to assess estimates of attitudes or perceptions; for example, commitment, culture/climate, engagement, satisfaction). We began the simulations by establishing ``populations'', each consisting of 10,000 respondents characterized by demographic categorizations across gender (male and female) and department (A and B). We therefore had four demographic groups (male-A, male-B, female-A, and female-B). For these population respondents, we generated scaled continuous responses (real numbers) ranging from values of 1 to 5, reflecting averaged aggregate scale scores from a fictional multi-item survey with a typical 1 \(\rightarrow\) 5 Likert-type or graphic rating scale response format.
+We address our research questions within a simulated context of organizational surveying (wherein it is common to assess estimates of employee attitude or perception; for example, commitment, culture/climate, engagement, satisfaction). We began the simulations by establishing ``populations'', each consisting of 10,000 respondents characterized by demographic categorizations across gender (male and female) and department (A and B). We therefore had four demographic groups (male-A, male-B, female-A, and female-B). For these population respondents, we generated scaled continuous responses (real numbers) ranging from values of 1 to 5, reflecting averaged aggregate scale scores from a fictional multi-item survey with a typical 1 \(\rightarrow\) 5 Likert-type or graphic rating scale response format.
 
 In order to represent different proportions of relative constituency (for example, more females than males or more department A workers than department B), we iterated population characteristics at marginal levels (gender and department) starting at 20\% (and 80\%) with increments and corresponding decriments of 20\%. For example, if males accounted for 20\% of the simulated population, then females were 80\%; also if respondents in Department A represented 60\% of a population, then 40\% were in Department B. Marginal constituencies were therefore specified at all combinations (across the two variables) of 20\% and 80\%, 40\% and 60\%, 60\% and 40\%, and 80\% and 20\%. This resulted in population \emph{cell} constituencies (e.g., men in department A) as low as 400 and as high as 6,400.
 
@@ -292,15 +290,15 @@ In order to represent different proportions of relative constituency (for exampl
 \toprule
  &  &  & \multicolumn{2}{c}{Male} & \multicolumn{2}{c}{Female}  &\\
 \cmidrule(r){4-5} \cmidrule(r){6-7}
-Condition & Distributional Shape & mu & Dept A & Dept B & Dept A & Dept B & Anticipated Bias\\
+Condition & Distributional Shape & mu & Dept A & Dept B & Dept A & Dept B & Bias Susceptibility\\
 \midrule
-1 & Normal & 3 & X & X & X & X & None\\
+1 & Normal & 3 & X & X & X & X & Low\\
  & Positive Skew & 2 &  &  &  &  & \\
  & Negative Skew & 4 &  &  &  &  & \\
-2 & Normal & 3 &  &  &  &  & None\\
+2 & Normal & 3 &  &  &  &  & Low\\
  & Positive Skew & 2 & X & X & X & X & \\
  & Negative Skew & 4 &  &  &  &  & \\
-3 & Normal & 3 &  &  &  &  & None\\
+3 & Normal & 3 &  &  &  &  & Low\\
  & Positive Skew & 2 &  &  &  &  & \\
  & Negative Skew & 4 & X & X & X & X & \\
 4 & Normal & 3 & X & X & X &  & Moderate\\
@@ -328,11 +326,11 @@ Condition & Distributional Shape & mu & Dept A & Dept B & Dept A & Dept B & Anti
 
 \end{table}
 
-Additionally, each of these cell populations was characterized by an attitudinal distribution in one of three different possible forms: normal, positively skewed, or negatively skewed. These distributional forms were specified in an attempt to model similarities and discrepancies in construct standing (e.g., commitment, satisfaction, or engagement) across respondent groupings. The normal distribution exhibited, on average, a mean of 3.0 whereas the skewed distributions were characterized by average means of 2.0 and 4.0, respectively. In total, eight crossings of distributional type across employee categorization were specified (Table \ref{tab:Tab1} presents the combinations of these distributions). Note that these eight conditions are not exhaustive of all possible combinations of constituent groups and attitudinal distribution - we specified scenarios that we expected to be most efficiently informative across our passive to active nonresponse continuum (reflected in Table \ref{tab:Tab1}'s ``anticipated bias'' column).
+Additionally, each of these cell populations was characterized by an attitudinal distribution in one of three different possible forms: normal, positively skewed, or negatively skewed. These distributional forms were specified in an attempt to model similarities and discrepancies in construct standing (e.g., commitment, satisfaction, or engagement) across respondent groupings. The normal distribution exhibited, on average, a mean of 3.0 whereas the skewed distributions were characterized by average means of 2.0 and 4.0, respectively. In total, eight crossings of distributional type across employee categorization were specified (Table \ref{tab:Tab1} presents the combinations of these distributions). Note that these eight conditions are not exhaustive of all possible combinations of constituent groups and attitudinal distribution - we specified scenarios that we expected to be most efficiently informative across our passive to active nonresponse continuum.
 
 Individual attitudes were randomly sampled from population distributions at the cell level (e.g., Department A Males) without replacement. Response rates (methodologially these could also be conceptualized as \emph{sampling} rates) were controlled at the marginal level using 10\% increments ranging from 60\% to 90\%, and these were fully iterated. Our cell-level response rates therefore ranged from 36\% to 81\% - a range of rates chosen because they are, according to the organizational surveying literature, reasonable expectations (e.g., Mellahi \& Harris, 2016; Werner et al., 2007). We therefore investigated error within the aggregate mean (e.g., grand mean or total sample mean) attributable to different likelihoods of sample inclusion from constituent groups of different relative size and representing populations of different attitudinal distribution, but at response rates reasonably expected to exist in real-world organizational surveying contexts.
 
-It should be noted here that there are several collective patterns of response that are intended to represent sampling scenarios exhibiting \emph{passive} nonresponse, regardless of absolute response rate: all subgroups exhibiting the same response rate (e.g., 36\%, 36\%, 36\%, and 36\%). All other combinations of response rate are intended operationalizations of active forms of nonresponse (e.g., not \emph{as reasonably} characterized as missing at random), although the degree to which a sampling scenario should be reasonably characterized as exhibiting active nonresponse is intended to be incremental across response rate conditions.
+It should be noted here that there are several collective patterns of response that are intended to represent sampling scenarios reflecting effectively \emph{passive} nonresponse across groups, regardless of response rate. These are the scenarios in which all subgroups exhibit the same response rate (e.g., 36\%, 36\%, 36\%, and 36\%). All other combinations of response rate are intended operationalizations of active forms of nonresponse (e.g., not \emph{as reasonably} characterized as missing at random), although the degree to which a sampling scenario should be reasonably considered to be reflecting active nonresponse is intended to be incremental across response rate conditions.
 
 \begin{lltable}
 

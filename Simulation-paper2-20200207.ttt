@@ -13,15 +13,15 @@
 \toprule
  &  &  & \multicolumn{2}{c}{Male} & \multicolumn{2}{c}{Female}  &\\
 \cmidrule(r){4-5} \cmidrule(r){6-7}
-Condition & Distributional Shape & mu & Dept A & Dept B & Dept A & Dept B & Anticipated Bias\\
+Condition & Distributional Shape & mu & Dept A & Dept B & Dept A & Dept B & Bias Susceptibility\\
 \midrule
-1 & Normal & 3 & X & X & X & X & None\\
+1 & Normal & 3 & X & X & X & X & Low\\
  & Positive Skew & 2 &  &  &  &  & \\
  & Negative Skew & 4 &  &  &  &  & \\
-2 & Normal & 3 &  &  &  &  & None\\
+2 & Normal & 3 &  &  &  &  & Low\\
  & Positive Skew & 2 & X & X & X & X & \\
  & Negative Skew & 4 &  &  &  &  & \\
-3 & Normal & 3 &  &  &  &  & None\\
+3 & Normal & 3 &  &  &  &  & Low\\
  & Positive Skew & 2 &  &  &  &  & \\
  & Negative Skew & 4 & X & X & X & X & \\
 4 & Normal & 3 & X & X & X &  & Moderate\\
