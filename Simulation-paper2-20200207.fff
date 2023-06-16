@@ -32,21 +32,3 @@
 \includegraphics{Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf}
 \caption{\label{fig:Overall4}Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.}
 \end{figure*}
-\efloatseparator
- 
-\begin{figure*}[hbt]
-\ifnextchar[{\eatarg}{}
-
-\centering
-\includegraphics{Simulation-paper2-20200207_files/figure-latex/Together5-1.pdf}
-\caption{\label{fig:Together5}Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 1 through 3).}
-\end{figure*}
-\efloatseparator
- 
-\begin{figure*}[hbt]
-\ifnextchar[{\eatarg}{}
-
-\centering
-\includegraphics{Simulation-paper2-20200207_files/figure-latex/Together6-1.pdf}
-\caption{\label{fig:Together6}Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 4 through 8).}
-\end{figure*}
