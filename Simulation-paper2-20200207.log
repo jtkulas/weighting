@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.11)  11 AUG 2023 08:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.14)  19 AUG 2023 15:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Simulation-paper2-20200207.tex
 (./Simulation-paper2-20200207.tex
 LaTeX2e <2023-06-01> patch level 1
-L3 programming layer <2023-08-03>
+L3 programming layer <2023-08-11>
 (c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/apa7/apa7.cls
 Document Class: apa7 2022/07/25 v2.16 APA formatting (7th edition)
 (c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
@@ -696,7 +696,7 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 Failed to patch abstract.
 Failed to patch title.
 (c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xpatch/xpatch.sty (c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-08-03 L3 programming layer (loader) 
+Package: expl3 2023-08-11 L3 programming layer (loader) 
 (c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count336
@@ -956,15 +956,15 @@ Package rerunfilecheck Info: File `Simulation-paper2-20200207.out' has not chang
 (rerunfilecheck)             Checksum: C0DD3804791F68F590B8001FEF3F6D79;2593.
  ) 
 Here is how much of TeX's memory you used:
- 26570 strings out of 477147
- 498043 string characters out of 5811508
+ 26570 strings out of 477148
+ 498043 string characters out of 5811539
  1941248 words of memory out of 5000000
- 46955 multiletter control sequences out of 15000+600000
+ 46954 multiletter control sequences out of 15000+600000
  657623 words of font info for 114 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,11n,103p,2153b,783s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,11n,103p,2159b,783s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri8.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/jtkul/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Simulation-paper2-20200207.pdf (37 pages, 5089941 bytes).
+Output written on Simulation-paper2-20200207.pdf (37 pages, 5089972 bytes).
 PDF statistics:
  498 PDF objects out of 1000 (max. 8388607)
  416 compressed objects within 5 object streams
