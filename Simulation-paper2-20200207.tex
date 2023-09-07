@@ -33,15 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Nonresponse and Sample Weighting in Organizational Surveying},
-  pdflang={en-EN},
-  pdfkeywords={Survey methodology, sample weighting, nonresponse, response rate},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -179,6 +170,15 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Nonresponse and Sample Weighting in Organizational Surveying},
+  pdflang={en-EN},
+  pdfkeywords={Survey methodology, sample weighting, nonresponse, response rate},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{Nonresponse and Sample Weighting in Organizational Surveying}
 \author{John T. Kulas\textsuperscript{1}, Yang Yang\textsuperscript{2}, \& David H. Robinson\textsuperscript{3}}
@@ -215,7 +215,7 @@ In the context of any survey application, population misrepresentation ultimatel
 
 Within the organizational surveying domain, it is not uncommon for response rate (RR) to be referenced as a proxy for survey data quality (see, for example, Baruch \& Holtom, 2008; Fan \& Yan, 2010; Pedersen \& Nielsen, 2016). Baruch (1999), for example, states that, ``\ldots to have dependable, valid, and reliable results, we need a high RR from a wide representation of the whole population under study'' and that, ``The level of RR is an important, sometimes crucial, issue in relation to the validity of a paper's results'' (p.~422). Fan and Yan (2010) similarly state that response rate is, ``\ldots the most widely used and commonly computed statistic to indicate the quality of surveys'' (p.~132). Pedersen and Nielsen (2016) claim that a high survey response rate, ``\ldots diminishes sampling bias concerns and promotes the validity of survey-based research findings'' (p.~230). The general consensus seems to be that there are three major (negative) consequences of low response rates, including (a) yielding smaller sample size, which negatively impacts statistical power and confidence intervals, (b) reducing the credibility of survey data, and (c) generating biased samples that impair the generalizability of survey results (Biemer \& Lyberg, 2003; Luong \& Rogelberg, 1998; Rogelberg et al., 2000).
 
-To the likely frustration of those who associate response rate with survey data quality, organizational survey response rates have, on average, been declining for decades. Baruch (1999), for example, summarized response rates of 175 studies published in five leading management and behavioral sciences journals in 1975, 1985, and 1995. His results revealed an average response rate (across time periods) of 55.6\% (\emph{SD} = 19.7\%), but also a trend within which response rates declined steadily from 64.4\% to 55.7\% to 48.4\% over the three time points. Nine years later, Baruch and Holtom (2008) conducted a follow-up study of 1,607 studies published in 17 disciplinary-relevant journals in 2000 and 2005 but found no substantial differences in response rates compared to those in 1995, suggesting that the declining trend had perhaps reached a lower asymptote. \href{https://journals.sagepub.com/doi/epub/10.1177/00187267211070769}{Most recent here (2022) - NEED TO INCORPORATE} However, a different approach with similar goals (Anseel et al., 2010) analyzed 2,037 survey projects published in 12 journals in Industrial and Organizational Psychology, Management, and Marketing from 1995 to 2008 and did note a slight decline (overall \emph{M} = 52.3\%) when controlling for the use of response enhancing techniques.\footnote{It is also possible that the declination has stabilized with mean response rates hovering around 50\% after roughly the turn of the millenium (\emph{M} = 52.5\% for HRM studies from 2009 to 2013, Mellahi \& Harris, 2016; \emph{M} = 52.0\% for management studies from 2000 to 2004, Werner et al., 2007). This stability, if authentic, may again possibly be accounted for by an increased contemporary emphasis on response enhancing strategies (Anseel et al., 2010; Fulton, 2016).}
+To the likely frustration of those who associate response rate with survey data quality, organizational survey response rates have, on average, been declining for decades. Baruch (1999), for example, summarized response rates of 175 studies published in five leading management and behavioral sciences journals in 1975, 1985, and 1995. His results revealed an average response rate (across time periods) of 55.6\% (\emph{SD} = 19.7\%), but also a trend within which response rates declined steadily from 64.4\% to 55.7\% to 48.4\% over the three time points. Nine years later, Baruch and Holtom (2008) conducted a follow-up study of 1,607 studies published in 17 disciplinary-relevant journals in 2000 and 2005 but found no substantial differences in response rates compared to those in 1995, suggesting that the declining trend had perhaps reached a lower asymptote. However, a different approach with similar goals (Anseel et al., 2010) analyzed 2,037 survey projects published in 12 journals in Industrial and Organizational Psychology, Management, and Marketing from 1995 to 2008 and did note a slight decline (overall \emph{M} = 52.3\%) when controlling for the use of response enhancing techniques.\footnote{It is also possible that the declination had stabilized with mean response rates hovering around 50\% after roughly the turn of the millenium (\emph{M} = 52.5\% for HRM studies from 2009 to 2013, Mellahi \& Harris, 2016; \emph{M} = 52.0\% for management studies from 2000 to 2004, Werner et al., 2007). This stability, if authentic, may again possibly be accounted for by an increased contemporary emphasis on response enhancing strategies (Anseel et al., 2010; Fulton, 2016).} The most recent like-minded review focused on the years 2010, 2015, and 2020 and noted a possible reversal of the trend, such that average response rates had risen to 68\% in 2020 (Holtom et al., 2022).
 
 \hypertarget{form-of-nonresponse}{%
 \subsubsection{Form of Nonresponse}\label{form-of-nonresponse}}
@@ -418,7 +418,7 @@ These operationalizations of passive and active forms of nonresponse differ from
 \caption{\label{fig:Overall4}Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.}
 \end{figure}
 
-In total, we generated 327.68 million samples (4,096 unique combinations of response rate and population constituency across gender and department, simulated 10,000 times each across our eight Table \ref{tab:Tab1} conditions). Each of these samples was comprised of, on average, \emph{n} = 5,625, collectively representing an experiment-wide simulated \emph{n} of 1.8432 trillion. For each individual simulation, weights were applied iteratively to the data at the two marginal (variable) levels via raking, and were estimated via the \emph{anesrake} package (Pasek, 2018) in R version 4.1.1 (2021-08-10).
+In total, we generated 327.68 million samples (4,096 unique combinations of response rate and population constituency across gender and department, simulated 10,000 times each across our eight Table \ref{tab:Tab1} conditions). Each of these samples was comprised of, on average, \emph{n} = 5,625, collectively representing an experiment-wide simulated \emph{n} of 1.8432 trillion. For each individual simulation, weights were applied iteratively to the data at the two marginal (variable) levels via raking, and were estimated via the \emph{anesrake} package (Pasek, 2018) in R version 4.2.2 (2022-10-31 ucrt).
 
 We were most interested in comparing the extent to which unweighted (aggregated responses without raking) and weighted (aggregated weighted responses) sample means approximated the known population means across our controlled specifications of response rate, nonresponse form, and attitudinal distribution. Population means were extracted from each iteration, as the simulations specified a new population at each iteration. The ``misrepresentation'' betwen sample and population was operationalized by calculating: 1) the discrepancies between the population and both weighted and unweighted sample means, as well as, 2) the averaged deviations of these discrepancies from the population mean (discrepancy in the ``mean'' of the means is bias, dispersion about the ``mean'' of the means is error). If the average weighted sample mean was closer to the true population mean, relative to the unweighted one, then the weighting was deemed beneficial.\footnote{Do we want to do a little more with the dispersion concept? Currently it's underreported in the Results (but stated here that it is something we look at). If so, do we say that the weighting was beneficial also if the dispersion (error) was relatively small?}
 
@@ -581,6 +581,9 @@ Fulton, B. R. (2016). Organizations and survey research: Implementing response e
 
 \leavevmode\vadjust pre{\hypertarget{ref-heitjan_distinguishing_1996}{}}%
 Heitjan, D. F., \& Basu, S. (1996). Distinguishing {``missing at random''} and {``missing completely at random.''} \emph{The American Statistician}, \emph{50}(3), 207--213.
+
+\leavevmode\vadjust pre{\hypertarget{ref-holtom2022survey}{}}%
+Holtom, B., Baruch, Y., Aguinis, H., \& A Ballinger, G. (2022). Survey response rates: Trends and a validity assessment framework. \emph{Human Relations}, \emph{75}(8), 1560--1584.
 
 \leavevmode\vadjust pre{\hypertarget{ref-keeter_gauging_2006}{}}%
 Keeter, S., Kennedy, C., Dimock, M., Best, J., \& Craighill, P. (2006). Gauging the impact of growing nonresponse on estimates from a national {RDD} telephone survey. \emph{International Journal of Public Opinion Quarterly}, \emph{70}(5), 759--779.
