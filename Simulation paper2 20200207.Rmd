@@ -344,6 +344,31 @@ ggplot(combo, aes(x=RR.all, y=PPSU)) +
   facet_wrap(~Condition) +
   theme(strip.text.x = element_text(size = 10,color= "black"))
 
+copycombo <- combo
+copycombo$Condition <- stringr::str_replace_all(copycombo$Condition, " ", "")
+rrdesc <- psych::describeBy(PPSU ~ Condition, data = copycombo)
+
+rr.aov <- aov(PPSU~Condition, copycombo)  
+
+copycombo2 <- copycombo[ which(copycombo$Condition == "Condition4" |  
+                                 copycombo$Condition == "Condition5" |
+                                 copycombo$Condition == "Condition6" |
+                                 copycombo$Condition == "Condition7" |
+                                 copycombo$Condition == "Condition8"),]
+
+polynomial <- lm(PPSU ~ Condition, copycombo2)
+polynomial1 <- lm(PPSU ~ Condition + RR.all, copycombo2)
+polynomial2 <- lm(PPSU ~ Condition + RR.all + I(RR.all^2), copycombo2)
+
+firstpoly <- anova(polynomial,polynomial1)
+secondpoly <- anova(polynomial1,polynomial2)
+
+lm.first <- summary(polynomial)$r.squared       ## was rendering odd in inline script
+lm.second <- summary(polynomial1)$r.squared
+lm.third <- summary(polynomial2)$r.squared
+
+# summary(polynomial2)
+  
 ```
 
 ```{r SDForm2, echo=FALSE, fig.cap="Relationship between nonresponse form and misrepresentation.",fig.height=4.5, fig.width=6.5}
@@ -387,6 +412,17 @@ ggplot(combo, aes(x=r.p, y=PPSU)) +
   theme(axis.text.y = element_text(size = 8,color = "black")) +
   facet_wrap(~Condition) +
   theme(strip.text.x = element_text(size = 10,color= "black"))
+
+poly <- lm(PPSU ~ Condition, copycombo2)
+poly1 <- lm(PPSU ~ Condition + r.p, copycombo2)
+poly2 <- lm(PPSU ~ Condition + r.p + I(r.p^2), copycombo2)
+
+firstpoly <- anova(poly,poly1)
+secondpoly <- anova(poly1,poly2)
+
+lm.1 <- summary(poly)$r.squared       ## was rendering odd in inline script
+lm.2 <- summary(poly1)$r.squared
+lm.3 <- summary(poly2)$r.squared
 
 ```
 
@@ -522,14 +558,14 @@ We were most interested in comparing the extent to which unweighted (aggregated 
 
 Yet to do:
 
-1. means and standard deviations (report at least in overall response rate section)
-2. find the polynomial regressions and report
+1. means and standard deviations (report at least in overall response rate section) DONE (ALSO ANOVA)
+2. find the polynomial regression DONE (Figure 1 and 3)
 3. correct the .51 estimate in the Cattell section
 4. find the figure with "red" and "grey" standard error bars (standard error section)
 
 ## Role of overall response rate
 
-Research question 1 asked what role overall response rate plays in population misrepresentation. This is presented most directly in Figure \@ref(fig:ResponseRate1), with *moderate* response rates exhibiting the greatest degrees of misrepresentation across our simulated conditions. Note here again that conditions 1 through 3, which represent populations with similar distributions of attitude, do not exhibit misrepresentation regardless of response rate. These can be contrasted with conditions 6 through 8, which evidence considerable misrepresentation, particularly so at moderate response rates (the greatest degree of misrepresentation occurs with response rates ranging from roughly 40% to 70%).[^clarify] 
+Research question 1 asked what role overall response rate plays in population misrepresentation. This is presented most directly in Figure \@ref(fig:ResponseRate1), with *moderate* response rates exhibiting the greatest degrees of misrepresentation across our simulated conditions. Note here again that conditions 1 through 3, which represent populations with similar distributions of attitude, do not exhibit misrepresentation regardless of response rate ($\bar{d}_{Cond1}$ = `r round(rrdesc$Condition1$mean,3)`, $sd_{Cond1}$ = `r round(rrdesc$Condition1$sd,3)`; $\bar{d}_{Cond2}$ = `r round(rrdesc$Condition2$mean,3)`, $sd_{Cond2}$ = `r round(rrdesc$Condition2$sd,3)`; $\bar{d}_{Cond3}$ = `r round(rrdesc$Condition3$mean,3)`, $sd_{Cond3}$ = `r round(rrdesc$Condition3$sd,3)`). These can be contrasted most particularly with conditions 6 ($\bar{d}_{Cond6}$ = `r round(rrdesc$Condition6$mean,3)`, $sd_{Cond6}$ = `r round(rrdesc$Condition6$sd,3)`), 7 ($\bar{d}_{Cond7}$ = `r round(rrdesc$Condition7$mean,3)`, $sd_{Cond7}$ = `r round(rrdesc$Condition7$sd,3)`), and 8 ($\bar{d}_{Cond8}$ = `r round(rrdesc$Condition8$mean,3)`, $sd_{Cond8}$ = `r round(rrdesc$Condition8$sd,3)`), which evidence considerable misrepresentation, particularly so at moderate response rates (the greatest degree of misrepresentation occurs with response rates ranging from roughly 40% to 70%). Discrepancies in unweighted means between samples and populations - regardless of response rate - did broach statistical significance across the 8 conditions ($F_{(7,32,760)}$ = `r summary(rr.aov)[[1]][1,4]`, *p* < .001. Tukey's HSD noted differences across all contrasts other than between Conditions 1, 2, and 3 and also Conditions 7 and 8. Focusing only on Conditions 4 through 8, the relationship between response rate and sample/population discrepancy was significant beyond the effect of condition ($\Delta{R^2}$ = `r lm.second-lm.first`; $F$ = `r firstpoly[2,5]`), and the polynomial response rate term further added to the discrepancy prediction ($\Delta{R^2}$ = `r round(lm.third-lm.second,4)`; $F$ = `r secondpoly[2,5]`).[^clarify] 
 
 [^clarify]: **NEEDS FURTHER THOUGHT/EXPLANATION** Middle range more cases - for the lowest case, there's only 256 cases (all with the same response rate of 36%). That explains the "upward slope" on the left of the graphing spaces. Clarification here would state that *these graphs hint to form of nonresponse being important - the lowest and highest response rates are constrained such that all groups have the same/similar levels of response rate - this is our operationalization of passive nonresponse*. 
 
@@ -543,7 +579,7 @@ The systematic patterns of heteroskedasticity of the Figure \@ref(fig:SDForm2) s
 
 [^redo]: Need to redo this - .51 doesn't appear on graph, highest should be .2
 
-To partially address this moderation, the discrepancies between population constituency and sampling proportions were additionally evaluated through the lens of Cattell's profile similarity index [*r~p~*, @cattell_r_1949; @cattell_taxonometric_1966]. *r~p~* is sensitive to discrepancies in profile shape (pattern across profile components), elevation (average component score), and scatter (sum of individual components' deviation from the elevation estimate. Figure \@ref(fig:Cattell3) demonstrates the pattern of unweighted sample mean deviation (from the population parameter) when this index is taken into consideration. Specifically, Figure \@ref(fig:Cattell3) demonstrates a more pronounced *form of* nonresponse association when underlying attitudinal distributions evidence group differences, and in these scenarios, active nonresponse is shown to have a fairly large effect on error within the sample estimate (as well as systematically increasing degrees of  heteroskedasticity paralleling the Cattell index; omnibus  Breusch-Pagan = 3177.2, *p* < .001).  
+To partially address this moderation, the discrepancies between population constituency and sampling proportions were additionally evaluated through the lens of Cattell's profile similarity index [*r~p~*, @cattell_r_1949; @cattell_taxonometric_1966]. *r~p~* is sensitive to discrepancies in profile shape (pattern across profile components), elevation (average component score), and scatter (sum of individual components' deviation from the elevation estimate. Figure \@ref(fig:Cattell3) demonstrates the pattern of unweighted sample mean deviation (from the population parameter) when this index is taken into consideration. Specifically, Figure \@ref(fig:Cattell3) demonstrates a more pronounced *form of* nonresponse association when underlying attitudinal distributions evidence group differences, and in these scenarios, active nonresponse is shown to have a fairly large effect on error within the sample estimate (as well as systematically increasing degrees of  heteroskedasticity paralleling the Cattell index; omnibus  Breusch-Pagan = 3177.2, *p* < .001). The curvilinear nature of these (non conditions 1, 2, and 3) functions was again estimated via polynomial regression, with misrepresentation again exhibiting a linear association across the Cattell index ($\Delta{R^2}$ = `r lm.2 - lm.1`, *p* < .001), but also a polynomial effect ($\Delta{R^2}$ = `r lm.3 - lm.2`, *p* < .001). 
 
 ## Impact of weighting
 
