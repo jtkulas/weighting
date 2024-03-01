@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.2)  3 FEB 2024 10:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.2)  1 MAR 2024 08:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -608,27 +608,49 @@ Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@posthook=\toks37
 ) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
-) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/parskip/parskip.sty
+) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2023/03/13 v3.1a Micro-typographical refinements (RS)
+\MT@toks=\toks38
+\MT@tempbox=\box66
+\MT@count=\count329
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1059.
+LaTeX Info: Redefining \leftprotrusion on input line 1060.
+\MT@prot@toks=\toks39
+LaTeX Info: Redefining \rightprotrusion on input line 1078.
+LaTeX Info: Redefining \textls on input line 1368.
+\MT@outer@kern=\dimen297
+LaTeX Info: Redefining \textmicrotypecontext on input line 1988.
+\MT@listname@count=\count330
+(c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2023/03/13 v3.1a Definitions specific to pdftex (RS)
+LaTeX Info: Redefining \lsstyle on input line 902.
+LaTeX Info: Redefining \lslig on input line 902.
+\MT@outer@space=\skip86
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+(c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2023/03/13 v3.1a microtype main configuration file (RS)
+)) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
 )
-\cslhangindent=\skip86
-\csllabelwidth=\skip87
-\cslentryspacingunit=\skip88
+\cslhangindent=\skip87
+\csllabelwidth=\skip88
+\cslentryspacingunit=\skip89
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2024/01/07 v24.1 The Babel package
-\babel@savecnt=\count329
-\U@D=\dimen297
+Package: babel 2024/02/07 v24.2 The Babel package
+\babel@savecnt=\count331
+\U@D=\dimen298
 \l@unhyphenated=\language5
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read3
-\bbl@dirlevel=\count330
+\bbl@dirlevel=\count332
 Package babel Info: You haven't specified a language as a class or package
-(babel)             option. I'll load 'nil'. Reported on input line 4342.
+(babel)             option. I'll load 'nil'. Reported on input line 4258.
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/nil.ldf
-Language: nil 2024/01/07 v24.1 Nil language
+Language: nil 2024/02/07 v24.2 Nil language
 \l@nil=\language6
 ))
-\everypar=\toks38
+\everypar=\toks40
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/locale/en/babel-english.tex)
 Package babel Info: Importing data for english
 (babel)             from babel-en.ini. Reported on input line 93.
@@ -640,49 +662,49 @@ LaTeX Font Info:    Overwriting symbol font `ugrf@m' in version `bold'
 (Font)                  U/eur/m/n --> U/eur/b/n on input line 38.
 ) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
-\LTleft=\skip89
-\LTright=\skip90
-\LTpre=\skip91
-\LTpost=\skip92
-\LTchunksize=\count331
-\LTcapwidth=\dimen298
-\LT@head=\box66
-\LT@firsthead=\box67
-\LT@foot=\box68
-\LT@lastfoot=\box69
-\LT@gbox=\box70
-\LT@cols=\count332
-\LT@rows=\count333
-\c@LT@tables=\count334
-\c@LT@chunks=\count335
-\LT@p@ftn=\toks39
+\LTleft=\skip90
+\LTright=\skip91
+\LTpre=\skip92
+\LTpost=\skip93
+\LTchunksize=\count333
+\LTcapwidth=\dimen299
+\LT@head=\box67
+\LT@firsthead=\box68
+\LT@foot=\box69
+\LT@lastfoot=\box70
+\LT@gbox=\box71
+\LT@cols=\count334
+\LT@rows=\count335
+\c@LT@tables=\count336
+\c@LT@chunks=\count337
+\LT@p@ftn=\toks41
 ) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 ) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
-\multirow@colwidth=\skip93
-\multirow@cntb=\count336
-\multirow@dima=\skip94
-\bigstrutjot=\dimen299
+\multirow@colwidth=\skip94
+\multirow@cntb=\count338
+\multirow@dima=\skip95
+\bigstrutjot=\dimen300
 ) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2023/07/08 v2.11c `tabularx' package (DPC)
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
 Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
-\col@sep=\dimen300
-\ar@mcellbox=\box71
-\extrarowheight=\dimen301
-\NC@list=\toks40
-\extratabsurround=\skip95
-\backup@length=\skip96
-\ar@cellbox=\box72
+\col@sep=\dimen301
+\ar@mcellbox=\box72
+\extrarowheight=\dimen302
+\NC@list=\toks42
+\extratabsurround=\skip96
+\backup@length=\skip97
+\ar@cellbox=\box73
 )
-\TX@col@width=\dimen302
-\TX@old@table=\dimen303
-\TX@old@col=\dimen304
-\TX@target=\dimen305
-\TX@delta=\dimen306
-\TX@cols=\count337
-\TX@ftn=\toks41
+\TX@col@width=\dimen303
+\TX@old@table=\dimen304
+\TX@old@col=\dimen305
+\TX@target=\dimen306
+\TX@delta=\dimen307
+\TX@cols=\count339
+\TX@ftn=\toks43
 ) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttablex/threeparttablex.sty
 Package: threeparttablex 2013/07/23 v0.3 by daleif
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
@@ -690,48 +712,48 @@ Package: environ 2014/05/04 v0.3 A new way to define environments
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
-\TPTL@width=\skip97
+\TPTL@width=\skip98
 )
-\longtablewidth=\skip98
+\longtablewidth=\skip99
 Failed to patch abstract.
 Failed to patch title.
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xpatch/xpatch.sty (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2024-01-22 L3 programming layer (loader) 
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count338
-\l__pdf_internal_box=\box73
+\l__color_backend_stack_int=\count340
+\l__pdf_internal_box=\box74
 ))
 Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2023-10-10 L3 Experimental document command parser
 )) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2023/05/20 line numbers on paragraphs v5.3
-\linenopenalty=\count339
-\output=\toks42
-\linenoprevgraf=\count340
-\linenumbersep=\dimen307
-\linenumberwidth=\dimen308
-\c@linenumber=\count341
-\c@pagewiselinenumber=\count342
-\c@LN@truepage=\count343
-\c@internallinenumber=\count344
-\c@internallinenumbers=\count345
-\quotelinenumbersep=\dimen309
-\bframerule=\dimen310
-\bframesep=\dimen311
-\bframebox=\box74
-\linenoamsmath@ams@eqpen=\count346
+\linenopenalty=\count341
+\output=\toks44
+\linenoprevgraf=\count342
+\linenumbersep=\dimen308
+\linenumberwidth=\dimen309
+\c@linenumber=\count343
+\c@pagewiselinenumber=\count344
+\c@LN@truepage=\count345
+\c@internallinenumber=\count346
+\c@internallinenumbers=\count347
+\quotelinenumbersep=\dimen310
+\bframerule=\dimen311
+\bframesep=\dimen312
+\bframebox=\box75
+\linenoamsmath@ams@eqpen=\count348
 LaTeX Info: Redefining \\ on input line 3180.
 ) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
-\csq@reset=\count347
-\csq@gtype=\count348
-\csq@glevel=\count349
-\csq@qlevel=\count350
-\csq@maxlvl=\count351
-\csq@tshold=\count352
-\csq@ltx@everypar=\toks43
+\csq@reset=\count349
+\csq@gtype=\count350
+\csq@glevel=\count351
+\csq@qlevel=\count352
+\csq@maxlvl=\count353
+\csq@tshold=\count354
+\csq@ltx@everypar=\toks45
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2022-09-14 v5.2n csquotes generic definitions (JAW)
 )
@@ -743,14 +765,14 @@ File: csquotes.cfg
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO)
-\BKM@id=\count353
+\BKM@id=\count355
 ))
-\c@NumberOfAuthors=\count354
-\c@NumberOfSuperscripts=\count355
+\c@NumberOfAuthors=\count356
+\c@NumberOfSuperscripts=\count357
 
 Class apa7 Warning: Deprecated: see documentation for \authorsaffiliations on input line 199.
 
-\c@NumberOfAffiliations=\count356
+\c@NumberOfAffiliations=\count358
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
@@ -826,6 +848,25 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
+LaTeX Info: Redefining \microtypecontext on input line 207.
+Package microtype Info: Applying patch `item' on input line 207.
+Package microtype Info: Applying patch `toc' on input line 207.
+Package microtype Info: Applying patch `eqnum' on input line 207.
+Package microtype Info: Applying patch `footnote' on input line 207.
+Package microtype Info: Applying patch `verbatim' on input line 207.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+LaTeX Info: Redefining \showhyphens on input line 207.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+(c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
+)
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 208.
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -857,10 +898,16 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    Trying to load font information for U+msa on input line 212.
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 212.
 (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+) (c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-eur.cfg
+File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 212.
@@ -874,11 +921,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Simulation-paper2-20200207.ttt) [11] [12]
 \openout5 = `Simulation-paper2-20200207.fff'.
 
-(Simulation-paper2-20200207.fff) [13] [14] [15]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 453.
-(c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] AED endfloat: Processing end Figures and Tables [32] (./Simulation-paper2-20200207.ttt
+(Simulation-paper2-20200207.fff) [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] AED endfloat: Processing end Figures and Tables [31] (./Simulation-paper2-20200207.ttt
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 12.
 
@@ -889,7 +932,7 @@ Overfull \hbox (17.61519pt too wide) in paragraph at lines 7--48
 
 LaTeX Warning: Float too large for page by 27.27065pt on input line 50.
 
-[33]
+[32]
 Overfull \hbox (10.0015pt too wide) in paragraph at lines 58--58
 [] [] 
  []
@@ -914,43 +957,43 @@ Overfull \hbox (20.00299pt too wide) in alignment at lines 71--109
  [] [] [] [] [] [] [] 
  []
 
-[34
+[33
 
 
 
 
-] [35] [36]) (./Simulation-paper2-20200207.fff
-<Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf, id=316, 469.755pt x 325.215pt>
+] [34] [35]) (./Simulation-paper2-20200207.fff
+<Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf, id=307, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf>
 Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf  used on input line 5.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[37
+[36
 
 
  <./Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf, id=332, 469.755pt x 325.215pt>
+<Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf, id=322, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf>
 Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf  used on input line 14.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[38
+[37
 
  <./Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf, id=347, 469.755pt x 325.215pt>
+<Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf, id=338, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf>
 Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf  used on input line 23.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[39
+[38
 
  <./Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf, id=362, 469.755pt x 325.215pt>
+<Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf, id=353, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf>
 Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf  used on input line 32.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-) [40
+) [39
 
  <./Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf>] (./Simulation-paper2-20200207.aux)
  ***********
@@ -959,18 +1002,18 @@ L3 programming layer <2020/03/25>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 26917 strings out of 476181
- 506188 string characters out of 5793564
+ 28976 strings out of 476181
+ 542871 string characters out of 5793564
  1947978 words of memory out of 5000000
- 48249 multiletter control sequences out of 15000+600000
- 657942 words of font info for 115 fonts, out of 8000000 for 9000
+ 50108 multiletter control sequences out of 15000+600000
+ 662213 words of font info for 206 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,11n,107p,2615b,788s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Simulation-paper2-20200207.pdf (40 pages, 5121977 bytes).
+ 99i,11n,107p,2617b,797s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on Simulation-paper2-20200207.pdf (39 pages, 5094057 bytes).
 PDF statistics:
- 523 PDF objects out of 1000 (max. 8388607)
- 436 compressed objects within 5 object streams
- 144 named destinations out of 1000 (max. 500000)
- 153 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 512 PDF objects out of 1000 (max. 8388607)
+ 430 compressed objects within 5 object streams
+ 142 named destinations out of 1000 (max. 500000)
+ 53417 words of extra memory for PDF output out of 61914 (max. 10000000)
 
