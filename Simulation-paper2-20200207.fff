@@ -2,6 +2,15 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/example1-1.pdf}
+\caption{\label{fig:example1}Visual demonstrating terms used to describe population elements.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
 \includegraphics{Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf}
 \caption{\label{fig:ResponseRate1}Relationship between total response rate and misrepresentation.}
 \end{figure*}

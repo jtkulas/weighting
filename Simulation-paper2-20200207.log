@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.2)  1 MAR 2024 08:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.2)  12 APR 2024 12:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -915,13 +915,13 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 212.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 212.
-[3] [4] [5] [6] [7] [8{c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [9] [10{c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-\openout4 = `Simulation-paper2-20200207.ttt'.
-
-(Simulation-paper2-20200207.ttt) [11] [12]
+[3] [4] [5] [6] [7] [8{c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [9]
 \openout5 = `Simulation-paper2-20200207.fff'.
 
-(Simulation-paper2-20200207.fff) [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] AED endfloat: Processing end Figures and Tables [31] (./Simulation-paper2-20200207.ttt
+(Simulation-paper2-20200207.fff) [10{c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+\openout4 = `Simulation-paper2-20200207.ttt'.
+
+(Simulation-paper2-20200207.ttt) [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] AED endfloat: Processing end Figures and Tables [31] (./Simulation-paper2-20200207.ttt
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 12.
 
@@ -963,37 +963,45 @@ Overfull \hbox (20.00299pt too wide) in alignment at lines 71--109
 
 
 ] [34] [35]) (./Simulation-paper2-20200207.fff
-<Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf, id=307, 469.755pt x 325.215pt>
-File: Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf Graphic file (type pdf)
-<use Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf>
-Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf  used on input line 5.
+<Simulation-paper2-20200207_files/figure-latex/example1-1.pdf, id=311, 469.755pt x 325.215pt>
+File: Simulation-paper2-20200207_files/figure-latex/example1-1.pdf Graphic file (type pdf)
+<use Simulation-paper2-20200207_files/figure-latex/example1-1.pdf>
+Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/example1-1.pdf  used on input line 5.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [36
 
 
- <./Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf, id=322, 469.755pt x 325.215pt>
-File: Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf Graphic file (type pdf)
-<use Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf>
-Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf  used on input line 14.
+ <./Simulation-paper2-20200207_files/figure-latex/example1-1.pdf>]
+<Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf, id=320, 469.755pt x 325.215pt>
+File: Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf Graphic file (type pdf)
+<use Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf>
+Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf  used on input line 14.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [37
 
- <./Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf, id=338, 469.755pt x 325.215pt>
-File: Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf Graphic file (type pdf)
-<use Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf>
-Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf  used on input line 23.
+ <./Simulation-paper2-20200207_files/figure-latex/ResponseRate1-1.pdf>]
+<Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf, id=336, 469.755pt x 325.215pt>
+File: Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf Graphic file (type pdf)
+<use Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf>
+Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf  used on input line 23.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [38
 
+ <./Simulation-paper2-20200207_files/figure-latex/SDForm2-1.pdf>]
+<Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf, id=351, 469.755pt x 325.215pt>
+File: Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf Graphic file (type pdf)
+<use Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf>
+Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf  used on input line 32.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[39
+
  <./Simulation-paper2-20200207_files/figure-latex/Cattell3-1.pdf>]
-<Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf, id=353, 469.755pt x 325.215pt>
+<Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf, id=366, 469.755pt x 325.215pt>
 File: Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf Graphic file (type pdf)
 <use Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf>
-Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf  used on input line 32.
+Package pdftex.def Info: Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf  used on input line 41.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-) [39
+) [40
 
  <./Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf>] (./Simulation-paper2-20200207.aux)
  ***********
@@ -1002,18 +1010,18 @@ L3 programming layer <2020/03/25>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 28976 strings out of 476181
- 542871 string characters out of 5793564
+ 28991 strings out of 476181
+ 543455 string characters out of 5793564
  1947978 words of memory out of 5000000
- 50108 multiletter control sequences out of 15000+600000
- 662213 words of font info for 206 fonts, out of 8000000 for 9000
+ 50116 multiletter control sequences out of 15000+600000
+ 662390 words of font info for 208 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,11n,107p,2617b,797s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,11n,107p,2748b,797s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Simulation-paper2-20200207.pdf (39 pages, 5094057 bytes).
+Output written on Simulation-paper2-20200207.pdf (40 pages, 5332904 bytes).
 PDF statistics:
- 512 PDF objects out of 1000 (max. 8388607)
- 430 compressed objects within 5 object streams
- 142 named destinations out of 1000 (max. 500000)
- 53417 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 527 PDF objects out of 1000 (max. 8388607)
+ 441 compressed objects within 5 object streams
+ 145 named destinations out of 1000 (max. 500000)
+ 53422 words of extra memory for PDF output out of 61914 (max. 10000000)
 
