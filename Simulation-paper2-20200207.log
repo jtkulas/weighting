@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.12)  12 APR 2024 17:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.12)  15 APR 2024 09:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1016,13 +1016,13 @@ L3 programming layer <2020/03/25>
 Here is how much of TeX's memory you used:
  29047 strings out of 476063
  544598 string characters out of 5790598
- 1950496 words of memory out of 5000000
+ 1951496 words of memory out of 5000000
  50285 multiletter control sequences out of 15000+600000
  662621 words of font info for 208 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,11n,107p,2748b,797s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/ergadmin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on Simulation-paper2-20200207.pdf (40 pages, 5351092 bytes).
+Output written on Simulation-paper2-20200207.pdf (40 pages, 5350695 bytes).
 PDF statistics:
  532 PDF objects out of 1000 (max. 8388607)
  444 compressed objects within 5 object streams
