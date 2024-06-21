@@ -225,11 +225,12 @@ We address our research questions within a simulated fictionalized context of or
 ```{r example1, fig.cap="Visual demonstrating terms used to describe population elements."}
 
 ## need to read in as figure
+## https://docs.google.com/presentation/d/1nW-8azHZop82vByLDqdtqOJRTFAxa-vJ1sPgw5d9XPs/edit#slide=id.p
 
 library(magick)
 library(grid)
 
-figure <- image_read("example.JPG")
+figure <- image_read("Screenshot 2024-06-21 at 22.13.58.png")
 
 grid.raster(figure)
 
@@ -609,6 +610,8 @@ The systematic patterns of heteroskedasticity of the Figure \@ref(fig:SDForm2) s
 [^anotherfootnote]: Don't think this is correct - maybe frame: "sometimes the active non-response is non-troublesome - when it fully parallels the distributional proportions (?)" $\leftarrow$ still confusing. Looked at with Yang 3/1/24 and still confused - maybe leave in for reviewers to note and question.
 
 ### Need to work on this section
+
+In `data load and prep` chunk (line 74) - work backwards from lines 141-144 to pull proper distal variables and place into explanatory figure (showcase one low $r_p$ and one high $r_p$)
 
 To further expand upon this *attitudinal form/pattern of nonresponse* interplay, the discrepancies between population constituency and sampling proportions were additionally evaluated through the lens of Cattell's profile similarity index [$r_p$, @cattell_r_1949; @cattell_taxonometric_1966]. $r_p$ is sensitive to discrepancies in profile shape (pattern across profile components), elevation (average component score), and scatter (sum of individual components' deviation from the elevation estimate. Here, the profile similarity index references the relationship between the response rates (NEED YANG TO VERIFY - THINK THIS IS SSmale;SSfemale;SSdepta;SSdeptb from `combo` object) and sample sizes (cellrate.ma;cellrate.mb;cellrate.fa;cellrate.gb) across experimental *cells*. For example, VERIFY BEFORE CLARIFYING HERE. Figure \@ref(fig:Cattell3) demonstrates the pattern of unweighted sample mean deviation (from the population parameter) when this index is taken into consideration. Specifically, Figure \@ref(fig:Cattell3) demonstrates a more pronounced *form of* nonresponse association when underlying attitudinal distributions evidence group differences (e.g., incrementally across the 8 specified conditions), and in these scenarios, active nonresponse is shown to have a fairly large effect on error within the sample estimate (as well as systematically increasing degrees of  heteroskedasticity paralleling the Cattell index; omnibus  Breusch-Pagan [across conditions] = 3177.2, *p* < .001). The curvilinear nature of these functions was estimated via hierarchical polynomial regression (excluding conditions 1, 2, and 3), with misrepresentation exhibiting a linear association across condition ($R^2$ = `r lm.1`, *p* < .001) as well as incrementally across the Cattell index ($\Delta{R^2}$ = `r lm.2 - lm.1`, *p* < .001), and also exhibiting an incremental polynomial effect ($\Delta{R^2}$ = `r lm.3 - lm.2`, *p* < .001).
 
