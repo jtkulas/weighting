@@ -41,3 +41,12 @@
 \includegraphics{Simulation-paper2-20200207_files/figure-latex/Overall4-1.pdf}
 \caption{\label{fig:Overall4}Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.}
 \end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{Simulation-paper2-20200207_files/figure-latex/CattelExplain-1.pdf}
+\caption{\label{fig:CattelExplain}Allocation of response rates relative to underlying distributional form and its impact on population misrepresentation (need to think through hi/lo given Dr Robinsons thoughts)}
+\end{figure*}
