@@ -159,7 +159,7 @@ combo.active <- subset(combo, ID > 12288)     #Cond4to8
 
 Akin to differential variable weighting (for instance: a) construct indicators within a multi-item assessment scale [aka factor loadings], or b) predictors within a selection system [aka regression weights]; e.g., per data matrix "columns"), sample weighting alters the proportional contributions of *individual respondents* within a data set (e.g., data matrix rows). Some respondents' responses are assigned greater relative contribution and others are assigned less. This practice is commonplace in the summary of general population polling data reflecting, for example, elections and politics [e.g., @rivers_inference_2009], prevalence rates of psychological disorders [e.g., @kessler_national_2009], or feelings of physical safety [e.g., @quine_feeling_2008]. It is also seemingly in the periphery of awareness and interest within the published organizational surveying literature [see, for example, @kulas_post-stratification_2016; @landers_inconvenient_2015; @tett_2011_2014].
 
-We speculate that this form of statistical remediation is gaining research interest in the organizational surveying research domain, at least in part, because industrial psychologists are keenly aware that response rates within organizational surveying applications have been trending downward [see, for example, @anseel_response_2010; @rogelberg_introduction_2007]. With lower response rates, surveyors are confronted with heightened levels of scrutiny because, historically, a locally realized high response rate has been positively associated with data quality [e.g., @anseel_response_2010; @cycyota_enhancing_2002; @cycyota_what_2006; @frohlich_techniques_2002]. The orientation of this presentation, however, is that although response rate is a commonly referenced proxy of survey quality, it is not response rate but rather sample representativeness that should be the primary focus of concern for survey specialists [see, for example, @cook_meta-analysis_2000; @krosnick_survey_1999]. Representativeness can of course be "hurt" by low response rates, but the relationship between these two survey concepts is by no means exact [e.g., @curtin_effects_2000; @keeter_gauging_2006; @kulas_nonresponse_2017]. Stated differently, a high response rate is neither a sufficient nor necessary condition for representative population sampling.[^1]
+We speculate that this form of statistical remediation is gaining research interest in the organizational surveying research domain, at least in part, because industrial psychologists are keenly aware that response rates within organizational surveying applications have been trending downward [see, for example, @anseel_response_2010; @rogelberg_introduction_2007]. With lower response rates, surveyors are confronted with heightened levels of scrutiny because, historically, a locally realized high response rate has been positively associated with data quality [e.g., @anseel_response_2010; @cycyota_enhancing_2002; @cycyota_what_2006; @frohlich_techniques_2002]. The orientation of this presentation, however, is that although response rate is a commonly referenced proxy of survey quality, it is not response rate but rather sample representativeness that should be the primary focus of concern for survey specialists [see, for example, @cook_meta-analysis_2000; @krosnick_survey_1999]. Representativeness can of course be "hurt" by low response rates, but the relationship between these two survey concepts is by no means exact [e.g., @curtin_effects_2000; @keeter_gauging_2006; @kulas_nonresponse_2017]. "put differently, a high response rate may not allow for valid inferences and a lower response rate might adqueately represent the broader population" [p. 1574; @holtom2022survey]. Stated differently, a high response rate is neither a sufficient nor necessary condition for representative population sampling.[^1]
 
 [^1]: Statistical benefits exist that are commonly attributed to higher response rates, such as greater power. These benefits, however, do not originate from response rate, but rather its consequence: larger *n*. Our presentation reflects the fact that greater power (and/or, relatedly, smaller confidence intervals) may in fact foster a false sense of confidence regarding “data quality”. Primarily for this reason, we stress that the methodological/statistical concepts of response rate, sample size, and power should be fully disentangled from the principle of representativeness, and the importance of these dissociations drives the central theme of the current paper.
 
@@ -608,14 +608,14 @@ wrongeight <- onlyeight[ which(onlyeight$cellrate.ma == .54 &
 
 cattelexample <- data.frame(
   rr = c(.81,.81,.54,.54,.6,.75,.6,.75),
-  group = as.factor(c("Ma","Mb","Fa","Fb","Ma","Mb","Fa","Fb")),
-  effect = as.factor(c("lo","lo","lo","lo","hi","hi","hi","hi")),
+  group = as.factor(c("Male.A","Male.B","Female.A","Female.B","Male.A","Male.B","Female.A","Female.B")),
+  Impact = as.factor(c("Low","Low","Low","Low","High","High","High","High")),
   image=c("posskew.png","posskew.png","negskew.png","negskew.png","posskew.png","posskew.png","negskew.png","negskew.png")
   )
 
-ggplot(cattelexample, aes(x=group, y=rr, group=effect)) + 
-  geom_line(aes(linetype=effect)) +
-  geom_point() + 
+ggplot(cattelexample, aes(x=group, y=rr, group=Impact)) + 
+  geom_line(aes(linetype=Impact)) +
+#  geom_point() + 
   ylim(.5, .9) + 
   xlab("Sampled Element") + 
   ylab("Response Rate") +

@@ -1,0 +1,113 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:Tab1}Attitudinal Distribution Conditions Specified in Current Paper}
+
+\small{
+
+\begin{tabular}{clcccccc}
+\toprule
+ &  &  & \multicolumn{2}{c}{Male} & \multicolumn{2}{c}{Female}  &\\
+\cmidrule(r){4-5} \cmidrule(r){6-7}
+Condition & Distributional Shape & mu & Dept A & Dept B & Dept A & Dept B & Bias Susceptibility\\
+\midrule
+1 & Normal & 3 & X & X & X & X & Low\\
+ & Positive Skew & 2 &  &  &  &  & \\
+ & Negative Skew & 4 &  &  &  &  & \\
+2 & Normal & 3 &  &  &  &  & Low\\
+ & Positive Skew & 2 & X & X & X & X & \\
+ & Negative Skew & 4 &  &  &  &  & \\
+3 & Normal & 3 &  &  &  &  & Low\\
+ & Positive Skew & 2 &  &  &  &  & \\
+ & Negative Skew & 4 & X & X & X & X & \\
+4 & Normal & 3 & X & X & X &  & Moderate\\
+ & Positive Skew & 2 &  &  &  &  & \\
+ & Negative Skew & 4 &  &  &  & X & \\
+5 & Normal & 3 & X & X &  &  & Moderate/High\\
+ & Positive Skew & 2 &  &  & X & X & \\
+ & Negative Skew & 4 &  &  &  &  & \\
+6 & Normal & 3 &  & X & X &  & Moderate/High\\
+ & Positive Skew & 2 & X &  &  &  & \\
+ & Negative Skew & 4 &  &  &  & X & \\
+7 & Normal & 3 &  &  &  &  & High\\
+ & Positive Skew & 2 & X &  & X &  & \\
+ & Negative Skew & 4 &  & X &  & X & \\
+8 & Normal & 3 &  &  &  &  & High\\
+ & Positive Skew & 2 & X & X &  &  & \\
+ & Negative Skew & 4 &  &  & X & X & \\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}
+\efloatseparator
+ 
+\begin{lltable}
+
+\small{
+
+\begin{longtable}{ccccccc}\noalign{\getlongtablewidth\global\LTcapwidth=\longtablewidth}
+\caption{\label{tab:Tab2}Example Summarized Response Rate Conditions Represented in Figures 2 through 5}\\
+\toprule
+ \multicolumn{4}{c}{Example Response Rates (Any Combination)}  &  &  &\\
+\cmidrule(r){1-4}
+Male Dept A & Male Dept B & Female Dept A & Female Dept B & SD Index & Number of Conditions & Form (and degree) of Nonresponse\\
+\midrule
+\endfirsthead
+\caption*{\normalfont{Table \ref{tab:Tab2} continued}}\\
+\toprule
+ \multicolumn{4}{c}{Example Response Rates (Any Combination)}  &  &  &\\
+\cmidrule(r){1-4}
+Male Dept A & Male Dept B & Female Dept A & Female Dept B & SD Index & Number of Conditions & Form (and degree) of Nonresponse\\
+\midrule
+\endhead
+36\% & 36\% & 36\% & 36\% & .000 & 256 & Passive\\
+36\% & 36\% & 42\% & 42\% & .034 & 128 & \\
+48\% & 48\% & 54\% & 54\% & .035 & 64 & \\
+42\% & 42\% & 49\% & 49\% & .040 & 192 & \\
+48\% & 48\% & 56\% & 56\% & .046 & 128 & \\
+56\% & 56\% & 64\% & 64\% & .047 & 64 & \\
+54\% & 54\% & 63\% & 63\% & .051 & 128 & \\
+63\% & 63\% & 72\% & 72\% & .052 & 64 & \\
+36\% & 42\% & 42\% & 49\% & .053 & 64 & \\
+42\% & 48\% & 49\% & 56\% & .057 & 128 & \\
+49\% & 56\% & 56\% & 64\% & .061 & 64 & \\
+48\% & 54\% & 56\% & 63\% & .062 & 128 & \\
+56\% & 63\% & 64\% & 72\% & .066 & 128 & \\
+36\% & 36\% & 48\% & 48\% & .069 & 128 & \\
+64\% & 72\% & 72\% & 81\% & .069 & 64 & \\
+42\% & 42\% & 56\% & 56\% & .081 & 128 & \\
+36\% & 42\% & 48\% & 56\% & .085 & 128 & \\
+42\% & 49\% & 54\% & 63\% & .089 & 128 & \\
+48\% & 48\% & 64\% & 64\% & .092 & 128 & \\
+42\% & 48\% & 56\% & 64\% & .096 & 128 & \\
+49\% & 56\% & 63\% & 72\% & .098 & 128 & \\
+36\% & 36\% & 54\% & 54\% & .104 & 192 & \\
+48\% & 54\% & 64\% & 72\% & .106 & 128 & \\
+56\% & 63\% & 72\% & 81\% & .109 & 128 & \\
+36\% & 48\% & 48\% & 64\% & .115 & 64 & \\
+36\% & 42\% & 54\% & 63\% & .120 & 128 & \\
+42\% & 42\% & 63\% & 63\% & .121 & 64 & \\
+42\% & 54\% & 56\% & 72\% & .123 & 128 & \\
+49\% & 63\% & 63\% & 81\% & .131 & 64 & \\
+42\% & 48\% & 63\% & 72\% & .137 & 128 & \\
+48\% & 48\% & 72\% & 72\% & .139 & 64 & \\
+36\% & 48\% & 54\% & 72\% & .150 & 128 & \\
+48\% & 54\% & 72\% & 81\% & .154 & 128 & \\
+54\% & 54\% & 81\% & 81\% & .156 & 64 & \\
+42\% & 54\% & 63\% & 81\% & .164 & 128 & \\
+36\% & 54\% & 54\% & 81\% & .186 & 64 & Active\\
+\bottomrule
+\end{longtable}
+
+}
+
+\end{lltable}

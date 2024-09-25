@@ -1,0 +1,558 @@
+---
+title             : "Nonresponse and Sample Weighting in Organizational Surveying"
+shorttitle        : "NONRESPONSE AND SAMPLE WEIGHTING"
+
+author: 
+  - name          : "John T. Kulas"
+    affiliation   : "1"
+    corresponding : yes
+    address       : "Dickson Hall #250, Montclair State University, Montclair, NJ, 07043"
+    email         : "kulasj@montclair.edu"
+  - name          : "Yang Yang"
+    affiliation   : "2"
+  - name          : "David H. Robinson"
+    affiliation   : "3"
+
+affiliation:
+  - id            : "1"
+    institution   : "Montclair State University"
+  - id            : "2"
+    institution   : "Roche Group"
+  - id            : "3"
+    institution   : "St. Cloud State University"
+
+author_note: |
+  John T. Kulas, Professor of Industrial and Organizational Psychology, Department of Psychology, Montclair State University. Yang Yang, Organizational Scientist, People Insights & Technology, People & Culture, Roche Group. David H. Robinson, Professor of Statistics, St. Cloud State University. This manuscipt was generated via papaja [@R-papaja] within rMarkdown.
+
+abstract: |
+  
+keywords          : "Survey methodology, sample weighting, nonresponse, response rate"
+
+bibliography      : "simulation paper references.bib"
+
+figsintext        : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+lineno            : yes
+mask              : yes
+header-includes:
+  - \raggedbottom
+#  - \usepackage{float} #use the 'float' package
+#  - \floatplacement{figure}{H} #make every figure with caption = h
+csl               : "apa7.csl"
+documentclass     : "apa7"
+classoption       : "man"
+output            : papaja::apa6_pdf
+
+#header-includes: #used to change page orientation
+#- \usepackage{pdflscape}
+#- \newcommand{\blandscape}{\begin{landscape}}
+#- \newcommand{\elandscape}{\end{landscape}}
+---
+
+```{r chunk-preferences}
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, warning=FALSE, echo=FALSE)
+```
+
+```{r load_packages, include = FALSE}
+library(papaja)   #APA6 formatting
+# library(citr)     #APAcitation
+
+library(psych)
+library(ggplot2)  #data visualization
+library(reshape2) #convert Wide to Long (Fig2&3)
+
+library(Rmisc)    #summarySE()
+library(weights)  #rd()
+
+library(anesrake) #for citation - not used in body of paper - 2/1/23
+```
+
+
+```{r data load and prep, include=FALSE}
+
+cond1_nnnn <- read.csv("norm_norm_norm_norm_summary.csv")
+cond2_pppp <- read.csv("pos_pos_pos_pos_summary.csv")
+cond3_gggg <- read.csv("neg_neg_neg_neg_summary.csv")
+cond4_nnng <- read.csv("norm_norm_norm_neg_summary.csv")
+cond5_nnpp <- read.csv("norm_norm_pos_pos_summary.csv")
+cond6_pnng <- read.csv("pos_norm_norm_neg_summary.csv")
+cond7_pgpg <- read.csv("pos_neg_pos_neg_summary.csv")
+cond8_ppgg <- read.csv("pos_pos_neg_neg_summary.csv")
+
+cond1_nnnn$cond <- "Condition 1"
+cond2_pppp$cond <- "Condition 2"
+cond3_gggg$cond <- "Condition 3"
+cond4_nnng$cond <- "Condition 4"
+cond5_nnpp$cond <- "Condition 5"
+cond6_pnng$cond <- "Condition 6"
+cond7_pgpg$cond <- "Condition 7"
+cond8_ppgg$cond <- "Condition 8"
+
+combo <- rbind(cond1_nnnn, cond2_pppp, cond3_gggg, cond4_nnng, cond5_nnpp, cond6_pnng, cond7_pgpg, cond8_ppgg)
+names(combo)[names(combo)=="cond"] <- "Condition"
+
+
+## Sampling Rate for four subgroups(MA,MB,FA,FB)
+combo$cellrate.ma <- with(combo, SSmale*SSdepta)
+combo$cellrate.mb <- with(combo, SSmale*SSdeptb)
+combo$cellrate.fa <- with(combo, SSfemale*SSdepta)
+combo$cellrate.gb <- with(combo, SSfemale*SSdeptb)
+# SD index to indicate passive and active forms
+combo <- transform(combo, SD=apply(combo[18:21],1, sd, na.rm = TRUE))
+
+
+## Total response rate 
+combo$RR.all <- with(combo, PPmale*PPdepta*SSmale*SSdepta + PPmale*PPdeptb*SSmale*SSdeptb +
+                       PPfemale*PPdepta*SSfemale*SSdepta + PPfemale*PPdeptb*SSfemale*SSdeptb)
+
+
+## Population and sample subgroup constituencies
+combo$NS.ma <- with(combo, 10000*PPmale*PPdepta*SSmale*SSdepta)
+combo$NS.mb <- with(combo, 10000*PPmale*PPdeptb*SSmale*SSdeptb)
+combo$NS.fa <- with(combo, 10000*PPfemale*PPdepta*SSfemale*SSdepta)
+combo$NS.fb <- with(combo, 10000*PPfemale*PPdeptb*SSfemale*SSdeptb)
+combo$NS <- with(combo,NS.ma+NS.mb+NS.fa+NS.fb)
+
+combo$cell.sma <- with(combo, NS.ma/NS)*100
+combo$cell.smb <- with(combo, NS.mb/NS)*100
+combo$cell.sfa <- with(combo, NS.fa/NS)*100
+combo$cell.sfb <- with(combo, NS.fb/NS)*100
+combo$cell.pma <- with(combo, PPmale*PPdepta)*100
+combo$cell.pmb <- with(combo, PPmale*PPdeptb)*100
+combo$cell.pfa <- with(combo, PPfemale*PPdepta)*100
+combo$cell.pfb <- with(combo, PPfemale*PPdeptb)*100
+
+#combo$PPma <- scale(combo$cell.pma)
+#combo$PPmb <- scale(combo$cell.pmb)
+#combo$PPfa <- scale(combo$cell.pfa)
+#combo$PPfb <- scale(combo$cell.pfb)
+#combo$TSma <- scale(combo$cell.sma)
+#combo$TSmb <- scale(combo$cell.smb)
+#combo$TSfa <- scale(combo$cell.sfa)
+#combo$TSfb <- scale(combo$cell.sfb)
+#combo$one     <- (combo$PPma - combo$TSma)^2
+#combo$two     <- (combo$PPmb - combo$TSmb)^2
+#combo$three   <- (combo$PPfa - combo$TSfa)^2
+#combo$four    <- (combo$PPfb - combo$TSfb)^2
+
+combo$one     <- (combo$cell.pma - combo$cell.sma)^2
+combo$two     <- (combo$cell.pmb - combo$cell.smb)^2
+combo$three   <- (combo$cell.pfa - combo$cell.sfa)^2
+combo$four    <- (combo$cell.pfb - combo$cell.sfb)^2
+
+#The value E is the chance expected median value of sum of squared differences and
+#if the d is measured as differences in stand scores, we obtain Formular 2, E = 2k
+combo$Chron.d2 <- with(combo, one+two+three+four)
+combo$r.p      <- with(combo, (3.357*2-Chron.d2)/(3.357*2+Chron.d2))
+summary(combo$r.p)
+
+
+#Active and passive forms subsets
+combo$ID <- c(1:nrow(combo))
+combo.passive <- subset(combo, ID < 12289)     #Cond1to3
+combo.active <- subset(combo, ID > 12288)     #Cond4to8
+
+```
+
+In order to represent different proportions of relative constituency (for example, more females than males or more department A workers than department B), we iterated population characteristics at marginal levels (gender and department) starting at 20% (and 80%) with increments and corresponding decriments of 20%. For example, if males accounted for 20% of the simulated population, then females were 80%; also if respondents in Department A represented 60% of a population, then 40% were in Department B. Marginal constituencies were therefore realized at all combinations (across the two variables) of 20% and 80%, 40% and 60%, 60% and 40%, and 80% and 20%. This resulted in population *cell* constituencies (e.g., Male.A, Female.A, Male.B, Female.B) as low as 400 and as high as 6,400 - see Figure \@ref(fig:example1) for further clarification of our "cell" and "margin" terminology and variable specification.
+
+```{r Tab1, echo=FALSE, results="asis"}
+
+a <- c("1","","","2","","","3","","","4","","","5","","","6","","","7","","","8","","")
+b <- c("Normal","Positive Skew","Negative Skew","Normal","Positive Skew","Negative Skew",
+       "Normal","Positive Skew","Negative Skew","Normal","Positive Skew","Negative Skew",
+       "Normal","Positive Skew","Negative Skew","Normal","Positive Skew","Negative Skew",
+       "Normal","Positive Skew","Negative Skew","Normal","Positive Skew","Negative Skew")
+c <- c("3","2","4","3","2","4","3","2","4","3","2","4",
+       "3","2","4","3","2","4","3","2","4","3","2","4")
+d <- c("X","","","","X","","","","X","X","","",
+       "X","","","","X","","","X","","","X","")
+e <- c("X","","","","X","","","","X","X","","",
+       "X","","","X","","","","","X","","X","")
+f <- c("X","","","","X","","","","X","X","","",
+       "","X","","X","","","","X","","","","X")
+g <- c("X","","","","X","","","","X","","","X",
+       "","X","","","","X","","","X","","","X")
+h <- c("Low","","","Low","","","Low","","",
+       "Moderate","","","Moderate/High","","",
+       "Moderate/High","","","High","","",
+       "High","","")
+
+tab.1 <- cbind.data.frame(a,b,c,d,e,f,g,h)
+
+apa_table(tab.1,
+          align=c("c","l",rep("c",6)),
+          escape=TRUE,
+          caption="Attitudinal Distribution Conditions Specified in Current Paper",
+          col.names=c("Condition","Distributional Shape","mu","Dept A","Dept B","Dept A","Dept B","Bias Susceptibility"),
+          col_spanners=list("Male"=c(4,5), "Female"=c(6,7)),
+          small=TRUE,
+          landscape=FALSE)
+
+```
+
+Each population cell was characterized by an attitudinal distribution in one of three different possible forms: normal, positively skewed, or negatively skewed. These distributional forms were specified in an attempt to model similarities and discrepancies in construct standing (e.g., commitment, satisfaction, or engagement) across respondent groupings. The normal distribution exhibited, on average, a mean of 3.0 whereas the skewed distributions were characterized by average means of 2.0 and 4.0, respectively. In total, eight crossings of distributional type across employee categorization were specified (Table \@ref(tab:Tab1) presents the combinations of these distributions). Note that these eight conditions are not exhaustive of all possible combinations of constituent groups and attitudinal distribution - we limited the simulations to combinations that we projected to collectively be most efficiently informative. 
+
+Individual attitudes were randomly sampled from population distributions at the cell level (e.g., Male.A) without replacement. These response rates (methodologically these could alternatively be conceptualized as *sampling* rates) were specified at 10% increments ranging from 60% to 90%, and these were fully iterated across each of our four marginal groups (Males, Females, Departments A and B). Our cell-level response rates therefore ranged from 36% to 81% - a range of rates specified because they are approximations of reasonable expectations according to the organizational surveying literature [e.g., @mellahi_response_2016; @werner_reporting_2007]. We therefore investigated error within the aggregate mean (e.g., grand mean aka total sample mean) attributable to different likelihoods of sample inclusion from constituent groups of different relative size and representing populations of different attitudinal distribution, but at response rates reasonably expected to exist in real-world organizational surveying contexts.  
+
+```{r Tab2, echo=FALSE, results="asis"}
+
+aa <- c("36%","36%","48%","42%","48%","56%","54%","63%","36%",
+	"42%","49%","48%","56%","36%","64%","42%","36%","42%",
+	"48%","42%","49%","36%","48%","56%","36%","36%","42%",
+	"42%","49%","42%","48%","36%","48%","54%","42%","36%")
+
+bb <- c("36%","36%","48%","42%","48%","56%","54%","63%","42%",
+	"48%","56%","54%","63%","36%","72%","42%","42%","49%",
+	"48%","48%","56%","36%","54%","63%","48%","42%","42%",
+	"54%","63%","48%","48%","48%","54%","54%","54%","54%")
+
+cc <- c("36%","42%","54%","49%","56%","64%","63%","72%","42%",
+	"49%","56%","56%","64%","48%","72%","56%","48%","54%",
+	"64%","56%","63%","54%","64%","72%","48%","54%","63%",
+	"56%","63%","63%","72%","54%","72%","81%","63%","54%")
+
+dd <- c("36%","42%","54%","49%","56%","64%","63%","72%","49%",
+	"56%","64%","63%","72%","48%","81%","56%","56%","63%",
+	"64%","64%","72%","54%","72%","81%","64%","63%","63%",
+	"72%","81%","72%","72%","72%","81%","81%","81%","81%")
+
+
+
+ee <- c(".000",".034",".035",".040",".046",".047",".051",".052",".053",
+	".057",".061",".062",".066",".069",".069",".081",".085",".089",
+	".092",".096",".098",".104",".106",".109",".115",".120",".121",
+	".123",".131",".137",".139",".150",".154",".156",".164",".186")
+
+
+ff <- c("256","128","64","192","128","64","128","64","64",
+	"128","64","128","128","128","64","128","128","128",
+	"128","128","128","192","128","128","64","128","64",
+	"128","64","128","64","128","128","64","128","64")
+
+
+gg <- c("Passive","","","","","","","","",
+        "","","","","","","","","",
+        "","","","","","","","","",
+        "","","","","","","","","Active")
+tab.2 <- cbind.data.frame(aa,bb,cc,dd,ee,ff,gg)
+
+apa_table(tab.2,
+          align=c(rep("c",7)),
+          caption="Example Summarized Response Rate Conditions Represented in Figures 2 through 5",
+          col.names=c("Male Dept A","Male Dept B","Female Dept A","Female Dept B","SD Index", "Number of Conditions","Form (and degree) of Nonresponse"),
+          col_spanners=list("Example Response Rates (Any Combination)"=c(1,4)),
+          longtable = TRUE,
+          small=TRUE,
+          landscape=TRUE)
+```
+
+In an attempt to capture this "degree of active nonresponse", we calculated a simple index of response rate discrepancy (SD; presented in Table \@ref(tab:Tab2)). The "least" active nonresponse scenarios are characterized by two subgroups with identical response rates and two  having a slightly different response rate (e.g., male.a = 36%, female.a = 36%, male.b = 42%, and female.b[^sample] = 42%; see the second row of Table \@ref(tab:Tab2), the SD index = .034)[^3]. Also here note that three of our eight Table \@ref(tab:Tab1) conditions represent scenarios where the presence of active nonrespondents is not expected to result in bias (e.g., regardless of patterns of nonresponse, the unweighted sample mean is expected to yield an unbiased estimate of the population mean). These are Table \@ref(tab:Tab1) conditions one through three, where attitudinal distributions are of *the same form* across groups, regardless of any individual group response rate discrepancy from others'.
+
+[^sample]: "Lowercase" specification of simulation strata indicates sample constituencies (e.g., male.b) whereas uppercase implicates population (e.g., Male.B).
+
+[^3]: This method of simplifying the presentation of our response rate conditions is fully independent of consideration of population constituency and distributional form. That is, the amount of bias present in a sample estimate is expected to be quite different for Condition 7 with response rates of 48%, 48%, 72%, 72% versus 48%, 72%, 48%, 72%, even though the crude response rate index (SD = 0.139) is the same for both scenarios.  There is additional information within these simulations (the effect of a *combination* of response rate and population form on degree of bias) that is therefore not captured via this simple SD index. 
+
+# Results
+
+```{r ResponseRate1, echo=FALSE, fig.cap="Relationship between total response rate and misrepresentation.", warning=FALSE, fig.height=4.5, fig.width=6.5}
+
+ggplot(combo, aes(x=RR.all, y=PPSU)) + 
+  geom_point(alpha=1/25, size=1.5) + 
+  xlim(0.36,0.81) +
+  ylim(0, .3) + 
+  xlab("Total Response Rate") + 
+  ylab("Misrepresentation") +
+  theme(panel.background = element_rect(fill = "transparent", color = "#CCCCCC"),
+        panel.grid.major.y = element_line(color = "grey80")) + 
+  scale_colour_gradient() +
+  geom_smooth(method='loess', color="red", size = 1/3) +
+  theme(axis.title.x = element_text(size = 8,color = "black")) +
+  theme(axis.text.x = element_text(size = 8, color = "black")) +
+  theme(axis.title.y = element_text(size = 8,color = "black")) +  
+  theme(axis.text.y = element_text(size = 8,color = "black")) +  
+  facet_wrap(~Condition) +
+  theme(strip.text.x = element_text(size = 10,color= "black"))
+
+copycombo <- combo
+copycombo$Condition <- stringr::str_replace_all(copycombo$Condition, " ", "")
+rrdesc <- psych::describeBy(PPSU ~ Condition, data = copycombo)
+
+rr.aov <- aov(PPSU~Condition, copycombo)  
+
+copycombo2 <- copycombo[ which(copycombo$Condition == "Condition4" |  
+                                 copycombo$Condition == "Condition5" |
+                                 copycombo$Condition == "Condition6" |
+                                 copycombo$Condition == "Condition7" |
+                                 copycombo$Condition == "Condition8"),]
+
+polynomial <- lm(PPSU ~ Condition, copycombo2)
+polynomial1 <- lm(PPSU ~ Condition + RR.all, copycombo2)
+polynomial2 <- lm(PPSU ~ Condition + RR.all + I(RR.all^2), copycombo2)
+
+firstpoly <- anova(polynomial,polynomial1)
+secondpoly <- anova(polynomial1,polynomial2)
+
+lm.first <- summary(polynomial)$r.squared       ## was rendering odd in inline script
+lm.second <- summary(polynomial1)$r.squared
+lm.third <- summary(polynomial2)$r.squared
+
+# summary(polynomial2)
+  
+```
+
+```{r SDForm2, echo=FALSE, fig.cap="Relationship between nonresponse form and misrepresentation.",fig.height=4.5, fig.width=6.5}
+
+ggplot(combo, aes(x=SD, y=PPSU)) + 
+  geom_point(alpha=1/25, size=1.5) + 
+  xlim(0, .2) +
+  ylim(0, .3) + 
+  xlab("SD indicating Form of Nonresponse") + 
+  ylab("Misrepresentation") +
+  theme(panel.background = element_rect(fill = "transparent", color = "#CCCCCC"),
+        panel.grid.major.y = element_line(color = "grey80")) + 
+  scale_colour_gradient() +
+  geom_smooth(method='loess', color="red",size=1/3) +
+  theme(legend.title = element_text(size = 8)) +
+  theme(legend.text = element_text(size = 8)) +
+  theme(axis.title.x = element_text(size = 8,color = "black")) +
+  theme(axis.text.x = element_text(size = 8, color = "black")) +
+  theme(axis.title.y = element_text(size = 8,color = "black")) +
+  theme(axis.text.y = element_text(size = 8,color = "black")) +
+  facet_wrap(~Condition) +
+  theme(strip.text.x = element_text(size = 10,color= "black"))
+
+```
+
+```{r Cattell3, echo=FALSE, fig.cap="Effect of subgroup sampling rate match with distributional form on population  misrepresentation.",fig.height=4.5, fig.width=6.5}
+
+ggplot(combo, aes(x=r.p, y=PPSU)) + 
+  geom_point(alpha=1/25,size=1.5) + 
+  xlim(-1.0, 1.0) + 
+  ylim(0, .3) + 
+  xlab("Cattell's Profile Similarity Coefficient rp") + 
+  ylab("Misrepresentation") +
+  theme(panel.background = element_rect(fill = "transparent", color = "#CCCCCC"),
+        panel.grid.major.y = element_line(color = "grey80")) + 
+  scale_colour_gradient() +
+  geom_smooth(method='loess', color="red",size=1/3) +
+  theme(axis.title.x = element_text(size = 8,color = "black")) +
+  theme(axis.text.x = element_text(size = 8, color = "black")) +
+  theme(axis.title.y = element_text(size = 8,color = "black")) +  
+  theme(axis.text.y = element_text(size = 8,color = "black")) +
+  facet_wrap(~Condition) +
+  theme(strip.text.x = element_text(size = 10,color= "black"))
+
+poly <- lm(PPSU ~ Condition, copycombo2)
+poly1 <- lm(PPSU ~ Condition + r.p, copycombo2)
+poly2 <- lm(PPSU ~ Condition + r.p + I(r.p^2), copycombo2)
+
+firstpoly <- anova(poly,poly1)
+secondpoly <- anova(poly1,poly2)
+
+lm.1 <- summary(poly)$r.squared       ## was rendering odd in inline script
+lm.2 <- summary(poly1)$r.squared
+lm.3 <- summary(poly2)$r.squared
+
+```
+
+```{r Overall4, echo=FALSE, fig.cap="Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.",fig.height=4.5, fig.width=6.5}
+
+combo.fig4 <- data.frame(Misrepresentation=numeric(), 
+                        Condition=factor(levels = c("Condition 1","Condition 2","Condition 3","Condition 4",
+                                                    "Condition 5","Condition 6","Condition 7","Condition 8")),
+                        Type=factor(levels = c("Misrepresentation before applying weighting",
+                                               "Misrepresentation after applying weighting")))
+
+combo.fig4[c(1:32768),c(1:2)] <- combo[c(1:32768),c(14,2)]
+combo.fig4[c(1:32768),3]   <- "Misrepresentation before applying weighting"
+combo.fig4[c(32769:65536),c(1:2)] <- combo[c(1:32768),c(15,2)]
+combo.fig4[c(32769:65536),3]   <- "Misrepresentation after applying weighting"
+
+combo.fig4 <- summarySE(combo.fig4, measurevar="Misrepresentation", groupvars=c("Type","Condition"))
+
+ggplot(combo.fig4, aes(x=Condition, y=Misrepresentation, fill=Type)) + 
+  xlab("Simulation Conditions") + 
+  ylab("Mean Misrepresentation") +
+  scale_y_continuous(limits = c(0, .15), breaks=seq(0,.15, by =.01)) + 
+  geom_bar(position=position_dodge(), stat="identity", colour="black") +
+  geom_errorbar(aes(ymin=Misrepresentation-sd,ymax=Misrepresentation+sd),
+                    width=.2,position=position_dodge(.9)) +
+  scale_fill_manual(values=c("#FFFFFF","#999999")) +
+  theme(legend.justification = c(0,1), 
+        legend.position = c(.1,.97),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 8,colour = "black"),
+        legend.background = element_rect(fill="transparent")) +
+  theme(axis.title.x = element_text(size = 8,colour = "black")) + 
+  theme(axis.title.y = element_text(size = 8,colour = "black")) +  
+  theme(axis.text.x = element_text(size = 8,colour = "black")) +
+  theme(axis.text.y = element_text(size = 8,colour = "black")) +
+  theme(panel.background = element_rect(fill = "transparent"),
+        panel.border = element_rect(colour = "grey80", fill=NA, size=0.5),
+        panel.grid.major.y = element_line(colour = "grey80"))
+
+```
+
+```{r Together5, echo=FALSE, fig.cap="Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 1 through 3).",fig.height=7, fig.width=6.5, include=FALSE}
+
+## deleted from paper 6/15 because of seeming redundancy with Figure 2
+
+combo.fig5 <- combo.passive[,c(2,14,15,22)]
+combo.fig5 <- melt(combo.fig5, id.vars=c("Condition","SD"), variable.name="type", value.name="difvalue")
+
+rownum <- nrow(combo.fig5)/2
+
+for (i in 1:rownum){
+  combo.fig5$type2[i] <- "Before applying weighting"
+  combo.fig5$type2[i+rownum] <- "After applying weighting"
+}
+
+rm(rownum,i)  #delete extraneous objects
+
+xlab <- expression('SD Index')
+
+ggplot(combo.fig5, aes(x=SD, y=difvalue, color=Condition)) + 
+  geom_point(alpha=1/2,size=1.5)+ 
+  xlim(0,.2) + 
+  ylim(0,.4) + 
+  xlab("SD Index") + 
+  ylab("Misrepresentation") +
+  #geom_jitter(width=.03) +
+  theme(panel.background = element_rect(fill = "transparent", colour = "#CCCCCC"),
+        panel.grid.major.y = element_line(colour = "grey80")) + 
+  theme(axis.title.x = element_text(size = 8,colour = "black")) +  
+  theme(axis.title.y = element_text(size = 8,colour = "black")) +  
+  theme(axis.text.x = element_text(size = 8,colour = "black")) +
+  theme(axis.text.y = element_text(size = 8,colour = "black")) +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(size = 8, colour = "black"),
+        legend.background = element_rect(fill="transparent")) +
+  #geom_vline(xintercept=.025) + 
+  scale_colour_brewer() + 
+  annotate("text", x=.00, y=.35, label="Passive", color = "black", size = 3) +
+  annotate("text", x=.20, y=.35, label="Active", color = "black", size = 3) +
+  geom_smooth(method=lm, se=FALSE, colour="red", size = 1/3) +
+  facet_wrap(~type2, nrow=2) +
+  theme(strip.text.x = element_text(size=10,colour="black"))
+
+```
+
+```{r Together6, echo=FALSE, fig.cap="Presence (or lack) of error in unweighted and weighted sample estimates across passive and active forms of nonresponse (Conditions 4 through 8).",fig.height=7, fig.width=6.5, include=FALSE}
+
+combo.fig6 <- combo.active[,c(2,14,15,22)]
+combo.fig6 <- melt(combo.fig6, id.vars=c("Condition","SD"), variable.name="type", value.name="difvalue")
+
+rownum <- nrow(combo.fig6)/2
+
+for (i in 1:rownum){
+  combo.fig6$type2[i] <- "Before applying weighting"
+  combo.fig6$type2[i+rownum] <- "After applying weighting"
+}
+
+rm(rownum,i)  #delete extraneous objects
+
+xlab <- expression('SD Index')
+
+ggplot(combo.fig6, aes(x=SD, y=difvalue, color=Condition)) + 
+  geom_point(alpha=1/2,size=1.5)+ 
+  xlim(0,.2) + 
+  ylim(0,.4) + 
+  xlab("SD Index") + 
+  ylab("Misrepresentation") +
+  #geom_jitter(width=.03) +
+  theme(panel.background = element_rect(fill = "transparent", colour = "#CCCCCC"),
+        panel.grid.major.y = element_line(colour = "grey80")) + 
+  theme(axis.title.x = element_text(size = 8,colour = "black")) +  
+  theme(axis.title.y = element_text(size = 8,colour = "black")) +  
+  theme(axis.text.x = element_text(size = 8,colour = "black")) +
+  theme(axis.text.y = element_text(size = 8,colour = "black")) +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(size = 8, colour = "black"),
+        legend.background = element_rect(fill="transparent")) +
+  #geom_vline(xintercept=.025) + 
+  scale_colour_brewer() + 
+  annotate("text", x=.00, y=.35, label="Passive", color = "black", size = 3) +
+  annotate("text", x=.20, y=.35, label="Active", color = "black", size = 3) +
+  geom_smooth(method=lm, se=FALSE, colour="red", size = 1/3) + 
+  facet_wrap(~type2, nrow=2) +
+  theme(strip.text.x = element_text(size=10,colour="black"))
+
+```
+
+
+## Role of nonresponse form
+
+```{r, correcting.51}
+## just trying to correct the ".51" estimate in the below paragraph - 1/10/24
+
+onlyeight <- combo[ which(combo$Condition == "Condition 8"), ]
+onlyeight2 <- onlyeight[ which(onlyeight$SD > 0.154 & onlyeight$SD < 0.156),]
+
+paralleleight <- onlyeight[ which(onlyeight$cellrate.ma == .54 &
+                                    onlyeight$cellrate.mb == .54 &
+                                    onlyeight$cellrate.fa == .81 &
+                                    onlyeight$cellrate.gb == .81), ]
+
+wrongeight <- onlyeight[ which(onlyeight$cellrate.ma == .54 &
+                                    onlyeight$cellrate.mb == .81 &
+                                    onlyeight$cellrate.fa == .54 &
+                                    onlyeight$cellrate.gb == .81), ]
+## Note - looks like 7 & 8 are mislabeled - not a huge deal just reporting condition 8 results consistent with mislabeling in combo object
+```
+
+```{r CattelExplain, fig.cap="Allocation of response rates relative to underlying distributional form and its impact on population misrepresentation (need to think through hi/lo given Dr Robinsons thoughts)"}
+
+cattelexample <- data.frame(
+  rr = c(.81,.81,.54,.54,.6,.75,.6,.75),
+  group = as.factor(c("Male.A","Male.B","Female.A","Female.B","Male.A","Male.B","Female.A","Female.B")),
+  Impact = as.factor(c("Low","Low","Low","Low","High","High","High","High")),
+  image=c("posskew.png","posskew.png","negskew.png","negskew.png","posskew.png","posskew.png","negskew.png","negskew.png")
+  )
+
+ggplot(cattelexample, aes(x=group, y=rr, group=Impact)) + 
+  geom_line(aes(linetype=Impact)) +
+#  geom_point() + 
+  ylim(.5, .9) + 
+  xlab("Sampled Element") + 
+  ylab("Response Rate") +
+  theme(panel.background = element_rect(fill = "transparent", color = "#CCCCCC"),
+        panel.grid.major.y = element_line(color = "grey80")) + 
+  scale_colour_gradient() +
+  theme(axis.title.x = element_text(size = 8,color = "black")) +
+  theme(axis.text.x = element_text(size = 8, color = "black")) +
+  theme(axis.title.y = element_text(size = 8,color = "black")) +  
+  theme(axis.text.y = element_text(size = 8,color = "black")) +
+  ggimage::geom_image(
+    aes(image = image),
+    size = 0.2
+  )
+
+```
+
+The systematic patterns of heteroskedasticity of the Figure \@ref(fig:SDForm2) scatterplots should also be noted. There are *active nonresponse* scenarios in which no error is present (see, for example, the lower right-hand portions of conditions 4 through 8 where discrepancy estimates of "0" persist at multiple points along the passive-active x-axis). These circumstances are simulated conditions within which the response rates "parallel" the *population distributional form*. For example, in Condition Eight, the distributional forms across populations were: $Positive Skew_{Male(A)}$, $Positive Skew_{Male(B)}$, $Negative Skew_{Female(A)}$, $Negative Skew_{Female(B)}$. Response rates that "mirror" distributional patterns in extreme cases of active nonresponse (e.g., SD = .156; 54%~Male(A)~, 54%~Male(B)~, 81%~Female(A)~, 81%~Female(B)~) result in effectively zero error in the population mean approximation (average discrepancy = `r mean(wrongeight$PPSU)`, *SD* = `r sd(wrongeight$PPSU)`). Alternatively, when the response rates are inverted for the SD=.156 cases, (e.g., 54%~Male_A~, 81%~Male_B~, 54%~Female_A~, 81%~Female_B~), there is substantial error in approximation (average discrepancy = `r mean(paralleleight$PPSU)`, SD = `r sd(paralleleight$PPSU)`). Here, it is not merely response rate or form that is associated with biased sample estimates, but rather the nature of response rate relative to existing attitudinal differences.[^anotherfootnote] See Figure \@ref(fig:CattelExplain) for placeholder explanation.
+
+[^anotherfootnote]: Don't think this is correct - maybe frame: "sometimes the active non-response is non-troublesome - when it fully parallels the distributional proportions (?)" $\leftarrow$ still confusing. Looked at with Yang 3/1/24 and still confused - maybe leave in for reviewers to note and question.
+
+To further expand upon this *attitudinal form/pattern of nonresponse* interplay, the discrepancies between population constituency and sampling proportions were additionally evaluated through the lens of Cattell's profile similarity index [$r_p$, @cattell_r_1949; @cattell_taxonometric_1966]. $r_p$ is sensitive to discrepancies in profile shape (pattern across profile components), elevation (average component score), and scatter (sum of individual components' deviation from the elevation estimate. Here, the profile similarity index references the relationship between the response rates (NEED YANG TO VERIFY - THINK THIS IS SSmale;SSfemale;SSdepta;SSdeptb from `combo` object) and sample sizes (cellrate.ma;cellrate.mb;cellrate.fa;cellrate.gb) across experimental *cells*. For example, VERIFY BEFORE CLARIFYING HERE. Figure \@ref(fig:Cattell3) demonstrates the pattern of unweighted sample mean deviation (from the population parameter) when this index is taken into consideration. Specifically, Figure \@ref(fig:Cattell3) demonstrates a more pronounced *form of* nonresponse association when underlying attitudinal distributions evidence group differences (e.g., incrementally across the 8 specified conditions), and in these scenarios, active nonresponse is shown to have a fairly large effect on error within the sample estimate (as well as systematically increasing degrees of  heteroskedasticity paralleling the Cattell index; omnibus  Breusch-Pagan [across conditions] = 3177.2, *p* < .001). The curvilinear nature of these functions was estimated via hierarchical polynomial regression (excluding conditions 1, 2, and 3), with misrepresentation exhibiting a linear association across condition ($R^2$ = `r lm.1`, *p* < .001) as well as incrementally across the Cattell index ($\Delta{R^2}$ = `r lm.2 - lm.1`, *p* < .001), and also exhibiting an incremental polynomial effect ($\Delta{R^2}$ = `r lm.3 - lm.2`, *p* < .001).
+
+To further elaborate this point, consider, for example, Condition 4 as presented in Table \@ref(tab:Tab1). Here, three groups are characterized by similar distributions of attitudes (normally distributed) and one, Female.B, is characterized by negatively skewed attitudes. The greatest unweighted error here arises from sampling scenarios in which there are many Female.B (e.g., in our specifications, 6,400) and fewer males and Department A females[^4], but the female.b exhibit a much lower response rate (e.g., 20%) than do other groups, who respond at a high rate (e.g., 80%). That is, it is not merely response rate, but response rate within these identifiable groups, and whether or not those response rate differences parallel underlying attitudinal differences that drives sample misrepresentation.
+
+[^4]: Because of the "marginal" versus "cell" specifications of population constituencies, our most extreme example here necessarily results in 400 Male.A's, 1,600 Male.B's, and 1,600 Female.A's. This was a decision based on keeping the population N's at 10,000 and certainly more extreme population constituency combinations could be examined in future like-minded explorations.
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "simulation paper references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
+
