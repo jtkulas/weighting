@@ -1,0 +1,7 @@
+Yang & Kulas meeting (12/6) agenda items:
+
+1. Forward reference Taris & Schreurs (2007) for articles that state: "different patterns of nonresponse (across subgroups) should be taken as an indication of active non-response within (some of) those groups". Our simulation operationalization of active nonresponse is based on this notion, but we do not have empirical support for doing so (12/5/24)
+
+Taris, T. W., & Schreurs, P. J. (2007). How may nonresponse affect findings in organizational surveys? The tendency-to-the-positive effect. International Journal of Stress Management, 14(3), 249
+
+2. Decolorize Figure 1 (hatch marks or gray scale if possible)
