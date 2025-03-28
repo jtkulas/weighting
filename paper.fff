@@ -1,0 +1,52 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{paper_files/figure-latex/example1-1.pdf}
+\caption{\label{fig:example1}Visual demonstrating terms used to describe population elements.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{paper_files/figure-latex/ResponseRate1-1.pdf}
+\caption{\label{fig:ResponseRate1}Relationship between total response rate and misrepresentation.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{paper_files/figure-latex/SDForm2-1.pdf}
+\caption{\label{fig:SDForm2}Relationship between nonresponse form and misrepresentation.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{paper_files/figure-latex/Cattell3-1.pdf}
+\caption{\label{fig:Cattell3}Effect of subgroup sampling rate match with distributional form on population misrepresentation.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{paper_files/figure-latex/Overall4-1.pdf}
+\caption{\label{fig:Overall4}Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{paper_files/figure-latex/CattelExplain-1.pdf}
+\caption{\label{fig:CattelExplain}Allocation of response rates relative to underlying distributional form and its impact on population misrepresentation (need to think through hi/lo given Dr Robinsons thoughts)}
+\end{figure*}
