@@ -30,7 +30,7 @@
 
 \centering
 \includegraphics{paper_files/figure-latex/Cattell3-1.pdf}
-\caption{\label{fig:Cattell3}Effect of subgroup sampling rate match with distributional form on population misrepresentation.}
+\caption{\label{fig:Cattell3}Effect of subgroup sampling rate match with population constituency on point estimate misrepresentation.}
 \end{figure*}
 \efloatseparator
  
@@ -48,5 +48,5 @@
 
 \centering
 \includegraphics{paper_files/figure-latex/CattelExplain-1.pdf}
-\caption{\label{fig:CattelExplain}Allocation of response rates relative to underlying distributional form and its impact on population misrepresentation (need to think through hi/lo given Dr Robinsons thoughts)}
+\caption{\label{fig:CattelExplain}Allocation of response rates relative to underlying distributional form and consequential association with population misrepresentation}
 \end{figure*}
