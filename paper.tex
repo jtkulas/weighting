@@ -1,10 +1,12 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
+  english,
   man,mask]{apa7}
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -35,30 +37,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\usepackage{graphicx}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-% Set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
-\ifLuaTeX
-  \usepackage{luacolor}
-  \usepackage[soul]{lua-ul}
-\else
-  \usepackage{soul}
-\fi
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
 \makeatletter
 \ifx\paragraph\undefined\else
@@ -82,6 +60,27 @@
   \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 \makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+  \usepackage{luacolor}
+  \usepackage[soul]{lua-ul}
+\else
+  \usepackage{soul}
+\fi
 % definitions for citeproc citations
 \NewDocumentCommand\citeproctext{}{}
 \NewDocumentCommand\citeproc{mm}{%
@@ -120,10 +119,15 @@
 \else
 \usepackage[bidi=default]{babel}
 \fi
-\babelprovide[main,import]{english}
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage[english]{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -184,11 +188,10 @@
 \makeatletter
 \xapptocmd\appendix
   {\xapptocmd\section
-    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi: #1}}
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
     {}{\InnerPatchFailed}%
   }
 {}{\PatchFailed}
-\makeatother
 \keywords{Survey methodology, sample weighting, nonresponse, response rate}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
@@ -201,9 +204,6 @@
 \linenumbers
 \usepackage{csquotes}
 \raggedbottom
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -299,7 +299,7 @@ We address our research questions within a simulated fictionalized context of or
 
 \begin{figure}
 \centering
-\includegraphics{paper_files/paper_files/figure-latex/example1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/example1-1.pdf}}
 \caption{\label{fig:example1}Visual demonstrating terms used to describe population elements.}
 \end{figure}
 
@@ -430,29 +430,29 @@ The operationalizations of passive and active forms of nonresponse retained here
 
 \begin{figure}
 \centering
-\includegraphics{paper_files/paper_files/figure-latex/ResponseRate1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/ResponseRate1-1.pdf}}
 \caption{\label{fig:ResponseRate1}Relationship between total response rate and misrepresentation.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{paper_files/paper_files/figure-latex/SDForm2-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/SDForm2-1.pdf}}
 \caption{\label{fig:SDForm2}Relationship between nonresponse form and misrepresentation.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{paper_files/paper_files/figure-latex/Cattell3-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/Cattell3-1.pdf}}
 \caption{\label{fig:Cattell3}Effect of subgroup sampling rate match with population constituency on point estimate misrepresentation.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{paper_files/paper_files/figure-latex/Overall4-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/Overall4-1.pdf}}
 \caption{\label{fig:Overall4}Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.}
 \end{figure}
 
-In total, we generated 327.68 million samples (4,096 unique combinations of response rate and population constituencies across gender and department, simulated 10,000 times each across the eight Table \ref{tab:Tab1} conditions). Each of these samples was comprised of, on average, \emph{n} = 5,625, collectively representing an experiment-wide simulated \emph{N} of 1.8432 trillion. For each individual simulation, weights were applied iteratively to the data at the two marginal (variable) levels via raking, and were estimated via the \emph{anesrake} package (Pasek, 2018) in R version 4.5.0 (2025-04-11 ucrt).
+In total, we generated 327.68 million samples (4,096 unique combinations of response rate and population constituencies across gender and department, simulated 10,000 times each across the eight Table \ref{tab:Tab1} conditions). Each of these samples was comprised of, on average, \emph{n} = 5,625, collectively representing an experiment-wide simulated \emph{N} of 1.8432 trillion. For each individual simulation, weights were applied iteratively to the data at the two marginal (variable) levels via raking, and were estimated via the \emph{anesrake} package (Pasek, 2018) in R version 4.3.1 (2023-06-16 ucrt).
 
 We were most interested in comparing the extent to which unweighted (aggregated responses absent raking) and weighted (aggregated subsequent to raking) sample means approximated the population values across our controlled specifications of response rate, nonresponse form, and attitudinal distribution. Population means were extracted from each iteration, as all simulations resulted in unique populations. ``Misrepresentation'' between sample and population was operationalized as: 1) the discrepancies between the population and both weighted and unweighted sample means, as well as, 2) the averaged deviation of these discrepancies from the population mean (discrepancy in the ``mean'' of the means is bias, dispersion about the ``mean'' of the means is error). If the average weighted sample mean was closer to the true population mean, relative to the unweighted one, then the weighting was deemed beneficial.\footnote{Do we want to do a little more with the dispersion concept? Currently it's underreported in the Results (but stated here that it is something we look at). If so, do we say that the weighting was beneficial also if the dispersion (error) was relatively small? Probably need Dr.~Robinson to weigh in on this one}
 
@@ -470,7 +470,7 @@ Research question 2 asked what role the \emph{form} of nonresponse (passive vers
 
 \begin{figure}
 \centering
-\includegraphics{paper_files/paper_files/figure-latex/CattelExplain-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/CattelExplain-1.pdf}}
 \caption{\label{fig:CattelExplain}Allocation of response rates relative to underlying distributional form and consequential association with population misrepresentation}
 \end{figure}
 
