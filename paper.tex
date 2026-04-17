@@ -1,12 +1,10 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
-  english,
   man,mask]{apa7}
-\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -37,6 +35,30 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+  \usepackage{luacolor}
+  \usepackage[soul]{lua-ul}
+\else
+  \usepackage{soul}
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
 \makeatletter
 \ifx\paragraph\undefined\else
@@ -60,27 +82,6 @@
   \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 \makeatother
-\usepackage{graphicx}
-\makeatletter
-\newsavebox\pandoc@box
-\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
-  \sbox\pandoc@box{#1}%
-  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
-  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
-  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
-  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
-  \else\usebox{\pandoc@box}%
-  \fi%
-}
-% Set default figure placement to htbp
-\def\fps@figure{htbp}
-\makeatother
-\ifLuaTeX
-  \usepackage{luacolor}
-  \usepackage[soul]{lua-ul}
-\else
-  \usepackage{soul}
-\fi
 % definitions for citeproc citations
 \NewDocumentCommand\citeproctext{}{}
 \NewDocumentCommand\citeproc{mm}{%
@@ -119,15 +120,10 @@
 \else
 \usepackage[bidi=default]{babel}
 \fi
+\babelprovide[main,import]{english}
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
-\ifLuaTeX
-  \usepackage[english]{selnolig} % disable illegal ligatures
-\fi
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -188,10 +184,11 @@
 \makeatletter
 \xapptocmd\appendix
   {\xapptocmd\section
-    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi: #1}}
     {}{\InnerPatchFailed}%
   }
 {}{\PatchFailed}
+\makeatother
 \keywords{Survey methodology, sample weighting, nonresponse, response rate}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
@@ -204,6 +201,9 @@
 \linenumbers
 \usepackage{csquotes}
 \raggedbottom
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -238,7 +238,7 @@ Post-stratification weighting is a common procedure used in public opinion polli
 \begin{document}
 \maketitle
 
-Akin to differential variable weighting (for instance: a) construct indicators within a multi-item assessment scale {[}aka factor loadings{]}, or b) predictors within a selection system {[}aka regression weights{]}), sample weighting alters the proportional contributions of \emph{individual respondents} within a data set. Some respondents' responses are assigned greater relative contribution and others are assigned less. This practice is commonplace in the summary of general population polling data reflecting, for example, elections and politics (e.g., Rivers \& Bailey, 2009), prevalence rates of psychological disorders (e.g., Kessler et al., 2009), or feelings of physical safety (e.g., Quine \& Morrell, 2008). It is also seemingly in the periphery of awareness and interest within the published organizational surveying literature (see, for example, Kulas et al., 2016; Landers \& Behrend, 2015; Tett et al., 2014).
+Akin to differential variable weighting (for instance: a) construct indicators within a multi-item assessment scale {[}aka factor loadings{]}, or b) predictors within a selection system {[}aka regression weights{]}), sample weighting alters the proportional contribution of \emph{individual respondents} within a data set. Some respondents' responses are assigned greater relative contribution and others are assigned less. This practice is commonplace in the summary of general population polling data reflecting, for example, elections and politics (e.g., Rivers \& Bailey, 2009), prevalence rates of psychological disorders (e.g., Kessler et al., 2009), or feelings of physical safety (e.g., Quine \& Morrell, 2008). It is also seemingly in the periphery of awareness and interest within the published organizational surveying literature (see, for example, Kulas et al., 2016; Landers \& Behrend, 2015; Tett et al., 2014).
 
 We speculate that this form of statistical remediation is gaining research interest in the organizational surveying research domain, at least in part, because industrial psychologists are keenly aware that response rates within organizational surveying applications have been trending downward (see, for example, Anseel et al., 2010; Rogelberg \& Stanton, 2007). With lower response rates, surveyors are confronted with heightened levels of scrutiny because, historically, higher locally realized response rates have been interpreted as indicators of data quality (e.g., Anseel et al., 2010; Cycyota \& Harrison, 2002, 2006; Frohlich, 2002). The orientation of this presentation, however, is that although response rate is a commonly referenced proxy of survey quality, it is not response rate but rather sample representativeness that should be the primary focus of concern for survey specialists (see, for example, Cook et al., 2000; Krosnick, 1999). Representativeness can of course be ``hurt'' by low response rates, but the relationship between these two survey concepts is by no means exact (e.g., Curtin et al., 2000; Keeter et al., 2006; Kulas et al., 2017). Stated differently, a high response rate is neither a sufficient nor necessary condition for representative population sampling.\footnote{Statistical benefits exist that are commonly attributed to higher response rates, such as greater power. These benefits, however, do not originate from response rate, but rather its consequence: larger \emph{n}. Our presentation reflects the fact that greater power (and/or, relatedly, smaller confidence intervals) may in fact foster a false sense of confidence regarding ``data quality''. Primarily for this reason, we stress that the methodological/statistical concepts of response rate, sample size, and power should be fully disentangled from the principle of representativeness, and the importance of these dissociations drives the central theme of the current paper.}
 
@@ -258,7 +258,7 @@ The more commonly encountered form of organizational nonresponse appears to be p
 
 \section{Sample Weighting - a Brief Overview}\label{sample-weighting---a-brief-overview}
 
-Within public opinion polling contexts, when realized sample constituencies (e.g., 44\% male - by tradition from \emph{carefully-constructed} and \emph{randomly sampled} data frames)\footnote{These important sampling concepts are very carefully attended to within public opinion polling contexts. Conversely, within organizational surveying traditions, these considerations are not commonly acknowledged, at least explicitly within the published literature. The weighting procedure presented in the current manuscript remediates bias regardless of the methodological source, but is dependent on accurate ``census'' population constituency estimates.} are compared against census estimates of population parameters (e.g., 49\% male), weights are applied to the sample in an effort to remediate the relative proportional under- or over-sampling. This is because, if the broader populations from which the under- or over-represented groups are sampled differ along surveyed dimensions (e.g., males, within the population, are \emph{less likely to vote for Candidate X} than are women), then unweighted aggregate statistics (of, for example, projected voting results) will misrepresent the true population parameter. This remedial application of sample weights should also be considered an option for researchers pursuing answers to analagous organizational pollings such as: ``What is the mood of the employees?'' This is because focused queries such as this are of course covertly complex - implicit in the question is a focus not on survey results, but rather the broader employee population. Acknowledging the appropriate object of attribution is of course important, because the next step (after gauging the mood of the surveyed respondents) is \emph{doing something} about it. Weighting may be a procedural option for organizational surveyors to credibly transition a bit closer from, ``What do the survey results say''? to ``What do the employees feel''?
+Within public opinion polling contexts, when realized sample constituencies (e.g., 44\% male - by tradition from \emph{carefully-constructed} and \emph{randomly sampled} data frames)\footnote{These important sampling concepts are very carefully attended to within public opinion polling contexts. Conversely, within organizational surveying traditions, these considerations are not commonly acknowledged, at least explicitly within the published literature. The weighting procedure presented in the current manuscript remediates bias regardless of the methodological source, but is dependent on accurate ``census'' population constituency estimates.} are compared against census estimates of population parameters (e.g., 49\% male), weights are applied to the sample in an effort to remediate the relative proportional under- or over-sampling. This is because, if the broader populations from which the under- or over-represented groups are sampled differ along surveyed dimensions (e.g., males, within the population, are \emph{less likely to vote for Candidate X} than are women), then unweighted aggregate statistics (of, for example, projected voting results) will misrepresent the true population parameter. This remedial application of sample weights should also be considered an option for researchers pursuing answers to analagous organizational pollings such as: ``What is the mood of the employees?'' This is because focused queries such as this are of course covertly complex - implicit in the question is a focus not on survey results, but rather the broader employee population. Acknowledging the appropriate object of attribution is crucially important, because the next step (after gauging the mood of the surveyed respondents) is \emph{doing something} about it. Weighting may be a procedural option for organizational surveyors to credibly transition a bit closer from, ``What do the survey results say''? to ``What do the employees feel''?
 
 \subsection{Procedural application}\label{procedural-application}
 
@@ -289,9 +289,9 @@ Possible strata relevant for organizational survey weighting include: branch, fu
 
 \emph{Research question 2}: What role does nonresponse form (passive versus active) play in population misrepresentation?
 
-\emph{Research question 3}: What impact does the application of weights have on both biased\footnote{We have to be careful about the use of the term ``bias'' - either very carefully distinguish between error and bias or just avoid use of the term altogether. Perhaps Dr.~Robinson can help here.} and unbiased sample estimates?
+\emph{Research question 3}: What impact does the application of weights have on both biased and unbiased sample estimates?
 
-We view these questions as being analogous to similar questions asked and answered regarding differential \emph{variable} weighting within the broader applied psychological disciplines. Just as, for example, there has been debate regarding the merits of differential versus unit variable weighting in a selection context or aggregate scale score definition (e.g., Bobko et al., 2007; Wainer, 1976), we propose that a similar consideration is appropriate with persons, and therefore compare and contrast unit versus proportional sample weighting.
+We view these questions as being analogous to similar questions asked and answered regarding differential \emph{variable} weighting within the broader applied psychological disciplines. Just as, for example, there has been debate regarding the merits of differential versus unit variable weighting in a selection context or aggregate scale score definition (e.g., Bobko et al., 2007; Wainer, 1976), we propose that a similar consideration is appropriate with \emph{persons}, and therefore compare and contrast unit versus proportional sample weighting.
 
 \section{Methods}\label{methods}
 
@@ -299,11 +299,11 @@ We address our research questions within a simulated fictionalized context of or
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/example1-1.pdf}}
-\caption{\label{fig:example1}Visual demonstrating terms used to describe population elements.}
+\includegraphics{paper_files/paper_files/figure-latex/example1-1.pdf}
+\caption{\label{fig:example1}Visual representation of terms used to describe population elements as well as (N's).}
 \end{figure}
 
-In order to represent different proportions of relative constituency (for example, more Females than Males or more Department A workers than Department B), we iterated population characteristics at marginal levels (gender and department) starting at 20\% (and 80\%) with increments and corresponding decriments of 20\%. For example, if Males accounted for 20\% of the simulated population, then Females were 80\%; also if respondents in Department A represented 60\% of a population, then 40\% were in Department B. Marginal constituencies were therefore realized at all combinations (across the two variables) of 20\% and 80\%, 40\% and 60\%, 60\% and 40\%, and 80\% and 20\%. This resulted in population \emph{cell} constituencies (e.g., Male.A, Female.A, Male.B, Female.B) as low as 400 and as high as 6,400 - see Figure \ref{fig:example1} for further clarification of our ``cell'' and ``margin'' terminology and relative constituency specification.
+In order to represent different proportions of relative constituency (for example, more Females than Males or more Department A workers than Department B), we iterated population characteristics at marginal levels (gender and department) starting at 20\% (and 80\%) with increments and corresponding decriments of 20\%. For example, if Males accounted for 20\% of the simulated population, then Females were 80\%; also if respondents in Department A represented 60\% of a population, then 40\% were in Department B. Marginal constituencies were therefore realized at all combinations (across the two variables) of 20\% and 80\%, 40\% and 60\%, 60\% and 40\%, and 80\% and 20\%. This resulted in population \emph{cell} constituencies (e.g., Male.A, Female.A, Male.B, Female.B) as low as 400 and as high as 6,400 - see Figure \ref{fig:example1} for further explication of our ``cell'' and ``margin'' terminology and relative constituency specification.
 
 \begin{table}[tbp]
 
@@ -356,9 +356,9 @@ Condition & Distributional Shape & mu & Dept A & Dept B & Dept A & Dept B & Bias
 
 Each population cell was characterized by an attitudinal distribution in one of three different possible forms: normal, positively skewed, or negatively skewed. These distributional forms were retained in an attempt to model similarities and discrepancies in construct standing (e.g., commitment, satisfaction, or engagement) across localized respondent groupings. The normal distribution exhibited, on average, a mean of 3.0 whereas the skewed distributions were characterized by average means of 2.0 and 4.0, respectively. In total, eight crossings of distributional type across employee cross--categorization were specified (Table \ref{tab:Tab1} presents the combinations of these distributions). Note that these eight conditions are not exhaustive of all possible combinations of constituent groups and attitudinal distribution - we limited the simulations to combinations projected to collectively be most informative within the manipulated simulation parameters.
 
-Individual attitudes were randomly sampled from population distributions at the cell level (e.g., Male.A) without replacement. These response rates (methodologically within the simulation these could equally be conceptualized as \emph{sampling} rates) were specified at 10\% increments ranging from 60\% to 90\%, and these were fully iterated across each of our four marginal groups (Males, Females, Departments A and B). Our cell-level response rates therefore ranged from 36\% to 81\% - a range of rates that encompass reasonable real-world expectations according to the organizational surveying literature (e.g., Mellahi \& Harris, 2016; Werner et al., 2007). We therefore investigated error within the aggregate mean (e.g., grand mean aka total sample mean) attributable to different likelihoods of sample inclusion from constituent groups of different relative size and representing populations of different attitudinal distribution, but at response rates reasonably expected to exist in real-world organizational surveying contexts.
+Individual attitudes were randomly sampled from population distributions at the cell level (e.g., Male.A) without replacement. These response rates (methodologically within the simulation these could equally be conceptualized as \emph{sampling} rates) were specified at 10\% increments ranging from 60\% to 90\%, and these were fully iterated across each of our four marginal groups (Males, Females, Departments A and B). Resultant cell-level response rates ranged from 36\% to 81\% -- a range of rates that encompass reasonable real--world expectations according to the organizational surveying literature (e.g., Mellahi \& Harris, 2016; Werner et al., 2007). We therefore investigated error within the aggregate mean (e.g., grand mean aka total sample mean) attributable to different likelihoods of sample inclusion from constituent groups of different relative size and representing populations of different attitudinal distribution, but at response rates reasonably expected to exist in real-world organizational surveying contexts.
 
-It should be noted here that our operationalization of \emph{nonresponse form} utilizes consistency of response rate across sampled groups as reflecting passive nonresponse. There are several patterns of response that are therefore intended to represent sampling scenarios reflecting passive nonresponse across groups, \emph{regardless of response rate}. These are the scenarios in which all subgroups exhibit the same response rate (e.g., 36\%, 36\%, 36\%, and 36\%). All other combinations of response rate are focal paper operationalizations of active forms of nonresponse (e.g., not \emph{as reasonably} characterized as missing at random).
+It should be noted here that our operationalization of \emph{nonresponse form} utilizes consistency of response rate across sampled groups as reflecting passive nonresponse. There are several patterns of response that are therefore intended to represent sampling scenarios reflecting passive nonresponse across groups, \emph{regardless of response rate}. These are the scenarios in which all subgroups exhibit the same response rate (e.g., 36\%, 36\%, 36\%, and 36\%). All other combinations of response rate are focal paper operationalizations of active forms of nonresponse (e.g., ``something is different'' across groups and this is taken as an indication that responses are \emph{not as reasonably characterized} as passive missingness).
 
 \begin{lltable}
 
@@ -430,39 +430,39 @@ The operationalizations of passive and active forms of nonresponse retained here
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/ResponseRate1-1.pdf}}
+\includegraphics{paper_files/paper_files/figure-latex/ResponseRate1-1.pdf}
 \caption{\label{fig:ResponseRate1}Relationship between total response rate and misrepresentation.}
 \end{figure}
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/SDForm2-1.pdf}}
+\includegraphics{paper_files/paper_files/figure-latex/SDForm2-1.pdf}
 \caption{\label{fig:SDForm2}Relationship between nonresponse form and misrepresentation.}
 \end{figure}
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/Cattell3-1.pdf}}
+\includegraphics{paper_files/paper_files/figure-latex/Cattell3-1.pdf}
 \caption{\label{fig:Cattell3}Effect of subgroup sampling rate match with population constituency on point estimate misrepresentation.}
 \end{figure}
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/Overall4-1.pdf}}
+\includegraphics{paper_files/paper_files/figure-latex/Overall4-1.pdf}
 \caption{\label{fig:Overall4}Average absolute discrepancy (unweighted in white and weighted in grey) across the eight attitudinal conditions.}
 \end{figure}
 
-In total, we generated 327.68 million samples (4,096 unique combinations of response rate and population constituencies across gender and department, simulated 10,000 times each across the eight Table \ref{tab:Tab1} conditions). Each of these samples was comprised of, on average, \emph{n} = 5,625, collectively representing an experiment-wide simulated \emph{N} of 1.8432 trillion. For each individual simulation, weights were applied iteratively to the data at the two marginal (variable) levels via raking, and were estimated via the \emph{anesrake} package (Pasek, 2018) in R version 4.3.1 (2023-06-16 ucrt).
+In total, we generated 327.68 million samples (4,096 unique combinations of response rate and population constituencies across gender and department, simulated 10,000 times each across the eight Table \ref{tab:Tab1} conditions). Each of these samples was comprised of, on average, \emph{n} = 5,625, collectively representing an experiment-wide simulated \emph{N} of 1.8432 trillion. For each individual simulation, weights were applied iteratively to the data at the two marginal (variable) levels via raking, and were estimated via the \emph{anesrake} package (Pasek, 2018) in R version 4.5.0 (2025-04-11 ucrt).
 
-We were most interested in comparing the extent to which unweighted (aggregated responses absent raking) and weighted (aggregated subsequent to raking) sample means approximated the population values across our controlled specifications of response rate, nonresponse form, and attitudinal distribution. Population means were extracted from each iteration, as all simulations resulted in unique populations. ``Misrepresentation'' between sample and population was operationalized as: 1) the discrepancies between the population and both weighted and unweighted sample means, as well as, 2) the averaged deviation of these discrepancies from the population mean (discrepancy in the ``mean'' of the means is bias, dispersion about the ``mean'' of the means is error). If the average weighted sample mean was closer to the true population mean, relative to the unweighted one, then the weighting was deemed beneficial.\footnote{Do we want to do a little more with the dispersion concept? Currently it's underreported in the Results (but stated here that it is something we look at). If so, do we say that the weighting was beneficial also if the dispersion (error) was relatively small? Probably need Dr.~Robinson to weigh in on this one}
+We were most interested in comparing the extent to which unweighted (aggregated responses absent raking) and weighted (aggregated subsequent to raking) sample means approximated the population values across our controlled specifications of response rate, nonresponse form, and attitudinal distribution. Population means were extracted from each iteration, as all simulations resulted in unique populations. ``Misrepresentation'' between sample and population was operationalized as: 1) the discrepancies between the population and both weighted and unweighted sample means, as well as, 2) the averaged deviation of these discrepancies from the population mean (discrepancy in the ``mean'' of the means is bias, dispersion about the ``mean'' of the means is error). If the average weighted sample mean was closer to the true population mean, relative to the unweighted one, then the weighting was deemed beneficial.
 
 \section{Unweighted effects}\label{unweighted-effects}
 
 \subsection{Role of response rate}\label{role-of-response-rate}
 
-Research question 1 asked what singular effect response rate has on population misrepresentation. This is presented most concisely in Figure \ref{fig:ResponseRate1}, with \emph{moderate} response rates exhibiting the greatest degrees of misrepresentation across our simulated conditions. Note here again that conditions 1 through 3, which represent populations with similar distributions of attitude, do not exhibit misrepresentation regardless of response rate (\(\bar{d}_{Cond1}\) = 0.01, \(sd_{Cond1}\) = 0.00; \(\bar{d}_{Cond2}\) = 0.01, \(sd_{Cond2}\) = 0.00; \(\bar{d}_{Cond3}\) = 0.01, \(sd_{Cond3}\) = 0.00). These can be contrasted most particularly with conditions 6 (\(\bar{d}_{Cond6}\) = 0.05, \(sd_{Cond6}\) = 0.04), 7 (\(\bar{d}_{Cond7}\) = 0.07, \(sd_{Cond7}\) = 0.05), and 8 (\(\bar{d}_{Cond8}\) = 0.07, \(sd_{Cond8}\) = 0.05), which evidence considerable misrepresentation, particularly so at moderate response rates (the greatest degree of misrepresentation occurs with aggregate response rates ranging from roughly 40\% to 70\%)\footnote{Note that extreme overall rates (e.g., .36/.81) are necessarily associated with more passive forms of non-response as operationalized in the current paper. The ``middle''-most response rates are those most likely to be characterized by a mixture of both passive and active forms of non-response.}. Note also that all conditions exhibit circumstances where low and moderate response rates result in no misrepresentation.
+Research question 1 asked what isolated effect response rate has on population misrepresentation. This is presented most concisely in Figure \ref{fig:ResponseRate1}, with \emph{moderate} response rates exhibiting the greatest degrees of misrepresentation across our eight simulated conditions. Note here again that conditions 1 through 3, which represent populations with similar distributions of attitude, do not exhibit misrepresentation regardless of response rate (\(\bar{d}_{Cond1}\) = 0.01, \(sd_{Cond1}\) = 0.00; \(\bar{d}_{Cond2}\) = 0.01, \(sd_{Cond2}\) = 0.00; \(\bar{d}_{Cond3}\) = 0.01, \(sd_{Cond3}\) = 0.00). These can be contrasted most particularly with conditions 6 (\(\bar{d}_{Cond6}\) = 0.05, \(sd_{Cond6}\) = 0.04), 7 (\(\bar{d}_{Cond7}\) = 0.07, \(sd_{Cond7}\) = 0.05), and 8 (\(\bar{d}_{Cond8}\) = 0.07, \(sd_{Cond8}\) = 0.05), which evidence considerable misrepresentation, particularly so at moderate response rates (the greatest degree of misrepresentation occurs with aggregate response rates ranging from roughly 40\% to 70\%)\footnote{Note that extreme overall rates (e.g., .36/.81) are necessarily associated with more passive forms of non-response as operationalized in the current paper. The ``middle''-most response rates are those most likely to be characterized by a mixture of both passive and active forms of non-response.}. Note also that all conditions exhibit circumstances along the entire span of investigated response rates where no misrepresentation exists.
 
-Discrepancies in unweighted means between samples and populations -- regardless of response rate -- did exhibit differences across the 8 conditions (\(F_{(7,32,760)}\) = 2,938.50, \emph{p} \textless{} .001). Tukey's HSD implicated all contrasts other than between Conditions 1, 2, and 3 and also between Conditions 7 and 8. Retaining only Conditions 4 through 8, the relationship between response rate and sample/population discrepancy was estimated via hierarchical regression (step 1 = condition, step 2 = response rate, step 3 = squared response rate). In these analyses there was a significant but trivial linear response rate influence \emph{beyond} the effect of condition (\(\Delta{R^2}\) = 0.00; \(F\) = 12,073.49), with the polynomial response rate term further adding slightly to the discrepancy prediction (\(\Delta{R^2}\) = 0.02; \(F\) = 524.78). Collectively these results reflect inconsistent direct relationships between response rate and population misrepresentation -- a range of representative/error-filled estimates were encountered all along the response rate continuum. The next sections explore plausible determinants of these ranges of misrepresentation at identical rates of response.
+Discrepancies in unweighted means between samples and populations -- regardless of response rate -- did exhibit differences across the 8 conditions (\(F_{(7,32,760)}\) = 2,938.50, \emph{p} \textless{} .001). Tukey's HSD implicated all contrasts other than between Conditions 1, 2, and 3 and also between Conditions 7 and 8. Retaining only Conditions 4 through 8, the relationship between response rate and sample/population discrepancy was estimated via hierarchical regression (step 1 = condition, step 2 = response rate, step 3 = squared response rate). In these analyses there was a significant but trivial linear response rate influence \emph{beyond} the effect of condition (\(\Delta{R^2}\) = 0.00; \(F\) = 12,073.49), with the polynomial response rate term further adding slightly to the discrepancy prediction (\(\Delta{R^2}\) = 0.02; \(F\) = 524.78). Collectively these results reflect only very weak direct relationships between response rate and population misrepresentation -- a range of representative/error-filled estimates were encountered all along the response rate continuum. The next sections explore plausible determinants of these ranges of misrepresentation.
 
 \subsection{\texorpdfstring{Role of nonresponse \emph{form}}{Role of nonresponse form}}\label{role-of-nonresponse-form}
 
@@ -470,27 +470,21 @@ Research question 2 asked what role the \emph{form} of nonresponse (passive vers
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-latex/CattelExplain-1.pdf}}
+\includegraphics{paper_files/paper_files/figure-latex/CattelExplain-1.pdf}
 \caption{\label{fig:CattelExplain}Allocation of response rates relative to underlying distributional form and consequential association with population misrepresentation}
 \end{figure}
 
-The Figure \ref{fig:SDForm2} scatterplots also reveal patterned heteroskedasticity across the active nonresponse continuum. Similar to the response rate -- misrepresentation associations, there are \emph{active nonresponse} scenarios in which no misrepresentation occurs (see, for example, the lower right-hand portions of conditions 4 through 8 where discrepancy estimates of ``0'' persist at multiple points along the passive--active x-axis). These circumstances are simulated conditions within which the response rate patterns ``do not mirror'' the \emph{population distributional form}. For example, in Condition Eight, the distributional forms across populations were: \(Positive Skew_{Male(A)}\), \(Positive Skew_{Male(B)}\), \(Negative Skew_{Female(A)}\), \(Negative Skew_{Female(B)}\). Response rates that ``track along with'' distributional patterns, when also characterized by extreme cases of active nonresponse (e.g., SD = .156; 54\%\textsubscript{Male(A)}, 54\%\textsubscript{Male(B)}, 81\%\textsubscript{Female(A)}, 81\%\textsubscript{Female(B)}), result in \emph{substantial error} in the population mean approximation (average discrepancy = 0.16, \emph{SD} = 0.03). Alternatively, when the response rates are ``not aligned'' with distributional patterns for the SD=.156 cases, (e.g., 54\%\textsubscript{Male\_A}, 81\%\textsubscript{Male\_B}, 54\%\textsubscript{Female\_A}, 81\%\textsubscript{Female\_B}), there is very little error in approximation (average discrepancy = 0.00, SD = 0.00; See Figure \ref{fig:CattelExplain} for visual reference). Here, it is not simply response rate or form that is associated with biased sample estimates, but rather the nature of response rate relative to existing attitudinal differences.
+The Figure \ref{fig:SDForm2} scatterplots also reveal patterned heteroskedasticity across the active nonresponse continuum. Similar to the response rate -- misrepresentation results noted above, there exist \emph{active nonresponse} scenarios in which no misrepresentation occurs (see, for example, the lower right-hand portions of conditions 4 through 8 where discrepancy estimates of ``0'' persist at multiple points along the passive--active x--axis). These circumstances are simulated conditions within which the response rate patterns ``do not mirror'' the \emph{population distributional form}. For example, in Condition Eight, the distributional forms across populations were: \(Positive Skew_{Male(A)}\), \(Positive Skew_{Male(B)}\), \(Negative Skew_{Female(A)}\), \(Negative Skew_{Female(B)}\). Response rates that ``track along with'' distributional patterns, when also characterized by extreme cases of active nonresponse (e.g., SD = .156; 54\%\textsubscript{Male(A)}, 54\%\textsubscript{Male(B)}, 81\%\textsubscript{Female(A)}, 81\%\textsubscript{Female(B)}), result in \emph{substantial error} in the population mean approximation (average discrepancy = 0.16, \emph{SD} = 0.03). Alternatively, when the response rates are ``not aligned'' with distributional patterns for the SD=.156 cases, (e.g., 54\%\textsubscript{Male\_A}, 81\%\textsubscript{Male\_B}, 54\%\textsubscript{Female\_A}, 81\%\textsubscript{Female\_B}), there is very little error in approximation (average discrepancy = 0.00, SD = 0.00; See Figure \ref{fig:CattelExplain} for visual reference). Here, it is not simply response rate or form that is associated with biased sample estimates, but rather the nature of response rate relative to existing attitudinal differences.
 
 \subsubsection{Sampling/population patterns and impact of nonresponse}\label{samplingpopulation-patterns-and-impact-of-nonresponse}
 
-\begin{quote}
-need to change framing of this given the 4/18 revelation that the profiles are only reflecting sampling and population constituency associations
-\end{quote}
-
 To further expand upon this \emph{attitudinal form/pattern of nonresponse} interplay, the discrepancies between population constituency and sampling proportions were additionally evaluated through the lens of Cattell's profile similarity index (\(r_p\), Cattell, 1949; Cattell et al., 1966). \(r_p\) is sensitive to discrepancies in profile shape (pattern across profile components), elevation (average component score), and scatter (sum of individual components' deviation from the elevation estimate. Here, the profile similarity index references the relationship between the response rates and sample sizes across experimental \emph{cells}. For example, VERIFY BEFORE CLARIFYING HERE. Figure \ref{fig:Cattell3} demonstrates the pattern of unweighted sample mean deviation (from the population parameter) when this index is taken into consideration. Specifically, Figure \ref{fig:Cattell3} demonstrates a more pronounced \emph{form of} nonresponse association \st{when underlying attitudinal distributions evidence group differences (e.g., incrementally across the 8 specified conditions)} {[}??? CLARIFY{]}, and in these scenarios, active nonresponse is shown to have a fairly large effect on error within the sample estimate (as well as systematically increasing degrees of heteroskedasticity paralleling the Cattell index; omnibus Breusch-Pagan {[}across conditions{]} = 3177.2, \emph{p} \textless{} .001). The curvilinear nature of these functions was estimated via hierarchical polynomial regression (excluding conditions 1, 2, and 3), with misrepresentation exhibiting mean differences across condition (\(R^2\) = 0.15, \emph{p} \textless{} .001) as well as incrementally across the Cattell index (\(\Delta{R^2}\) = 0.31, \emph{p} \textless{} .001). The incremental polynomial effect was also present (\(\Delta{R^2}\) = 0.01, \emph{p} \textless{} .001).
-
-\textbf{SAME PATTERN = NEGATIVE CATTELL} - do a mock Cattell with Yang 4/11
 
 To further elaborate this point, consider, for example, Condition 4 as presented in Table \ref{tab:Tab1}. Here, three groups are characterized by similar distributions of attitudes (normally distributed) and one, Female.B, is characterized by negatively skewed attitudes. The greatest unweighted error here arises from sampling scenarios in which there are many Female.B (e.g., in our specifications, 6,400) and fewer males and Department A females\footnote{Because of the ``marginal'' versus ``cell'' specifications of population constituencies, our most extreme example here necessarily results in 400 Male.A's, 1,600 Male.B's, and 1,600 Female.A's. This was a decision based on keeping the population N's at 10,000 and certainly more extreme population constituency combinations could be examined in future like-minded explorations.}, but the female.b exhibit a much lower response rate (e.g., 20\%) than do other groups, who respond at a high rate (e.g., 80\%). That is, it is not merely response rate, but response rate within these identifiable groups, and whether or not those response rate differences parallel underlying attitudinal differences that drives sample misrepresentation.
 
 \section{Impact of weighting}\label{impact-of-weighting}
 
-Research question 3 was focused on the impact of weights on both biased (e.g., misrepresentative) and unbiased sample estimates\footnote{Come back to this phrasing after decision is made on RQ 3 wording (whether to avoid using the term bias or not).}. Figure \ref{fig:Overall4} provides a broad summary of the results across the eight different attitudinal distribution conditions, presenting the average absolute discrepancy from the population mean for the weighted and unweighted sample estimates. Conditions one through three demonstrate that, on average, the unweighted sample mean provides a good (unbiased) estimate of the population mean when the distributional form does not differ across constituent groups (e.g., the distributions of attitudes are of similar functional forms and locations for all constituent groups). This is regardless of form or extent of nonresponse. Additionally, weighting remediates deviations about the true mean in all five attitudinally discrepant conditions, even when substantive relative error exists in the unweighted estimate (e.g., the rightmost bars in Figure \ref{fig:Overall4}). Although the \emph{patterns} of unweighted sample mean discrepancies differed across conditions, all eight conditions exhibited similar omnibus effect (weighting ameliorating error wherever it arose in the unweighted statistic).
+Research question 3 was focused on the impact of weights on both biased and unbiased sample estimates. Figure \ref{fig:Overall4} provides a broad summary of the results across the eight different attitudinal distribution conditions, presenting the average absolute discrepancy from the population mean for the weighted and unweighted sample estimates. Conditions one through three demonstrate that, on average, the unweighted sample mean provides a good (unbiased) estimate of the population mean when the distributional form does not differ across constituent groups (e.g., the distributions of attitudes are of similar functional forms and locations for all constituent groups). This is regardless of form or extent of nonresponse. Additionally, weighting remediates deviations about the true mean in all five attitudinally discrepant conditions, even when substantive relative error exists in the unweighted estimate (e.g., the rightmost bars in Figure \ref{fig:Overall4}). Although the \emph{patterns} of unweighted sample mean discrepancies differed across conditions, all eight conditions exhibited similar omnibus effect (weighting ameliorating error wherever it arose in the unweighted statistic).
 
 \subsubsection{Weighting and Sampling Error}\label{weighting-and-sampling-error}
 
